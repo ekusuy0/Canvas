@@ -23,5 +23,24 @@ Rails.application.routes.draw do
   get 'users/out_check' => 'public/users#out_check'
   patch 'users/out' => 'public/users#out'
 
+  scope module: :public do
+    resources :tags, only: [:create, :edit, :update]
+
+    resources :tasks, except: [:index, :edit, :show] do
+      collection do
+        get '/day_index' => 'tasks#day_index'
+      end
+    end
+
+    resources :groups, only: [:new, :create, :index] do
+      collection do
+        get '/confirm' => 'groups#confirm'
+        get '/chat' => 'groups#chat'
+      end
+    end
+
+    resources :messages, only: [:create]
+  end
+
 
 end
