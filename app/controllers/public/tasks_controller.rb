@@ -4,6 +4,7 @@ class Public::TasksController < ApplicationController
   end
 
   def new
+    @tag = Tag.new
   end
 
   def update

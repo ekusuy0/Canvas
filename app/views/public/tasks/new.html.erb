@@ -1,0 +1,10 @@
+<div class="container">
+  <%= form_with model: @tag, url: tags_path, method: :post do |f| %>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+    <%= f.select :color, [["赤色", "red"], ["青色", "blue"], ["黄色", "yellow"]] %>
+    <%= f.submit '追加' %>
+  <% end %>
+
+
+</div>

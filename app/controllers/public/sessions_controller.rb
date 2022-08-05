@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Public::SessionsController < Devise::SessionsController
+  before_action :user_state, only: [:create]
   # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in
@@ -27,5 +28,18 @@ class Public::SessionsController < Devise::SessionsController
 
   def after_sign_in_path_for(resource)
     users_my_page_path
+  end
+
+  protected
+  def user_state
+    # 入力されたnameからアカウントを1権取得
+    @user = User.find_by(name: params[:user][:name])
+    # アカウントを取得できなかったときこのメソッドを終了する
+    return if !@user
+    # 取得したアカウントのパスワードと入力したパスワードが一致してるかを判別している。かつ、userのステータスが退会のとき
+    if (@user.valid_password?(params[:user][:password]) && ( @user.status == true ))
+    # 新規登録画面に飛ばす処理
+      redirect_to new_user_registration_path
+    end
   end
 end

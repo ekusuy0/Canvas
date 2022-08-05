@@ -1,0 +1,9 @@
+<header class="text-center">
+  <%= link_to "マイページ", users_my_page_path %>
+  <%= link_to "アバウト", about_path %>
+  <%= link_to "新規登録", new_user_registration_path %>
+  <%= link_to "ログイン", new_user_session_path %>
+  <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+  <%= link_to "チーム", groups_path %>
+  <%= link_to "カスタム", users_information_edit_path %>
+</header>
