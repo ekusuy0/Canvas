@@ -16,4 +16,6 @@
 #  user_id         :integer          not null
 #
 class Task < ApplicationRecord
+  belongs_to :user
+  belongs_to :group
 end

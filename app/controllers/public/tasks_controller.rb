@@ -5,6 +5,7 @@ class Public::TasksController < ApplicationController
 
   def new
     @tag = Tag.new
+    @tags = current_user.tags.all
   end
 
   def update
