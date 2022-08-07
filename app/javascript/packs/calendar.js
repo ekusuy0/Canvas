@@ -166,8 +166,21 @@ function showCalendar(month, year) {
         cell.className = "date-picker text-center";
         cell.innerHTML = "<span>" + date + "</span>";
 
+
+
         if(date === today.getDate() && year === today.getFullYear() && month === today.getMonth()) {
           cell.className = "date-picker selected text-center";
+        }
+
+        var tasks = document.getElementById('tasks');
+        var taskHash = JSON.parse(tasks.getAttribute('data-task-status'))
+
+        for(var k = 0; k < taskHash.length; k++) {
+          var task = taskHash[k];
+          if(date === task[2] && year === task[0] && month === (task[1] - 1)) {
+
+            cell.innerHTML += "<p class='mb-0'>"+ task[3] + "</p>";
+          }
         }
         row.appendChild(cell);
         date++;
@@ -181,3 +194,8 @@ function showCalendar(month, year) {
 function daysInMonth(iMonth, iYear) {
   return 32 - new Date(iYear, iMonth, 32).getDate();
 }
+// function taskcheck(cell, year, month, day) {
+//   if (cell.data-date === day, cell.data-month === month, cell.data-year === year ) {
+//     cell.innerHTML += "<div>" +
+//   }
+// }

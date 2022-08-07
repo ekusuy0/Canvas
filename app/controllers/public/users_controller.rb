@@ -1,6 +1,7 @@
 class Public::UsersController < ApplicationController
 
   def show
+    @tasks = current_user.tasks.all
   end
 
   def edit

@@ -1,12 +1,12 @@
 <div class="container container-calendar">
   <%= link_to "新規作成", new_task_path %>
-  <h4 id="monthAndYear"></h4>
-  <div class="button-container-calendar">
-    <input type="button" value="<" id="previous">
-    <input type="button" value=">" id="next">
+  <div class="button-container-calendar row">
+    <input type="button" value="<" id="previous" class="col-1 text-left allow btn btn-outline-dark">
+    <h4 id="monthAndYear" class="col text-center"></h4>
+    <input type="button" value=">" id="next" class="col-1 text-right allow btn btn-outline-dark">
   </div>
 
-  <table class="table-calendar table" id="calendar" data-lang="ja">
+  <table class="table-calendar table vh-100" id="calendar" data-lang="ja">
     <thead id="thead-month"></thead>
     <tbody id="calendar-body"></tbody>
   </table>
@@ -31,6 +31,23 @@
   </div>
 </div>
 
+<% task = [] %>
+<% tasks = [] %>
+<% @tasks.each do |t| %>
+  <% task << t.start_time.year %>
+  <% task << t.start_time.month %>
+  <% task << t.start_time.day %>
+  <% task << t.tag.name %>
+  <% task << t.tag.color %>
+  <% tasks << task %>
+  <%# @tasks_json = tasks.to_json.html_safe %>
+  <% task = [] %>
+<% end %>
 
+<%# tasks.each do |f| %>
+  <%#= f[0] %>
+<%# end %>
+
+<div id="tasks" data-task-status="<%= tasks.to_json %>"></div>
 <%= javascript_pack_tag 'calendar' %>
 
