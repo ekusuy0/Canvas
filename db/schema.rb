@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_06_005726) do
+ActiveRecord::Schema.define(version: 2022_08_07_030919) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -58,7 +58,6 @@ ActiveRecord::Schema.define(version: 2022_08_06_005726) do
   create_table "tasks", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "tag_id", null: false
-    t.integer "group_id", null: false
     t.string "title", null: false
     t.text "content", null: false
     t.integer "assigned_person", null: false
@@ -67,6 +66,7 @@ ActiveRecord::Schema.define(version: 2022_08_06_005726) do
     t.boolean "status", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "group_id"
   end
 
   create_table "users", force: :cascade do |t|

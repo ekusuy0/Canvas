@@ -1,11 +1,12 @@
-<div class="container-calendar">
+<div class="container container-calendar">
+  <%= link_to "新規作成", new_task_path %>
   <h4 id="monthAndYear"></h4>
   <div class="button-container-calendar">
-    <button id="previous" onclick="previous()"><</button>
-    <button id="next" onclick="next()">></button>
+    <input type="button" value="<" id="previous">
+    <input type="button" value=">" id="next">
   </div>
 
-  <table class="table-calendar" id="calendar" data-lang="ja">
+  <table class="table-calendar table" id="calendar" data-lang="ja">
     <thead id="thead-month"></thead>
     <tbody id="calendar-body"></tbody>
   </table>
@@ -29,6 +30,7 @@
     <select id="year" onchange="jump()"></select>
   </div>
 </div>
+
 
 <%= javascript_pack_tag 'calendar' %>
 

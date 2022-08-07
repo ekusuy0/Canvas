@@ -6,6 +6,7 @@ class Public::TasksController < ApplicationController
   def new
     @tag = Tag.new
     @tags = current_user.tags.all
+    @task = Task.new
   end
 
   def update
@@ -16,4 +17,10 @@ class Public::TasksController < ApplicationController
 
   def create
   end
+  
+  private
+  def task_params
+    params.require(:task).permit(:title, :content, :assigned_person, :start_time, :end_time, :tag_id, :user_id)
+  end
+  
 end

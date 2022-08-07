@@ -66,32 +66,32 @@ function generate_year_range(start, end) {
   return years;
 }
 
-const today = new Date();
-const currentMonth = today.getMonth();
-const currentYear = today.getFullYear();
-const selectYear = document.getElementById("year");
-const selectMonth = document.getElementById("month");
+var today = new Date();
+var currentMonth = today.getMonth();
+var currentYear = today.getFullYear();
+var selectYear = document.getElementById("year");
+var selectMonth = document.getElementById("month");
 
-const createYear = generate_year_range(1900, 2200);
+var createYear = generate_year_range(1900, 2200);
 
 document.getElementById("year").innerHTML = createYear;
 
-const calendar = document.getElementById("calendar");
-const lang = calendar.getAttribute('data-lang');
+var calendar = document.getElementById("calendar");
+var lang = calendar.getAttribute('data-lang');
 
-const months = ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"];
-const days = ["日", "月", "火", "水", "木", "金", "土"];
+var months = ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"];
+var days = ["日", "月", "火", "水", "木", "金", "土"];
 
-const dayHeader = "<tr>";
+var dayHeader = "<tr>";
 
-for (let day in days) {
+for (day in days) {
   dayHeader += "<th data-days='" + days[day] + "'>" + days[day] + "</th>";
 }
 dayHeader += "</tr>";
 
 document.getElementById("thead-month").innerHTML = dayHeader;
 
-const monthAndYear = document.getElementById("monthAndYear");
+monthAndYear = document.getElementById("monthAndYear");
 showCalendar(currentMonth, currentYear);
 
 function next() {
@@ -99,22 +99,32 @@ function next() {
   currentMonth = (currentMonth + 1) % 12;
   showCalendar(currentMonth, currentYear);
 }
+let nexton = document.getElementById('next');
+nexton.onclick = next;
+
 
 function previous() {
-  currentYear = (currentYear === 0) ? currentYear - 1 : currentYear;
+  currentYear = (currentMonth === 0) ? currentYear - 1 : currentYear;
   currentMonth = (currentMonth === 0) ? 11 : currentMonth - 1;
   showCalendar(currentMonth, currentYear);
 }
+let previouson = document.getElementById('previous');
+previouson.onclick = previous;
 
 function jump() {
   currentYear = parseInt(selectYear.value);
   currentMonth = parseInt(selectMonth.value);
   showCalendar(currentMonth, currentYear);
 }
+let jumpmonth = document.getElementById('month');
+jumpmonth.onchange = jump;
+
+let jumpyear = document.getElementById('year');
+jumpyear.onchange = jump;
 
 function showCalendar(month, year) {
   var firstDay = (new Date(year, month)).getDay();
-  const tbl = document.getElementById("calendar-body");
+  tbl = document.getElementById("calendar-body");
   tbl.innerHTML = "";
 
   monthAndYear.innerHTML = months[month] + " " + year;
@@ -123,18 +133,18 @@ function showCalendar(month, year) {
 
   var date = 1;
   for (let i = 0; i < 6; i++) {
-    const row = document.createElement("tr");
+    var row = document.createElement("tr");
 
     for (let j = 0; j < 7; j++) {
       if (i === 0 && j < firstDay) {
-        const cell = document.createElement("td");
-        const cellText = document.createTextNode("");
+        cell = document.createElement("td");
+        cellText = document.createTextNode("");
         cell.appendChild(cellText);
         row.appendChild(cell);
       } else if (date > daysInMonth(month, year)) {
         break;
       } else {
-        const cell = document.createElement("td");
+        cell = document.createElement("td");
         cell.setAttribute("data-date", date);
         cell.setAttribute("data-month", month + 1);
         cell.setAttribute("data-year", year);
