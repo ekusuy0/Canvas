@@ -75,6 +75,7 @@ function showCalendar(month, year) {
   selectMonth.value = month;;
 
   mv_event = document.getElementById("mvEventContainer2");
+  mv_event.innerHTML = "";
   var date = 1;
 
   for(let i = 0; i < 6; i++) {
