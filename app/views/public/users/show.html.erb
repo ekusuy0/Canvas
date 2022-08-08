@@ -34,13 +34,15 @@
 <% task = [] %>
 <% tasks = [] %>
 <% @tasks.each do |t| %>
-  <% task << t.start_time.year %>
-  <% task << t.start_time.month %>
-  <% task << t.start_time.day %>
-  <% task << t.tag.name %>
-  <% task << t.tag.color %>
+  <% task << t.start_time.year %>   <!--0-->
+  <% task << t.start_time.month %>  <!--1-->
+  <% task << t.start_time.day %>    <!--2-->
+  <% task << t.end_time.year %>     <!--3-->
+  <% task << t.end_time.month %>    <!--4-->
+  <% task << t.end_time.day %>      <!--5-->
+  <% task << t.tag.name %>          <!--6-->
+  <% task << t.tag.color %>         <!--7-->
   <% tasks << task %>
-  <%# @tasks_json = tasks.to_json.html_safe %>
   <% task = [] %>
 <% end %>
 

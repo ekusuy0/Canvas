@@ -178,10 +178,12 @@ function showCalendar(month, year) {
         for(var k = 0; k < taskHash.length; k++) {
           var task = taskHash[k];
           if(date === task[2] && year === task[0] && month === (task[1] - 1)) {
-
-            cell.innerHTML += "<p class='mb-0'>"+ task[3] + "</p>";
+            cell.innerHTML += "<div class='mb-0 " + task[7] + "'>" + task[6] + "</div>";
           }
+
         }
+
+
         row.appendChild(cell);
         date++;
       }
@@ -199,3 +201,4 @@ function daysInMonth(iMonth, iYear) {
 //     cell.innerHTML += "<div>" +
 //   }
 // }
+
