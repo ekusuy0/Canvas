@@ -24,3 +24,56 @@
   border-radius: 4px;
   padding: 5px 10px;
 }
+
+.mv-daynames-table {
+  table-layout: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+/*.mv-container {*/
+/*  height: 100%;*/
+/*  position: relative;*/
+/*  white-space: nowrap;*/
+/*}*/
+
+/*.mv-event-container {*/
+/*  overflow: hidden;*/
+/*  position: absolute;*/
+/*  top: 14px;*/
+/*  bottom: 0;*/
+/*  left: 0;*/
+/*  width: 100%;*/
+/*  background: white;*/
+/*  border-top: 1px solid #bcf;*/
+/*  border-bottom: 1px solid #bcf;*/
+/*}*/
+/*.month-row {*/
+/*  position: absolute;*/
+/*  left: 0;*/
+/*  width: 100%;*/
+/*  overflow: hidden;*/
+/*}*/
+
+/*div {*/
+/*  display: block;*/
+/*}*/
+
+.st-bg-table {
+/*  position: absolute;*/
+/*  top: 0;*/
+/*  left: 0;*/
+/*  height: 100%;*/
+/*  width: 100%;*/
+  min-height: 150px;
+  table-layout: fixed;
+}
+
+table {
+  display: table;
+  border-collapse: separate;
+  box-sizing: border-box;
+  text-indent: initial;
+  border-color: grey;
+}

@@ -24,4 +24,8 @@ class Public::UsersController < ApplicationController
     redirect_to root_path
   end
 
+  def calendar_test
+    # @tasks = currnet_user.tasks.all
+  end
+
 end

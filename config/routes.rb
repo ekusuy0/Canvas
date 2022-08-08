@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   patch 'users/information' => 'public/users#update'
   get 'users/out_check' => 'public/users#out_check'
   patch 'users/out' => 'public/users#out'
+  get 'users/calendar_test' => 'public/users#calendar_test'
 
   scope module: :public do
     resources :tags, only: [:create, :edit, :update]
