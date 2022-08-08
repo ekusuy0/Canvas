@@ -58,42 +58,42 @@
 
 // document.querySelector('#calendar').innerHTML = createHtml;
 
-function generate_year_range(start, end) {
-  var years = "";
-  for (var year = start; year <= end; year++) {
-    years += "<option value ='" + year + "'>" + year + "</option>";
-  }
-  return years;
-}
+// function generate_year_range(start, end) {
+//   var years = "";
+//   for (var year = start; year <= end; year++) {
+//     years += "<option value ='" + year + "'>" + year + "</option>";
+//   }
+//   return years;
+// }
 
-var today = new Date();
-var currentMonth = today.getMonth();
-var currentYear = today.getFullYear();
-var selectYear = document.getElementById("year");
-var selectMonth = document.getElementById("month");
-var lastMonthEndDate = new Date(currentMonth, currentMonth, 0).getDate();
+// var today = new Date();
+// var currentMonth = today.getMonth();
+// var currentYear = today.getFullYear();
+// var selectYear = document.getElementById("year");
+// var selectMonth = document.getElementById("month");
+// var lastMonthEndDate = new Date(currentMonth, currentMonth, 0).getDate();
 
-var createYear = generate_year_range(1900, 2200);
+// var createYear = generate_year_range(1900, 2200);
 
-document.getElementById("year").innerHTML = createYear;
+// document.getElementById("year").innerHTML = createYear;
 
 var calendar = document.getElementById("calendar");
 var lang = calendar.getAttribute('data-lang');
 
-var months = ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"];
-var days = ["日", "月", "火", "水", "木", "金", "土"];
+// var months = ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"];
+// var days = ["日", "月", "火", "水", "木", "金", "土"];
 
-var dayHeader = "<tr>";
+// var dayHeader = "<tr>";
 
-for (day in days) {
-  dayHeader += "<th class='text-center' data-days='" + days[day] + "'>" + days[day] + "</th>";
-}
-dayHeader += "</tr>";
+// for (day in days) {
+//   dayHeader += "<th class='text-center' data-days='" + days[day] + "'>" + days[day] + "</th>";
+// }
+// dayHeader += "</tr>";
 
-document.getElementById("thead-month").innerHTML = dayHeader;
+// document.getElementById("thead-month").innerHTML = dayHeader;
 
-monthAndYear = document.getElementById("monthAndYear");
-showCalendar(currentMonth, currentYear);
+// monthAndYear = document.getElementById("monthAndYear");
+// showCalendar(currentMonth, currentYear);
 
 function next() {
   currentYear = (currentMonth === 11) ? currentYear + 1 : currentYear;

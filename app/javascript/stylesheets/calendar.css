@@ -1,3 +1,8 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 .tag {
   color: #fff;
 }
@@ -49,24 +54,24 @@
 /*  border-top: 1px solid #bcf;*/
 /*  border-bottom: 1px solid #bcf;*/
 /*}*/
-/*.month-row {*/
-/*  position: absolute;*/
-/*  left: 0;*/
+.month-row {
+  position: relative;
+  /*left: 0;*/
 /*  width: 100%;*/
 /*  overflow: hidden;*/
-/*}*/
+}
 
 /*div {*/
 /*  display: block;*/
 /*}*/
 
 .st-bg-table {
-/*  position: absolute;*/
-/*  top: 0;*/
-/*  left: 0;*/
+  /*position: absolute;*/
+  /*top: 0;*/
+  /*left: 0;*/
 /*  height: 100%;*/
 /*  width: 100%;*/
-  min-height: 150px;
+  min-height: 200px;
   table-layout: fixed;
 }
 
@@ -76,4 +81,11 @@ table {
   box-sizing: border-box;
   text-indent: initial;
   border-color: grey;
+}
+
+.st-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  table-layout: fixed;
 }

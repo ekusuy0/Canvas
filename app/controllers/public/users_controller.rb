@@ -25,7 +25,7 @@ class Public::UsersController < ApplicationController
   end
 
   def calendar_test
-    # @tasks = currnet_user.tasks.all
+    @tasks = current_user.tasks.all
   end
 
 end
