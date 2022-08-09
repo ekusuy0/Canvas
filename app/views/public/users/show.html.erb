@@ -1,38 +1,42 @@
-<div class="container container-calendar">
-  <!--<%= link_to "新規作成", new_task_path %>-->
-  <!--<div class="button-container-calendar row">-->
-  <!--  <input type="button" value="<" id="previous" class="col-1 text-left allow btn btn-outline-dark">-->
-  <!--  <h4 id="monthAndYear" class="col text-center"></h4>-->
-  <!--  <input type="button" value=">" id="next" class="col-1 text-right allow btn btn-outline-dark">-->
-  <!--</div>-->
+<div id="container" class="locale-ja container">
 
-  <table class="table-calendar-frame table vh-100" id="calendar" data-lang="ja">
-    <thead id="thead-month"></thead>
-    <tbody id="calendar-body"></tbody>
-  </table>
+  <%= link_to "新規作成", new_task_path %>
+  <div class="button-container-calendar row">
+    <input type="button" value="<" id="previous" class="col-1 text-left allow btn btn-outline-dark">
+    <h4 id="monthAndYear" class="col text-center"></h4>
+    <input type="button" value=">" id="next" class="col-1 text-right allow btn btn-outline-dark">
+  </div>
 
-  <div class="footer-container-calendar">
-    <label for="month">日付指定：</label>
-    <select id="month" onchange="jump()">
-      <option value=0>1月</option>
-      <option value=1>2月</option>
-      <option value=2>3月</option>
-      <option value=3>4月</option>
-      <option value=4>5月</option>
-      <option value=5>6月</option>
-      <option value=6>7月</option>
-      <option value=7>8月</option>
-      <option value=8>9月</option>
-      <option value=9>10月</option>
-      <option value=10>11月</option>
-      <option value=11>12月</option>
-    </select>
-    <select id="year" onchange="jump()"></select>
+  <div class="calendar-container">
+    <div class="mv-container">
+      <table cellpadding="0" cellspacing="0" class="mv-daynames-table row-10" id="myDaynamesTable">
+      </table>
+      <div class="mv-event-container" id="mvEventContainer2"></div>
+    </div>
   </div>
 </div>
 
+<div class="footer-container-calendar text-center">
+  <label for="month">日付指定：</label>
+  <select id="month" onchange="jump()">
+    <option value=0>1月</option>
+    <option value=1>2月</option>
+    <option value=2>3月</option>
+    <option value=3>4月</option>
+    <option value=4>5月</option>
+    <option value=5>6月</option>
+    <option value=6>7月</option>
+    <option value=7>8月</option>
+    <option value=8>9月</option>
+    <option value=9>10月</option>
+    <option value=10>11月</option>
+    <option value=11>12月</option>
+  </select>
+  <select id="year" onchange="jump()"></select>
+</div>
+
 <% task = [] %>
-<% tasks = [] %>
+<%tasks = [] %>
 <% @tasks.each do |t| %>
   <% task << t.start_time.year %>   <!--0-->
   <% task << t.start_time.month %>  <!--1-->
@@ -51,5 +55,6 @@
 <%# end %>
 
 <div id="tasks" data-task-status="<%= tasks.to_json %>"></div>
-<%= javascript_pack_tag 'calendar' %>
 
+
+<%= javascript_pack_tag 'calendar' %>

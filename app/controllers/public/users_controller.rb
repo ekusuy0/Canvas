@@ -24,8 +24,4 @@ class Public::UsersController < ApplicationController
     redirect_to root_path
   end
 
-  def calendar_test
-    @tasks = current_user.tasks.all
-  end
-
 end
