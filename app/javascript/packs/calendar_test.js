@@ -147,10 +147,11 @@ function showCalendar(month, year) {
 
     // console.log(row.outerHTML);
     // document.getElementsByClassName("date-number").innerHTML = row.outerHTML;
-
-    month_row.innerHTML = week_row;
-    month_row.innerHTML += date_row;
-    mv_event.appendChild(month_row);
+    if (row.children.length === 7) {
+      month_row.innerHTML = week_row;
+      month_row.innerHTML += date_row;
+      mv_event.appendChild(month_row);
+    }
   }
 }
 
