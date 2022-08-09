@@ -77,8 +77,11 @@ function showCalendar(month, year) {
   mv_event = document.getElementById("mvEventContainer2");
   mv_event.innerHTML = "";
   var date = 1;
+  var task_date = 1;
 
   for(let i = 0; i < 6; i++) {
+
+
     month_row = document.createElement("div");
     month_row.className = 'month-row';
     // month_row.setAttribute("type", "top:"+ i * 16.666 + "%: height: 17.666%");
@@ -91,6 +94,7 @@ function showCalendar(month, year) {
     date_row += "<tbody class='date-number'>";
 
     var row = document.createElement("tr");
+
 
     for(let j = 0; j < 7; j++) {
 
@@ -117,7 +121,7 @@ function showCalendar(month, year) {
         }
         cell = document.createElement("td");
         cell.className = 'disabled text-black-50 bg-light st-bg text-center p-0'
-        const nextMonthDate = (date - endDate)
+        const nextMonthDate = (date - endDate);
         cellText = document.createTextNode(nextMonthDate);
         cell.appendChild(cellText);
         row.appendChild(cell);
@@ -141,12 +145,38 @@ function showCalendar(month, year) {
         date++;
       }
     }
+
     week_row += "</tr>" + "</tbody>" + "</table>";
-    date_row += row.outerHTML
+    date_row += row.outerHTML;
+
+    var tasks = document.getElementById('tasks');
+    var taskHash = JSON.parse(tasks.getAttribute('data-task-status'));
+    for(var l = 0; l < taskHash.length; l++) {
+      var task = taskHash[l];
+      if((date - 7) <= task[2] < date && year === task[0] && month === (task[1] - 1)) {
+        console.log(date);
+        console.log(task[2]);
+        var createTr = document.createElement("tr");
+        for (var count = 0; count < 7; count++) {
+          task_cell = document.createElement("td");
+          task_cell.className = count;
+            if (count === task[3]) {
+              task_cell.className = task[8] + ' text-center p-0';
+              task_cell.innerHTML = task[7];
+            }
+              // } else {
+          // taskCellText = document.createTextNode("&nbsp");
+          // console.log(taskCellText);
+          // task_cell.appendChild(taskCellText);
+              // }
+          createTr.appendChild(task_cell);
+        }
+        date_row += createTr.outerHTML;
+      }
+    }
     date_row += "</tbody>" + "</table>";
 
-    // console.log(row.outerHTML);
-    // document.getElementsByClassName("date-number").innerHTML = row.outerHTML;
+    // trの中のtdの個数を調べてる
     if (row.children.length === 7) {
       month_row.innerHTML = week_row;
       month_row.innerHTML += date_row;
