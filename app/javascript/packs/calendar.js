@@ -67,12 +67,12 @@ jumpyear.onchange = jump;
 
 function showCalendar(month, year) {
   var firstDay = (new Date(year, month)).getDay();
-  var endDate = new Date(year, month + 1, 0).getDate()
+  var endDate = new Date(year, month + 1, 0).getDate();
   var lastMonthEndDate = new Date(year, month, 0).getDate();
 
   monthAndYear.innerHTML = months[month] + " " + year;
   selectYear.value = year;
-  selectMonth.value = month;;
+  selectMonth.value = month;
 
   mv_event = document.getElementById("mvEventContainer2");
   mv_event.innerHTML = "";
@@ -110,7 +110,7 @@ function showCalendar(month, year) {
 
       if (i === 0 && j < firstDay) {
         cell = document.createElement("td");
-        cell.className = 'disabled text-black-50 bg-light st-bg text-center p-0 under_border'
+        cell.className = 'disabled text-black-50 bg-light st-bg text-center p-0';
         const lastMonthDate = (lastMonthEndDate - firstDay + j + 1);
         cellText = document.createTextNode(lastMonthDate);
         cell.appendChild(cellText);
@@ -120,7 +120,7 @@ function showCalendar(month, year) {
           break;
         }
         cell = document.createElement("td");
-        cell.className = 'disabled text-black-50 bg-light st-bg text-center p-0 under_border'
+        cell.className = 'disabled text-black-50 bg-light st-bg text-center p-0';
         const nextMonthDate = (date - endDate);
         cellText = document.createTextNode(nextMonthDate);
         cell.appendChild(cellText);
@@ -160,18 +160,17 @@ function showCalendar(month, year) {
         if(task_date === task[2] && year === task[0] && month === (task[1] - 1)) {
           var createTr = document.createElement("tr");
 
-
           for (var count = 0; count < 7; count++) {
             var task_cell = document.createElement("td");
             task_cell.className = count;
 
             if (count === task[3]) {
               if (task[8] === 0) {
-                
+
                 task_cell.className = task[10] + ' text-center p-0 round';
                 task_cell.innerHTML = task[9];
-                createTr.appendChild(task_cell);
-                
+                // createTr.appendChild(task_cell);
+
               } else {
                 if (task[3] + task[8] <= 7) {
                   task_cell.className = task[10] + " text-center p-0 round";
@@ -185,7 +184,7 @@ function showCalendar(month, year) {
                   createTr.appendChild(task_cell);
                 }
                 var last_td = (7 - task[3] - task[8] - 1);
-                
+
                 for (let n = 0; n < last_td; n++) {
                   var task_null_cell = document.createElement("td");
                   let taskCellText = document.createTextNode("");
@@ -198,14 +197,15 @@ function showCalendar(month, year) {
               taskCellText = document.createTextNode("");
               task_cell.appendChild(taskCellText);
             }
-            
+
             createTr.appendChild(task_cell);
-            
+
           }
-          
           date_row += createTr.outerHTML;
 
-        } if (task_date === task[6] && year === task[4] && month === (task[5] - 1)) {
+        }
+
+        if (task_date === task[6] && year === task[4] && month === (task[5] - 1)) {
           if (task[8] > (task[7] + 1)) {
             var createTr = document.createElement("tr");
             for (var datecount = 0; datecount < 7; datecount++) {
