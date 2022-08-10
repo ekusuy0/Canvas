@@ -89,3 +89,20 @@ table {
   left: 0;
   table-layout: fixed;
 }
+
+.under_border {
+  border: none;
+  border-bottom: 1px solid #E4DBDE;
+}
+
+.round {
+  border-radius: 10px;
+}
+
+.left-round {
+  border-radius: 10px 0 0 10px;
+}
+
+.right-round {
+  border-radius: 0 10px 10px 0;
+}

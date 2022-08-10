@@ -20,7 +20,7 @@ class Public::TasksController < ApplicationController
     task = current_user.tasks.new(task_params)
     task.save
     puts task.title
-    redirect_to request.referer
+    redirect_to users_my_page_path
   end
 
   private

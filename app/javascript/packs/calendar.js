@@ -90,7 +90,7 @@ function showCalendar(month, year) {
     var week_row = "<table cellpadding='0' cellspacing='0' class='st-bg-table table table-bordered row-10 mb-0'>";
     week_row += "<tbody>" + "<tr>";
 
-    var date_row = "<table cellpadding='0' cellspacing='0' class='st-grid table table-bordered row-10 mb-0'>";
+    var date_row = "<table cellpadding='0' cellspacing='0' class='st-grid table table-borderless row-10 mb-0'>";
     date_row += "<tbody class='date-number'>";
 
     var row = document.createElement("tr");
@@ -110,7 +110,7 @@ function showCalendar(month, year) {
 
       if (i === 0 && j < firstDay) {
         cell = document.createElement("td");
-        cell.className = 'disabled text-black-50 bg-light st-bg text-center p-0'
+        cell.className = 'disabled text-black-50 bg-light st-bg text-center p-0 under_border'
         const lastMonthDate = (lastMonthEndDate - firstDay + j + 1);
         cellText = document.createTextNode(lastMonthDate);
         cell.appendChild(cellText);
@@ -120,7 +120,7 @@ function showCalendar(month, year) {
           break;
         }
         cell = document.createElement("td");
-        cell.className = 'disabled text-black-50 bg-light st-bg text-center p-0'
+        cell.className = 'disabled text-black-50 bg-light st-bg text-center p-0 under_border'
         const nextMonthDate = (date - endDate);
         cellText = document.createTextNode(nextMonthDate);
         cell.appendChild(cellText);
@@ -132,7 +132,7 @@ function showCalendar(month, year) {
         cell.setAttribute("data-month", month + 1);
         cell.setAttribute("data-year", year);
         cell.setAttribute("data-month_name", months[month]);
-        cell.className = "date-picker text-center p-0";
+        cell.className = "date-picker text-center p-0 under_border";
         cell.innerHTML = "<span class='mb-0'>" + date + "</span>";
 
 
@@ -151,30 +151,85 @@ function showCalendar(month, year) {
 
     var tasks = document.getElementById('tasks');
     var taskHash = JSON.parse(tasks.getAttribute('data-task-status'));
-    console.log(taskHash);
 
-    for (var m = 1; m < 7; m++) {
+    for(var m = 1; m < 7; m++) {
 
-    for(var l = 0; l < taskHash.length; l++) {
-      var task = taskHash[l];
+      for(var l = 0; l < taskHash.length; l++) {
+        var task = taskHash[l];
 
         if(task_date === task[2] && year === task[0] && month === (task[1] - 1)) {
           var createTr = document.createElement("tr");
+
+
           for (var count = 0; count < 7; count++) {
             var task_cell = document.createElement("td");
             task_cell.className = count;
-              if (count === task[3]) {
-                task_cell.className = task[8] + ' text-center p-0';
-                task_cell.innerHTML = task[7];
+
+            if (count === task[3]) {
+              if (task[8] === 0) {
+                
+                task_cell.className = task[10] + ' text-center p-0 round';
+                task_cell.innerHTML = task[9];
+                createTr.appendChild(task_cell);
+                
+              } else {
+                if (task[3] + task[8] <= 7) {
+                  task_cell.className = task[10] + " text-center p-0 round";
+                  task_cell.setAttribute("colspan", task[8] + 1);
+                  task_cell.innerHTML = task[9];
+                  createTr.appendChild(task_cell);
+                } else {
+                  task_cell.setAttribute("colspan", 7 - task[3]);
+                  task_cell.innerHTML = task[9];
+                  task_cell.className = task[10] + ' text-center p-0 left-round t';
+                  createTr.appendChild(task_cell);
+                }
+                var last_td = (7 - task[3] - task[8] - 1);
+                
+                for (let n = 0; n < last_td; n++) {
+                  var task_null_cell = document.createElement("td");
+                  let taskCellText = document.createTextNode("");
+                  task_null_cell.appendChild(taskCellText);
+                  createTr.appendChild(task_null_cell);
+                }
+                break;
               }
-                // } else {
-            // taskCellText = document.createTextNode("&nbsp");
-            // console.log(taskCellText);
-            // task_cell.appendChild(taskCellText);
-                // }
+            } else {
+              taskCellText = document.createTextNode("");
+              task_cell.appendChild(taskCellText);
+            }
+            
             createTr.appendChild(task_cell);
+            
           }
+          
           date_row += createTr.outerHTML;
+
+        } if (task_date === task[6] && year === task[4] && month === (task[5] - 1)) {
+          if (task[8] > (task[7] + 1)) {
+            var createTr = document.createElement("tr");
+            for (var datecount = 0; datecount < 7; datecount++) {
+              if (datecount === 1) {
+                var end_cell = document.createElement("td");
+                end_cell.className = task[10] + " text-center p-0 right-round";
+                end_cell.innerHTML = task[9];
+                end_cell.setAttribute("colspan", task[7] + 1);
+                let taskCellText = document.createTextNode("");
+                end_cell.appendChild(taskCellText);
+                createTr.appendChild(end_cell);
+
+                var last_end_td = (7 - task[7] - 1);
+                for (let p = 0; p < last_end_td; p++) {
+                  var task_null_end_cell = document.createElement("td");
+                  task_null_end_cell.className = task[7] + 2 + p;
+                  let taskEndCellText = document.createTextNode("");
+                  task_null_end_cell.appendChild(taskEndCellText);
+                  createTr.appendChild(task_null_end_cell);
+                }
+              }
+            }
+            date_row +=  createTr.outerHTML;
+          }
         }
       }
       task_date++;
