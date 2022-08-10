@@ -151,28 +151,33 @@ function showCalendar(month, year) {
 
     var tasks = document.getElementById('tasks');
     var taskHash = JSON.parse(tasks.getAttribute('data-task-status'));
+    console.log(taskHash);
+
+    for (var m = 1; m < 7; m++) {
+
     for(var l = 0; l < taskHash.length; l++) {
       var task = taskHash[l];
-      if((date - 7) <= task[2] < date && year === task[0] && month === (task[1] - 1)) {
-        console.log(date);
-        console.log(task[2]);
-        var createTr = document.createElement("tr");
-        for (var count = 0; count < 7; count++) {
-          task_cell = document.createElement("td");
-          task_cell.className = count;
-            if (count === task[3]) {
-              task_cell.className = task[8] + ' text-center p-0';
-              task_cell.innerHTML = task[7];
-            }
-              // } else {
-          // taskCellText = document.createTextNode("&nbsp");
-          // console.log(taskCellText);
-          // task_cell.appendChild(taskCellText);
-              // }
-          createTr.appendChild(task_cell);
+
+        if(task_date === task[2] && year === task[0] && month === (task[1] - 1)) {
+          var createTr = document.createElement("tr");
+          for (var count = 0; count < 7; count++) {
+            var task_cell = document.createElement("td");
+            task_cell.className = count;
+              if (count === task[3]) {
+                task_cell.className = task[8] + ' text-center p-0';
+                task_cell.innerHTML = task[7];
+              }
+                // } else {
+            // taskCellText = document.createTextNode("&nbsp");
+            // console.log(taskCellText);
+            // task_cell.appendChild(taskCellText);
+                // }
+            createTr.appendChild(task_cell);
+          }
+          date_row += createTr.outerHTML;
         }
-        date_row += createTr.outerHTML;
       }
+      task_date++;
     }
     date_row += "</tbody>" + "</table>";
 
