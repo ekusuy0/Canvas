@@ -3,7 +3,7 @@ class Public::GroupTagsController < ApplicationController
   def create
     tag = current_user.tags.new(tag_params)
     tag.save
-    redirect_to request.referer
+    redirect_to new_group_task_path
   end
 
   def edit

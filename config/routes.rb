@@ -41,11 +41,11 @@ Rails.application.routes.draw do
     end
 
     resources :groups, only: [:new, :create, :index, :show] do
-      collection do
-        get '/confirm' => 'groups#confirm'
-        get '/chat' => 'groups#chat'
+      get '/confirm' => 'groups#confirm'
+      get '/chat' => 'groups#chat'
+      member do
         get :join
-        get :invitation
+        post :invitation
       end
     end
 

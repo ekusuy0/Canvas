@@ -11,7 +11,6 @@ class Public::GroupsController < ApplicationController
     @group.owner_id = current_user.id
     # グループに紐づいたuserにcurrent_userを入れ込んでいる
     @group.users << current_user
-    @group.users <<
     @group.save
     redirect_to groups_path
   end
@@ -26,12 +25,32 @@ class Public::GroupsController < ApplicationController
   def show
     @group = Group.find(params[:id])
     @tasks = Task.where(group_id: @group.id)
+    @user = User.new
+    # ここやる　　　　@other_usersのやつ　　　
   end
 
   def join
+    @group = Group.find(params[:id])
+    # @group.usersに、current_userのレコードが含まれてなければ以下の処理を行う
+    unless @group.users.include?(current_user)
+      @group.users << current_user
+      notification = Notification.find_by(visited_id: current_user.id, group_id: @group.id, action: "invitation")
+      notification.destroy
+    end
+    redirect_to group_path(@group.id), notice: "グループに参加しました"
   end
 
   def invitation
+    @group = Group.find(params[:id])
+
+    @user = User.find_by(id: params[:user_id])
+    notification = Notification.where(visited_id: @user.id, group_id: @group.id, action: "invitation")
+    unless notification.exists?
+      @group.group_invitation_notification(current_user, @user.id, @group.id)
+      redirect_to request.referer, notice: "招待を送りました"
+    else
+      redirect_to request.referer, alert: "すでに招待しています"
+    end
   end
 
   private

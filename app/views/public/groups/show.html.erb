@@ -1,5 +1,12 @@
 <h1><%= @group.name %></h1>
 
+<% if @other_users.exits? %>
+  <%= form_with model: @user, url: invitation_group_path(@group), method: :post, local: true do |f| %>
+    <%= f.collection_select :user_id, @other_users, :id, :name %>
+    <%= f.submit "招待する" %>
+  <% end %>
+<% end %>
+
 <div id="container" class="locale-ja container">
 
   <%= link_to "新規作成",new_group_task_path(group_id: @group.id) %>
