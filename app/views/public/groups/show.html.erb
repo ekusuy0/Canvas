@@ -1,6 +1,8 @@
+<h1><%= @group.name %></h1>
+
 <div id="container" class="locale-ja container">
 
-  <%= link_to "新規作成", new_task_path %>
+  <%= link_to "新規作成",new_group_task_path(group_id: @group.id) %>
   <div class="button-container-calendar row">
     <input type="button" value="<" id="previous" class="col-1 text-left allow btn btn-outline-dark">
     <h4 id="monthAndYear" class="col text-center"></h4>
@@ -54,11 +56,6 @@
   <% task = [] %>
 <% end %>
 
-<%# tasks.each do |f| %>
-  <%#= f[0] %>
-<%# end %>
-
 <div id="tasks" data-task-status="<%= tasks.to_json %>"></div>
-
 
 <%= javascript_pack_tag 'calendar' %>

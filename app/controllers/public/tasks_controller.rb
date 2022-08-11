@@ -7,7 +7,10 @@ class Public::TasksController < ApplicationController
     @tag = Tag.new
     @tags = current_user.tags.all
     @task = Task.new
-    @tasks = current_user.tasks.all
+    # @tasks = current_user.tasks.all
+  end
+
+  def edit
   end
 
   def update
@@ -19,7 +22,6 @@ class Public::TasksController < ApplicationController
   def create
     task = current_user.tasks.new(task_params)
     task.save
-    puts task.title
     redirect_to users_my_page_path
   end
 

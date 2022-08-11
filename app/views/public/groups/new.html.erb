@@ -1,0 +1,8 @@
+<h1>チーム作成画面</h1>
+<%= form_with model: @group do |f| %>
+  <%= f.label :name, "グループ名" %>
+  <%= f.text_field :name %><br>
+  <%= f.label :password, "パスワード" %>
+  <%= f.text_field :password %><br>
+  <%= f.submit '作成' %>
+<% end %>

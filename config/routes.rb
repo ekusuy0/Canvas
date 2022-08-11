@@ -26,17 +26,26 @@ Rails.application.routes.draw do
 
   scope module: :public do
     resources :tags, only: [:create, :edit, :update]
+    resources :group_tags, only: [:create, :edit, :update]
 
-    resources :tasks, except: [:index, :edit, :show] do
+    resources :group_tasks, except: [:show, :index] do
+      collection do
+        get '/day_index' => 'group_tasks#day_index'
+      end
+    end
+
+    resources :tasks, except: [:index, :show] do
       collection do
         get '/day_index' => 'tasks#day_index'
       end
     end
 
-    resources :groups, only: [:new, :create, :index] do
+    resources :groups, only: [:new, :create, :index, :show] do
       collection do
         get '/confirm' => 'groups#confirm'
         get '/chat' => 'groups#chat'
+        get :join
+        get :invitation
       end
     end
 

@@ -1,7 +1,7 @@
 class Public::UsersController < ApplicationController
 
   def show
-    @tasks = current_user.tasks.all
+    @tasks = Task.where(assigned_person: current_user.id)
   end
 
   def edit

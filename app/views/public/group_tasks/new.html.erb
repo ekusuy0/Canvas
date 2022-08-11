@@ -1,0 +1,36 @@
+<div class="container">
+  <% @tags.each do |tag| %>
+    <div class="<%= tag.color %> tag">
+      <%= tag.name %>
+    </div>
+  <% end %>
+  <h1>グループのタグの作成</h1>
+  <%= form_with model: @tag, url: group_tags_path, method: :post do |f| %>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+    <%= f.hidden_field :group_id, :value => @tag.group_id %>
+    <%= f.select :color, [["赤色", "red"], ["青色", "blue"], ["黄色", "yellow"]] %>
+    <%= f.submit '追加' %>
+  <% end %>
+
+
+  <h1>グループのタスクの作成</h1>
+  <%= form_with model: @task, url: group_tasks_path, method: :post do |f| %>
+    <div class="form-group">
+      <%= f.label :title, "TITLE" %>
+      <%= f.text_field :title %>
+    </div>
+    <%= f.label :content %>
+    <%= f.text_area :content %><br>
+    <%= f.select :assigned_person, options_from_collection_for_select(@task.group.users.all, :id, :name)%><br>
+    <%= f.label :start_time %>
+    <%= f.date_field :start_time %>
+    <%= f.label :end_time %>
+    <%= f.date_field :end_time %><br>
+    <%= f.select :tag_id, options_from_collection_for_select(current_user.tags.all, :id, :name) %><br>
+    <%= f.hidden_field :group_id, :value => @task.group_id %>
+    <%= f.submit "保存する" %>
+  <% end %>
+
+
+</div>
