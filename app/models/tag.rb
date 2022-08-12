@@ -13,5 +13,5 @@
 class Tag < ApplicationRecord
   has_many :tasks, dependent: :destroy
   belongs_to :user
-  belongs_to :group
+  belongs_to :group, optional: true
 end

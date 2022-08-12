@@ -4,6 +4,7 @@
       <%= tag.name %>
     </div>
   <% end %>
+  
   <%= form_with model: @tag, url: tags_path, method: :post do |f| %>
     <%= f.label :name %>
     <%= f.text_field :name %>
