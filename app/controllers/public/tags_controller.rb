@@ -14,7 +14,7 @@ class Public::TagsController < ApplicationController
 
   def destroy
     tag = Tag.find(params[:id])
-    tag.delete
+    tag.destroy
     redirect_to request.referer
   end
 
