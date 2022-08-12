@@ -25,8 +25,8 @@ Rails.application.routes.draw do
 
 
   scope module: :public do
-    resources :tags, only: [:create, :edit, :update]
-    resources :group_tags, only: [:create, :edit, :update]
+    resources :tags, only: [:create, :edit, :update, :destroy]
+    resources :group_tags, only: [:create, :edit, :update, :destroy]
     resources :notifications, only: :index
 
     resources :group_tasks, except: [:show, :index] do

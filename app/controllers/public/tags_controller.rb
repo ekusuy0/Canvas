@@ -12,6 +12,12 @@ class Public::TagsController < ApplicationController
   def update
   end
 
+  def destroy
+    tag = Tag.find(params[:id])
+    tag.delete
+    redirect_to request.referer
+  end
+
   private
   def tag_params
     params.require(:tag).permit(:name, :color)

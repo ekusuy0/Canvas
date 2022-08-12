@@ -2,9 +2,10 @@
   <% @tags.each do |tag| %>
     <div class="<%= tag.color %> tag">
       <%= tag.name %>
+      <%= link_to "削除", tag_path(tag.id), method: :delete %>
     </div>
   <% end %>
-  
+
   <%= form_with model: @tag, url: tags_path, method: :post do |f| %>
     <%= f.label :name %>
     <%= f.text_field :name %>
@@ -29,6 +30,4 @@
     <%= f.select :tag_id, options_from_collection_for_select(current_user.tags.all, :id, :name) %><br>
     <%= f.submit "保存する" %>
   <% end %>
-
-
 </div>
