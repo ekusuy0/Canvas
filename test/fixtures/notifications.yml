@@ -3,8 +3,8 @@
 # Table name: notifications
 #
 #  id         :integer          not null, primary key
-#  action     :string           not null
-#  checked    :boolean          not null
+#  action     :string           default(""), not null
+#  checked    :boolean          default(FALSE), not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  group_id   :integer

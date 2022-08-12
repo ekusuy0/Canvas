@@ -1,0 +1,4 @@
+<% if notification.action == "invitation" %>
+  <%= notification.visitor.name %>さんからチームへの招待が届きました。
+  <%= link_to "参加する", join_group_path(notification.group_id) %>
+<% end %>

@@ -51,8 +51,8 @@ ActiveRecord::Schema.define(version: 2022_08_11_100225) do
     t.integer "visitor_id", null: false
     t.integer "visited_id", null: false
     t.integer "group_id"
-    t.string "action", null: false
-    t.boolean "checked", null: false
+    t.string "action", default: "", null: false
+    t.boolean "checked", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["group_id"], name: "index_notifications_on_group_id"

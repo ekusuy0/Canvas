@@ -16,7 +16,7 @@ class Group < ApplicationRecord
   has_many :tasks, dependent: :destroy
   has_many :tags, dependent: :destroy
   has_many :notifications, dependent: :destroy
-  
+
   def group_invitation_notification(current_user, visited_id, group_id)
     # すでに招待用の通知が送られているか検索
     temp = Notification.where(visitor_id: current_user.id, visited_id: visited_id, group_id: group_id)
@@ -27,8 +27,14 @@ class Group < ApplicationRecord
         group_id: group_id,
         action: "invitation",
       )
-      
+
       notification.save if notification.valid?
     end
+  end
+
+  def uniq_num(ary)
+    counts = Hash.new(0)                             # ハッシュを生成
+    ary.each { |v| counts[v] += 1 }                  # 重複している要素を検索
+    i = counts.select { |v, count| count == 1 }.keys
   end
 end
