@@ -2,7 +2,7 @@
   <% @tags.each do |tag| %>
     <div class="<%= tag.color %> tag">
       <%= tag.name %>
-      <%= link_to "削除", tag_path(tag.id), method: :delete %>
+      <%= link_to "削除", tag_path(tag.id), method: :delete, data: {confirm: "タグを削除するとタグが付いているタスクも削除されます。それでも削除しますか？"} %>
     </div>
   <% end %>
 
