@@ -4,6 +4,7 @@ class Public::GroupsController < ApplicationController
   end
 
   def confirm
+    @group = Group.find(params[:group_id])
   end
 
   def create
@@ -43,13 +44,21 @@ class Public::GroupsController < ApplicationController
 
   def join
     @group = Group.find(params[:id])
-    # @group.usersに、current_userのレコードが含まれてなければ以下の処理を行う
-    unless @group.users.include?(current_user)
-      @group.users << current_user
-      notification = Notification.find_by(visited_id: current_user.id, group_id: @group.id, action: "invitation")
-      notification.destroy
+    puts "ああああああああああああああああああああああああああ"
+    puts @group.password
+    puts params[:password]
+    if @group.password.to_s == params[:password]
+      # @group.usersに、current_userのレコードが含まれてなければ以下の処理を行う
+      unless @group.users.include?(current_user)
+        @group.users << current_user
+        notification = Notification.find_by(visited_id: current_user.id, group_id: @group.id, action: "invitation")
+        notification.destroy
+      end
+      redirect_to group_path(@group.id), notice: "グループに参加しました"
+    else
+      flash[:confirm] = "パスワードが違います"
+      redirect_to request.referer
     end
-    redirect_to group_path(@group.id), notice: "グループに参加しました"
   end
 
   def invitation

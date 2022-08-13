@@ -1,1 +1,8 @@
 <h1>チーム参加確認画面</h1>
+<p id="confirm" class="font-weight-bold"><%= flash[:confirm] %></p>
+
+<%= form_with url: join_group_path(@group.id), method: :get do |f| %>
+  <%= f.label :password, "パスワード" %>
+  <%= f.text_field :password %>
+  <%= f.submit 'チームに参加する' %>
+<% end %>
