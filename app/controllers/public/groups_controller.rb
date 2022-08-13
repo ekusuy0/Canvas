@@ -44,9 +44,7 @@ class Public::GroupsController < ApplicationController
 
   def join
     @group = Group.find(params[:id])
-    puts "ああああああああああああああああああああああああああ"
-    puts @group.password
-    puts params[:password]
+    # groupモデルのpasswordがinteger型なので.to_sで文字列にする
     if @group.password.to_s == params[:password]
       # @group.usersに、current_userのレコードが含まれてなければ以下の処理を行う
       unless @group.users.include?(current_user)

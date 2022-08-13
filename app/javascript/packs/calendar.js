@@ -70,7 +70,7 @@ function showCalendar(month, year) {
   var endDate = new Date(year, month + 1, 0).getDate();
   var lastMonthEndDate = new Date(year, month, 0).getDate();
 
-  monthAndYear.innerHTML = months[month] + " " + year;
+  monthAndYear.innerHTML = year + " / " + (month + 1);
   selectYear.value = year;
   selectMonth.value = month;
 

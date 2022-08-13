@@ -1,4 +1,7 @@
-<div id="container" class="locale-ja container">
+<div id="container" class="container">
+
+  <div id="today-box" class="my-3 text-center">
+  </div>
 
   <%= link_to "新規作成", new_task_path %>
   <div class="button-container-calendar row">
@@ -60,5 +63,5 @@
 
 <div id="tasks" data-task-status="<%= tasks.to_json %>"></div>
 
-
+<%= javascript_pack_tag 'today_task' %>
 <%= javascript_pack_tag 'calendar' %>
