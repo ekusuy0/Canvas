@@ -1,5 +1,7 @@
 <h1><%= @group.name %></h1>
 
+<%= link_to "チャットへ", group_chat_path(@group.id) %>
+
 <% if @other_users.present? %>
   <%= form_with model: @user, url: invitation_group_path(@group), method: :post, local: true do |f| %>
     <%= f.collection_select :user_id, @other_users, :id, :name %>

@@ -16,6 +16,9 @@ class Public::GroupsController < ApplicationController
   end
 
   def chat
+    @message = Message.new
+    @group = Group.find(params[:group_id])
+    @messages = @group.messages.all
   end
 
   def index

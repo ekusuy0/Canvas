@@ -1,0 +1,27 @@
+<div class="container">
+
+  <h1>チャットルーム</h1>
+
+  <%= form_with model: @message, url: messages_path, method: :post do |f| %>
+    <%= f.label :message, "メッセージ" %>
+    <%= f.text_field :message %>
+    <%= f.hidden_field :user_id, :value => current_user.id %>
+    <%= f.hidden_field :group_id, :value => @group.id %>
+    <%= f.submit '送信する' %>
+  <% end %>
+
+  <% @messages.each do |message| %>
+    <% if message.user.id == current_user.id %>
+      <div class="text-right mt-3">
+        <%= message.user.name %>
+        <%= message.message %>
+      </div>
+    <% else %>
+      <div class="text-left mt-3">
+        <%= message.user.name %>
+        <%= message.message %>
+      </div>
+    <% end %>
+  <% end %>
+
+</div>
