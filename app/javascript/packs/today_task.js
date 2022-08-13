@@ -27,12 +27,11 @@ function showTodayTask(date, month, year) {
     console.log(month);
     console.log(todate);
 
-    if (year === task[0] && month === task[1] && todate === task[2]) {
+    if (year === task[0] && month === (task[1] -1) && todate === task[2]) {
       today_content += "<p>" + task[9] + "</p>";
-      console.log(today_content);
+      console.log(task[9]);
     }
   }
 
-  console.log(task[9]);
   today_box.innerHTML = today_content;
 }
