@@ -44,15 +44,20 @@ let previouson = document.getElementById('day-previous');
 previouson.onclick = previous;
 
 
-function showTodayTask(date, month, year) {
+export function showTodayTask(date, month, year) {
   today_box = document.getElementById('today-box');
   today_box.innerHTML = "";
 
   var tasks = document.getElementById('tasks');
   var taskHash = JSON.parse(tasks.getAttribute('data-task-status'));
 
-
-  var today_content = "<div class='text-center'><h2 class='mb-4'>" + (month + 1) + "月 " + todate + "日のあなたの予定です！！" + "</h2></div>";
+  var now_day = today.getDate();
+  console.log(now_day);
+  if (now_day == todate) {
+    var today_content = "<div class='text-center'><h2 class='mb-4'>今日のあなたの予定です！！</h2></div>";
+  } else {
+    var today_content = "<div class='text-center'><h2 class='mb-4'>" + (month + 1) + "月 " + todate + "日のあなたの予定です！！" + "</h2></div>";
+  }
 
   for(var i = 0; i < taskHash.length; i++) {
     var task = taskHash[i];
@@ -60,7 +65,7 @@ function showTodayTask(date, month, year) {
 
     if (year == task[0] && month == (task[1] - 1) && todate == task[2]) {
       today_content += "<div class='row m-0'>"
-      today_content += "<p class='col-2 " + task[10] + "'>" + task[11] + "</p>";
+      today_content += "<p class='col-2 round text-center " + task[10] + "'>" + task[11] + "</p>";
       today_content += "<p class='col-2 text-center'>" + task[9] + "</p>"
       today_content += "<p class='col-8'>" + task[12] + "</p>"
       today_content += "</div>"

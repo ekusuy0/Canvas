@@ -1,3 +1,5 @@
+// import showTodayTask from 'today_task';
+
 function generate_year_range(start, end) {
   var years = "";
   for (var year = start; year <= end; year++) {
@@ -11,6 +13,7 @@ var currentMonth = today.getMonth();
 var currentYear = today.getFullYear();
 var selectYear = document.getElementById("year");
 var selectMonth = document.getElementById("month");
+
 
 var createYear = generate_year_range(1900, 2200);
 document.getElementById("year").innerHTML = createYear;
@@ -55,6 +58,7 @@ function jump() {
   // parseIntは、文字列を整数に変換する。
   currentYear = parseInt(selectYear.value);
   currentMonth = parseInt(selectMonth.value);
+  console.log(currentMonth);
   showCalendar(currentMonth, currentYear);
 }
 let jumpmonth = document.getElementById('month');
@@ -63,6 +67,15 @@ jumpmonth.onchange = jump;
 let jumpyear = document.getElementById('year');
 jumpyear.onchange = jump;
 
+
+function day_jump() {
+  var selectDay = document.getElementsByName("date");
+  console.log(selectDay);
+  date = selectDay.outerHTML;
+  showTodayTask(date, currentMonth, currentYear);
+}
+let jumpdate = document.getElementsByClassName("date");
+jumpdate.onclick = day_jump;
 
 
 function showCalendar(month, year) {
@@ -104,7 +117,6 @@ function showCalendar(month, year) {
       } else {
         week_row += "<td class='st-bg'>&nbsp";
       }
-      // document.getElementsByClassName("st-bg").innerHTML;
       week_row += "</td>";
 
 
@@ -133,8 +145,7 @@ function showCalendar(month, year) {
         cell.setAttribute("data-year", year);
         cell.setAttribute("data-month_name", months[month]);
         cell.className = "date-picker text-center p-0 under_border";
-        cell.innerHTML = "<span class='mb-0'>" + date + "</span>";
-
+        cell.innerHTML = "<a href='#' class='date mb-0 widelink'>" + date + "</a>";
 
 
         if(date == today.getDate() && year == today.getFullYear() && month == today.getMonth()) {
@@ -169,7 +180,6 @@ function showCalendar(month, year) {
 
                 task_cell.className = task[10] + ' text-center p-0 round';
                 task_cell.innerHTML = task[9];
-                // createTr.appendChild(task_cell);
 
               } else {
                 if (task[3] + task[8] <= 7) {

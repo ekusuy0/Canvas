@@ -43,6 +43,12 @@
   width: 100%;
 }
 
+.widelink {
+  display: block;
+  color: black;
+  text-decoration-line: none;
+}
+
 /*.mv-container {*/
 /*  height: 100%;*/
 /*  position: relative;*/
