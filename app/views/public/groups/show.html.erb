@@ -14,17 +14,44 @@
 
 <div id="container" class="container">
 
-  <div class="button-container-calendar row">
-    <input type="button" value="<" id="day-previous" class="col-1 text-left allow btn btn-outline-dark">
-    <div id="today-box" class="my-3 text-cente col-9"></div>
-    <input type="button" value=">" id="day-next" class="col-1 text-right allow btn btn-outline-dark">
+  <div class="button-container-calendar row day-box">
+    <div class="col-1 p-0 allow-box">
+      <input type="button" value="<" id="day-previous" class="text-center btn btn-outline-dark allow">
+    </div>
+    <div id="today-box" class="my-3 mx-0 text-cente col-10 pt-3"></div>
+    <div class="col-1 p-0 text-right allow-box">
+      <input type="button" value=">" id="day-next" class="text-center btn btn-outline-dark allow">
+    </div>
   </div>
 
   <%= link_to "新規作成",new_group_task_path(group_id: @group.id) %>
-  <div class="button-container-calendar row">
-    <input type="button" value="<" id="previous" class="col-1 text-left allow btn btn-outline-dark">
-    <h4 id="monthAndYear" class="col text-center"></h4>
-    <input type="button" value=">" id="next" class="col-1 text-right allow btn btn-outline-dark">
+  <div class="button-container-calendar row mb-3 day-box">
+    <div class="col-1 p-0">
+      <input type="button" value="<" id="previous" class="text-center btn btn-outline-dark allow">
+    </div>
+    <h4 id="monthAndYear" class="col-10 text-center my-3 mx-0 "></h4>
+    <div class="col-1 p-0 text-right">
+      <input type="button" value=">" id="next" class="text-center btn btn-outline-dark allow">
+    </div>
+  </div>
+
+  <div class="footer-container-calendar text-center">
+    <label for="month">日付指定：</label>
+    <select id="month" onchange="jump()">
+      <option value=0>1月</option>
+      <option value=1>2月</option>
+      <option value=2>3月</option>
+      <option value=3>4月</option>
+      <option value=4>5月</option>
+      <option value=5>6月</option>
+      <option value=6>7月</option>
+      <option value=7>8月</option>
+      <option value=8>9月</option>
+      <option value=9>10月</option>
+      <option value=10>11月</option>
+      <option value=11>12月</option>
+    </select>
+    <select id="year" onchange="jump()"></select>
   </div>
 
   <div class="calendar-container">
@@ -36,24 +63,6 @@
   </div>
 </div>
 
-<div class="footer-container-calendar text-center">
-  <label for="month">日付指定：</label>
-  <select id="month" onchange="jump()">
-    <option value=0>1月</option>
-    <option value=1>2月</option>
-    <option value=2>3月</option>
-    <option value=3>4月</option>
-    <option value=4>5月</option>
-    <option value=5>6月</option>
-    <option value=6>7月</option>
-    <option value=7>8月</option>
-    <option value=8>9月</option>
-    <option value=9>10月</option>
-    <option value=10>11月</option>
-    <option value=11>12月</option>
-  </select>
-  <select id="year" onchange="jump()"></select>
-</div>
 
 <% task = [] %>
 <% tasks = [] %>

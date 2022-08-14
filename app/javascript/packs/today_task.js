@@ -60,8 +60,7 @@ function showTodayTask(date, month, year) {
 
     if (year == task[0] && month == (task[1] - 1) && todate == task[2]) {
       today_content += "<div class='row m-0'>"
-      today_content += "<p class='col-1'></p>"
-      today_content += "<p class='col-1 " + task[10] + "'>" + task[11] + "</p>";
+      today_content += "<p class='col-2 " + task[10] + "'>" + task[11] + "</p>";
       today_content += "<p class='col-2 text-center'>" + task[9] + "</p>"
       today_content += "<p class='col-8'>" + task[12] + "</p>"
       today_content += "</div>"
