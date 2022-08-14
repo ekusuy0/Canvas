@@ -35,7 +35,7 @@ showCalendar(currentMonth, currentYear);
 
 
 function next() {
-  currentYear = (currentMonth === 11) ? currentYear + 1 : currentYear;
+  currentYear = (currentMonth == 11) ? currentYear + 1 : currentYear;
   currentMonth = (currentMonth + 1) % 12;
   showCalendar(currentMonth, currentYear);
 }
@@ -44,8 +44,8 @@ nexton.onclick = next;
 
 
 function previous() {
-  currentYear = (currentMonth === 0) ? currentYear - 1 : currentYear;
-  currentMonth = (currentMonth === 0) ? 11 : currentMonth - 1;
+  currentYear = (currentMonth == 0) ? currentYear - 1 : currentYear;
+  currentMonth = (currentMonth == 0) ? 11 : currentMonth - 1;
   showCalendar(currentMonth, currentYear);
 }
 let previouson = document.getElementById('previous');
@@ -98,7 +98,7 @@ function showCalendar(month, year) {
 
     for(let j = 0; j < 7; j++) {
 
-      if (j === 0) {
+      if (j == 0) {
         week_row += "<td class='st-bg st-bg-fc'>&nbsp";
 
       } else {
@@ -108,7 +108,7 @@ function showCalendar(month, year) {
       week_row += "</td>";
 
 
-      if (i === 0 && j < firstDay) {
+      if (i == 0 && j < firstDay) {
         cell = document.createElement("td");
         cell.className = 'disabled text-black-50 bg-light st-bg text-center p-0';
         const lastMonthDate = (lastMonthEndDate - firstDay + j + 1);
@@ -137,7 +137,7 @@ function showCalendar(month, year) {
 
 
 
-        if(date === today.getDate() && year === today.getFullYear() && month === today.getMonth()) {
+        if(date == today.getDate() && year == today.getFullYear() && month == today.getMonth()) {
           cell.className = "date-picker selected text-center p-0";
         }
 
@@ -157,15 +157,15 @@ function showCalendar(month, year) {
       for(var l = 0; l < taskHash.length; l++) {
         var task = taskHash[l];
 
-        if(task_date === task[2] && year === task[0] && month === (task[1] - 1)) {
+        if(task_date == task[2] && year == task[0] && month == (task[1] - 1)) {
           var createTr = document.createElement("tr");
 
           for (var count = 0; count < 7; count++) {
             var task_cell = document.createElement("td");
             task_cell.className = count;
 
-            if (count === task[3]) {
-              if (task[8] === 0) {
+            if (count == task[3]) {
+              if (task[8] == 0) {
 
                 task_cell.className = task[10] + ' text-center p-0 round';
                 task_cell.innerHTML = task[9];
@@ -205,11 +205,11 @@ function showCalendar(month, year) {
 
         }
 
-        if (task_date === task[6] && year === task[4] && month === (task[5] - 1)) {
+        if (task_date == task[6] && year == task[4] && month == (task[5] - 1)) {
           if (task[8] > (task[7] + 1)) {
             var createTr = document.createElement("tr");
             for (var datecount = 0; datecount < 7; datecount++) {
-              if (datecount === 1) {
+              if (datecount == 1) {
                 var end_cell = document.createElement("td");
                 end_cell.className = task[10] + " text-center p-0 right-round";
                 end_cell.innerHTML = task[9];
@@ -237,7 +237,7 @@ function showCalendar(month, year) {
     date_row += "</tbody>" + "</table>";
 
     // trの中のtdの個数を調べてる
-    if (row.children.length === 7) {
+    if (row.children.length == 7) {
       month_row.innerHTML = week_row;
       month_row.innerHTML += date_row;
       mv_event.appendChild(month_row);

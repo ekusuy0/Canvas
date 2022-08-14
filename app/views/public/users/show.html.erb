@@ -1,7 +1,11 @@
 <div id="container" class="container">
 
-  <div id="today-box" class="my-3 text-center">
+  <div class="button-container-calendar row">
+    <input type="button" value="<" id="day-previous" class="col-1 text-left allow btn btn-outline-dark">
+    <div id="today-box" class="my-3 text-cente col-9"></div>
+    <input type="button" value=">" id="day-next" class="col-1 text-right allow btn btn-outline-dark">
   </div>
+
 
   <%= link_to "新規作成", new_task_path %>
   <div class="button-container-calendar row">
@@ -53,6 +57,8 @@
   <% task << task_span %>           <!--8-->
   <% task << t.title %>             <!--9-->
   <% task << t.tag.color %>         <!--10-->
+  <% task << t.tag.name %>          <!--11-->
+  <% task << t.content %>           <!---12-->
   <% tasks << task %>
   <% task = [] %>
 <% end %>

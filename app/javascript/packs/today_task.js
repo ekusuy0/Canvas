@@ -2,10 +2,47 @@ var today = new Date()
 var todate = today.getDate()
 var currentMonth = today.getMonth();
 var currentYear = today.getFullYear();
+var endDate = new Date(currentYear, currentMonth + 1, 0).getDate();
+
+console.log(currentMonth);
 
 var days = ["日曜日", "月曜日", "火曜日", "水曜日", "木曜日", "金曜日", "土曜日"];
 
-showTodayTask(today, currentMonth, currentYear);
+showTodayTask(todate, currentMonth, currentYear);
+console.log(todate);
+
+function next() {
+
+  if (todate == endDate) {
+    currentMonth = (currentMonth + 1) % 12;
+    if (currentMonth == 11) {
+      currentYear = currentYear + 1;
+    }
+  }
+
+  todate = (todate == endDate) ? 1 : todate + 1;
+  endDate = new Date(currentYear, currentMonth + 1, 0).getDate();
+  showTodayTask(todate, currentMonth, currentYear);
+
+}
+
+let nexton = document.getElementById('day-next');
+nexton.onclick = next;
+
+
+function previous() {
+
+  currentYear = (currentMonth == 0) ? currentYear - 1 : currentYear;
+  currentMonth = (todate == 1) ? (currentMonth == 0) ? 11 : currentMonth - 1 : currentMonth;
+  endDate = new Date(currentYear, currentMonth + 1, 0).getDate();endDate = new Date(currentYear, currentMonth + 1, 0).getDate();
+  endDate = new Date(currentYear, currentMonth + 1, 0).getDate();
+  todate = (todate == 1) ? endDate : todate - 1;
+  showTodayTask(todate, currentMonth, currentYear);
+
+}
+let previouson = document.getElementById('day-previous');
+previouson.onclick = previous;
+
 
 function showTodayTask(date, month, year) {
   today_box = document.getElementById('today-box');
@@ -15,23 +52,21 @@ function showTodayTask(date, month, year) {
   var taskHash = JSON.parse(tasks.getAttribute('data-task-status'));
 
 
-  var today_content = "<h2 class='mx-auto'>" + (month + 1) + "月 " + todate + "日 " + "</h2>";
+  var today_content = "<div class='text-center'><h2 class='mb-4'>" + (month + 1) + "月 " + todate + "日のあなたの予定です！！" + "</h2></div>";
 
-  for(var l = 0; l < taskHash.length; l++) {
-    var task = taskHash[l];
+  for(var i = 0; i < taskHash.length; i++) {
+    var task = taskHash[i];
 
-    console.log(task[0]);
-    console.log(task[1]);
-    console.log(task[2]);
-    console.log(year);
-    console.log(month);
-    console.log(todate);
 
-    if (year === task[0] && month === (task[1] -1) && todate === task[2]) {
-      today_content += "<p>" + task[9] + "</p>";
-      console.log(task[9]);
+    if (year == task[0] && month == (task[1] - 1) && todate == task[2]) {
+      today_content += "<div class='row m-0'>"
+      today_content += "<p class='col-1'></p>"
+      today_content += "<p class='col-1 " + task[10] + "'>" + task[11] + "</p>";
+      today_content += "<p class='col-2'>" + task[9] + "</p>"
+      today_content += "<p class='col-8'>" + task[12] + "</p>"
+      today_content += "</div>"
     }
-  }
+   }
 
   today_box.innerHTML = today_content;
 }
