@@ -52,7 +52,7 @@ function showTodayTask(date, month, year) {
   var taskHash = JSON.parse(tasks.getAttribute('data-task-status'));
 
 
-  var today_content = "<div class='text-center'><h2 class='mb-4'>" + (month + 1) + "月 " + todate + "日のあなたの予定です！！" + "</h2></div>";
+  var today_content = "<div class='text-center'><h2 class='mb-4'>" + (month + 1) + "月 " + todate + "日のグループの予定です！！" + "</h2></div>";
 
   for(var i = 0; i < taskHash.length; i++) {
     var task = taskHash[i];

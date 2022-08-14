@@ -1,15 +1,24 @@
 <h1><%= @group.name %></h1>
 
-<%= link_to "チャットへ", group_chat_path(@group.id) %>
+<% if @group.owner_id == current_user %>
+  <%= link_to "チャットへ", group_chat_path(@group.id) %>
 
-<% if @other_users.present? %>
-  <%= form_with model: @user, url: invitation_group_path(@group), method: :post, local: true do |f| %>
-    <%= f.collection_select :user_id, @other_users, :id, :name %>
-    <%= f.submit "招待する" %>
+  <% if @other_users.present? %>
+    <%= form_with model: @user, url: invitation_group_path(@group), method: :post, local: true do |f| %>
+      <%= f.collection_select :user_id, @other_users, :id, :name %>
+      <%= f.submit "招待する" %>
+    <% end %>
   <% end %>
 <% end %>
 
-<div id="container" class="locale-ja container">
+
+<div id="container" class="container">
+
+  <div class="button-container-calendar row">
+    <input type="button" value="<" id="day-previous" class="col-1 text-left allow btn btn-outline-dark">
+    <div id="today-box" class="my-3 text-cente col-9"></div>
+    <input type="button" value=">" id="day-next" class="col-1 text-right allow btn btn-outline-dark">
+  </div>
 
   <%= link_to "新規作成",new_group_task_path(group_id: @group.id) %>
   <div class="button-container-calendar row">
@@ -59,12 +68,15 @@
   <% task << t.end_time.wday %>     <!--7-->
   <% task_span = t.end_time.day - t.start_time.day %>
   <% task << task_span %>           <!--8-->
-  <% task << t.title %>              <!--9-->
+  <% task << t.title %>             <!--9-->
   <% task << t.tag.color %>         <!--10-->
+  <% task << t.tag.name %>          <!--11-->
+  <% task << t.content %>           <!--12-->
   <% tasks << task %>
   <% task = [] %>
 <% end %>
 
 <div id="tasks" data-task-status="<%= tasks.to_json %>"></div>
 
+<%= javascript_pack_tag 'today_group_task' %>
 <%= javascript_pack_tag 'calendar' %>
