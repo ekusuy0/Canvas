@@ -1,6 +1,6 @@
 <div id="container" class="container">
 
-  <div class="button-container-calendar row day-box">
+  <div class="button-container-calendar row day-box" id="#">
     <div class="col-1 p-0 allow-box">
       <input type="button" value="<" id="day-previous" class="text-center btn btn-outline-dark allow">
     </div>
@@ -76,6 +76,7 @@
 <%# end %>
 
 <div id="tasks" data-task-status="<%= tasks.to_json %>"></div>
+
 
 <%= javascript_pack_tag 'today_task' %>
 <%= javascript_pack_tag 'calendar' %>

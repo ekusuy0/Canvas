@@ -1,5 +1,3 @@
-// import showTodayTask from 'today_task';
-
 function generate_year_range(start, end) {
   var years = "";
   for (var year = start; year <= end; year++) {
@@ -13,6 +11,7 @@ var currentMonth = today.getMonth();
 var currentYear = today.getFullYear();
 var selectYear = document.getElementById("year");
 var selectMonth = document.getElementById("month");
+var selsecDay = document.getElementById("date");
 
 
 var createYear = generate_year_range(1900, 2200);
@@ -68,16 +67,6 @@ let jumpyear = document.getElementById('year');
 jumpyear.onchange = jump;
 
 
-function day_jump() {
-  var selectDay = document.getElementsByName("date");
-  console.log(selectDay);
-  date = selectDay.outerHTML;
-  showTodayTask(date, currentMonth, currentYear);
-}
-let jumpdate = document.getElementsByClassName("date");
-jumpdate.onclick = day_jump;
-
-
 function showCalendar(month, year) {
   var firstDay = (new Date(year, month)).getDay();
   var endDate = new Date(year, month + 1, 0).getDate();
@@ -97,7 +86,6 @@ function showCalendar(month, year) {
 
     month_row = document.createElement("div");
     month_row.className = 'month-row';
-    // month_row.setAttribute("type", "top:"+ i * 16.666 + "%: height: 17.666%");
 
 
     var week_row = "<table cellpadding='0' cellspacing='0' class='st-bg-table table table-bordered row-10 mb-0'>";
@@ -145,7 +133,7 @@ function showCalendar(month, year) {
         cell.setAttribute("data-year", year);
         cell.setAttribute("data-month_name", months[month]);
         cell.className = "date-picker text-center p-0 under_border";
-        cell.innerHTML = "<a href='#' class='date mb-0 widelink'>" + date + "</a>";
+        cell.innerHTML = "<span class='date-picker' data-date='" + date + "' data-month='" + month + "' data-year='" + year + "'>" + date + "</span>";
 
 
         if(date == today.getDate() && year == today.getFullYear() && month == today.getMonth()) {

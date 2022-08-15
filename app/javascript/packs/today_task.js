@@ -43,8 +43,17 @@ function previous() {
 let previouson = document.getElementById('day-previous');
 previouson.onclick = previous;
 
+document.addEventListener("click", function(e) {
+  if(e.target.classList.contains("date-picker")) {
+    todate = e.target.dataset.date;
+    currentMonth = parseInt(e.target.dataset.month, 10) - 1;
+    currentYear = parseInt(e.target.dataset.year, 10);
+    showTodayTask(todate, currentMonth, currentYear);
+  }
+})
 
-export function showTodayTask(date, month, year) {
+
+function showTodayTask(date, month, year) {
   today_box = document.getElementById('today-box');
   today_box.innerHTML = "";
 
@@ -52,7 +61,6 @@ export function showTodayTask(date, month, year) {
   var taskHash = JSON.parse(tasks.getAttribute('data-task-status'));
 
   var now_day = today.getDate();
-  console.log(now_day);
   if (now_day == todate) {
     var today_content = "<div class='text-center'><h2 class='mb-4'>今日のあなたの予定です！！</h2></div>";
   } else {

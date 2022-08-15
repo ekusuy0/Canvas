@@ -40,8 +40,16 @@ function previous() {
 let previouson = document.getElementById('day-previous');
 previouson.onclick = previous;
 
+document.addEventListener("click", function(e) {
+  if(e.target.classList.contains("date-picker")) {
+    todate = e.target.dataset.date;
+    currentMonth = parseInt(e.target.dataset.month, 10) - 1;
+    currentYear = parseInt(e.target.dataset.year, 10);
+    showTodayTask(todate, currentMonth, currentYear);
+  }
+})
 
-function showTodayTask(date, month, year) {
+function showTodayTask(todate, month, year) {
   today_box = document.getElementById('today-box');
   today_box.innerHTML = "";
 
