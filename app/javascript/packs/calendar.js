@@ -156,7 +156,7 @@ function showCalendar(month, year) {
       for(var l = 0; l < taskHash.length; l++) {
         var task = taskHash[l];
 
-        if(task_date == task[2] && year == task[0] && month == (task[1] - 1)) {
+        if((task_date - firstDay) == task[2] && year == task[0] && month == (task[1] - 1)) {
           var createTr = document.createElement("tr");
 
           for (var count = 0; count < 7; count++) {
@@ -202,7 +202,7 @@ function showCalendar(month, year) {
 
         }
 
-        if (task_date == task[6] && year == task[4] && month == (task[5] - 1)) {
+        if ((task_date - firstDay) == task[6] && year == task[4] && month == (task[5] - 1)) {
           if (task[8] > (task[7] + 1)) {
             var createTr = document.createElement("tr");
             for (var datecount = 0; datecount < 7; datecount++) {
@@ -229,6 +229,7 @@ function showCalendar(month, year) {
           }
         }
       }
+
       task_date++;
     }
     date_row += "</tbody>" + "</table>";
