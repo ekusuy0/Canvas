@@ -1,10 +1,44 @@
-<header class="text-center">
-  <%= link_to "マイページ", users_my_page_path %>
-  <%= link_to "アバウト", about_path %>
-  <%= link_to "新規登録", new_user_registration_path %>
-  <%= link_to "ログイン", new_user_session_path %>
-  <%= link_to "ログアウト", destroy_user_session_path %>
-  <%= link_to "チーム", groups_path %>
-  <%= link_to "カスタム", users_information_edit_path %>
-  <%= link_to "通知", notifications_path %>
-</header>
+<nav class="navbar navbar-expand-sm <% if user_signed_in? %><%= current_user.color %><% end %>">
+  <div class="container">
+    <%= link_to root_path, class: "navbar-brand p-3 text-dark" do %><h1>Canvas</h1><% end %>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expended="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav ml-auto">
+        <% if user_signed_in? %>
+          <li class="nav-item ml-3">
+            <%= link_to "マイページ", users_my_page_path, class: 'nav-link text-dark' %>
+          </li>
+          <li class="nav-item ml-3">
+            <%= link_to "チーム", groups_path, class: 'nav-link text-dark' %>
+          </li>
+          <li class="nav-item ml-3">
+            <%= link_to "カスタム", users_information_edit_path, class: 'nav-link text-dark' %>
+          </li>
+          <li class="nav-item ml-3">
+            <%= link_to "通知", notifications_path, class: 'nav-link text-dark' %>
+          </li>
+          <li class="nav-item ml-3">
+            <%= link_to "ログアウト", destroy_user_session_path, class: 'nav-link text-dark' %>
+          </li>
+        <% else %>
+          <li class="nav-item ml-3">
+            <%= link_to "アバウト", about_path, class: 'nav-link text-dark' %>
+          </li>
+          <li class="nav-item ml-3">
+            <%= link_to "新規登録", new_user_registration_path, class: 'nav-link text-dark' %>
+          </li>
+          <li class="nav-item ml-3">
+            <%= link_to "ログイン", new_user_session_path, class: 'nav-link text-dark' %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+
+
