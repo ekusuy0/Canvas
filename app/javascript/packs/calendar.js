@@ -151,7 +151,7 @@ function showCalendar(month, year) {
     var tasks = document.getElementById('tasks');
     var taskHash = JSON.parse(tasks.getAttribute('data-task-status'));
 
-    for(var m = 1; m < 7; m++) {
+    for(var m = 0; m < 6; m++) {
 
       for(var l = 0; l < taskHash.length; l++) {
         var task = taskHash[l];
@@ -168,7 +168,6 @@ function showCalendar(month, year) {
 
                 task_cell.className = task[10] + ' text-center p-0 round';
                 task_cell.innerHTML = task[9];
-
               } else {
                 if (task[3] + task[8] <= 7) {
                   task_cell.className = task[10] + " text-center p-0 round";
