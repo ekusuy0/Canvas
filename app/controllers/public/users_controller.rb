@@ -9,19 +9,30 @@ class Public::UsersController < ApplicationController
   end
 
   def update
+    @user = User.find(current_user.id)
+    if @user.update(user_params)
+      redirect_to request.referer
+    else
+      render :edit
+    end
   end
 
   def out_check
+    @user = User.find(current_user.id)
   end
 
   def out
-    # ここで値を受け取ってる
-    params = params[:status]
     @user = User.find(current_user.id)
-    # 特定の値をアップデートする
-    @user.update(status: params)
-    session[:current_user] = nil
-    redirect_to root_path
+    if @user.update(user_params)
+      session[:current_user] = nil
+      redirect_to destroy_user_session_path
+    else
+      redirect_to request.referer
+    end
   end
 
+  private
+  def user_params
+    params.require(:user).permit(:name, :status, :email, )
+  end
 end

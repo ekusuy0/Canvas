@@ -1,5 +1,8 @@
 <h1>退会確認画面</h1>
 退会をクリックすると退会することになります
 <%= link_to "戻る", users_my_page_path %>
-<!--form_withじゃなくlink_toでやってみた-->
-<%= link_to "退会する", users_out_path(status: true)  %>
+
+<%= form_with model: @user, url: users_out_path, method: :patch do |f| %>
+  <%= f.hidden_field :status, :value => "true" %>
+  <%= f.submit "退会する" %>
+<% end %>
