@@ -58,9 +58,9 @@ function showTodayTask(todate, month, year) {
 
   var now_day = today.getDate();
   if (now_day == todate) {
-    var today_content = "<div class='text-center pt-4'><h4>今日のグループの予定です</h4></div>";
+    var today_content = "<div class='text-center py-4'><h4>今日のグループの予定です</h4></div>";
   } else {
-    var today_content = "<div class='text-center pt-4'><h4>" + (month + 1) + "月 " + todate + "日のグループの予定です" + "</h4></div>";
+    var today_content = "<div class='text-center py-4'><h4>" + (month + 1) + "月 " + todate + "日のグループの予定です" + "</h4></div>";
   }
 
   for(var i = 0; i < taskHash.length; i++) {
@@ -70,9 +70,10 @@ function showTodayTask(todate, month, year) {
     if (year == task[0] && month == (task[1] - 1) && todate == task[2]) {
       today_content += "<div class='container'>"
       today_content += "<div class='row mx-auto'>"
-      today_content += "<p class='col-2 round text-center " + task[10] + "'>" + task[11] + "</p>";
+      today_content += "<div class='col-2'><p class='round text-center " + task[10] + "'>" + task[11] + "</p></div>";
       today_content += "<p class='col-2 text-center'>" + task[9] + "</p>"
-      today_content += "<p class='col-8'>" + task[12] + "</p>"
+      today_content += "<p class='col-7'>" + task[12] + "</p>"
+      today_content += "<p class='col-1 p-0'><a href='/group_tasks/" + task[13] + "/edit' class='btn btn-outline-secondary btn-sm'>編集</a></p>"
       today_content += "</div></div>"
     }
    }
