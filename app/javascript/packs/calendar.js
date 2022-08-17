@@ -158,6 +158,7 @@ function showCalendar(month, year) {
 
         if((task_date - firstDay) == task[2] && year == task[0] && month == (task[1] - 1)) {
           var createTr = document.createElement("tr");
+          createTr.className = "taskTr";
 
           for (var count = 0; count < 7; count++) {
             var task_cell = document.createElement("td");

@@ -4,12 +4,10 @@ var currentMonth = today.getMonth();
 var currentYear = today.getFullYear();
 var endDate = new Date(currentYear, currentMonth + 1, 0).getDate();
 
-console.log(currentMonth);
 
 var days = ["日曜日", "月曜日", "火曜日", "水曜日", "木曜日", "金曜日", "土曜日"];
 
 showTodayTask(todate, currentMonth, currentYear);
-console.log(todate);
 
 function next() {
 
@@ -62,9 +60,9 @@ function showTodayTask(date, month, year) {
 
   var now_day = today.getDate();
   if (now_day == todate) {
-    var today_content = "<div class='text-center'><h2 class='mb-4'>今日のあなたの予定です！！</h2></div>";
+    var today_content = "<div class='text-center pt-4'><h4>今日のあなたの予定です</h4></div>";
   } else {
-    var today_content = "<div class='text-center'><h2 class='mb-4'>" + (month + 1) + "月 " + todate + "日のあなたの予定です！！" + "</h2></div>";
+    var today_content = "<div class='text-center pt-4'><h4>" + (month + 1) + "月 " + todate + "日のあなたの予定です" + "</h4></div>";
   }
 
   for(var i = 0; i < taskHash.length; i++) {
@@ -74,8 +72,8 @@ function showTodayTask(date, month, year) {
     if (year == task[0] && month == (task[1] - 1) && todate == task[2]) {
       today_content += "<div class='row m-0'>"
       today_content += "<p class='col-2 round text-center " + task[10] + "'>" + task[11] + "</p>";
-      today_content += "<p class='col-2 text-center'>" + task[9] + "</p>"
-      today_content += "<p class='col-8'>" + task[12] + "</p>"
+      today_content += "<p class='col-3 text-center'>" + task[9] + "</p>"
+      today_content += "<p class='col-7'>" + task[12] + "</p>"
       today_content += "</div>"
     }
    }
