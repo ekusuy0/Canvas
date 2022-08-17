@@ -6,6 +6,12 @@ class Public::GroupTasksController < ApplicationController
   end
 
   def update
+    @group_task = Task.find(params[:id])
+    if @group_task.update(task_params)
+      redirect_to group_path(@group_task.group_id)
+    else
+      redirect_to request.referer
+    end
   end
 
   def destroy
@@ -21,6 +27,7 @@ class Public::GroupTasksController < ApplicationController
   end
 
   def edit
+    @group_task = Task.find(params[:id])
   end
 
   def day_index

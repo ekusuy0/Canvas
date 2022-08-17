@@ -1,0 +1,16 @@
+<div class="container">
+  <h1>タスクの編集</h1>
+  <%= form_with model: @task do |f| %>
+    <%= f.label :title %>
+    <%= f.text_field :title %><br>
+    <%= f.label :content %>
+    <%= f.text_area :content %><br>
+    <%= f.hidden_field :assigned_person, :value => current_user.id %>
+    <%= f.label :start_time %>
+    <%= f.date_field :start_time %>
+    <%= f.label :end_time %>
+    <%= f.date_field :end_time %><br>
+    <%= f.select :tag_id, options_from_collection_for_select(current_user.tags.all, :id, :name) %><br>
+    <%= f.submit "変更する" %>
+  <% end %>
+</div>

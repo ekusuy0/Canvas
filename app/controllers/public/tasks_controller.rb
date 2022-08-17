@@ -11,9 +11,16 @@ class Public::TasksController < ApplicationController
   end
 
   def edit
+    @task = Task.find(params[:id])
   end
 
   def update
+    @task = Task.find(params[:id])
+    if @task.update(task_params)
+      redirect_to users_my_page_path
+    else
+      redirect_to request.referer
+    end
   end
 
   def destroy
