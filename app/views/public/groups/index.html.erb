@@ -1,13 +1,31 @@
-<%= link_to "新規グループ作成", new_group_path %>
-<h1>チーム一覧</h1>
-<% @groups.each do |group| %>
-  <span>グループ名： </span>
-  <span><%= group.name %></span><br>
-  <% group.users.each do |user| %>
-    <span>そのグループに所属するユーザー名： </span>
-    <span><%= user.name %></span>
-  <% end %>
-  <%= link_to group_path(group.id) do %>
-    <%= group.name %>へ
-  <% end %>
-<% end %>
+<div class="container">
+  <div class="row mb-3 mx-0">
+    <h4 class="col-10 p-0">グループ一覧</h4>
+    <%= link_to "新規グループ作成", new_group_path, class: "col btn btn-outline-secondary col-2" %>
+  </div>
+  <table class="table table-bordered col-12">
+      <thead>
+        <th>グループ名</th>
+        <th>グループに所属するユーザー名</th>
+        <th></th>
+      </thead>
+      <tbody>
+        <% @groups.each do |group| %>
+          <tr>
+            <td><%= group.name %></td>
+            <td>
+              <% group.users.each do |user| %>
+                <%= user.name %>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to group_path(group.id) do %>
+                <%= group.name %>へ
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+  </table>
+  </div>
+</div>

@@ -1,9 +1,11 @@
-<h1>ユーザー編集</h1>
+<div class="container">
+  <h4>ユーザー編集</h4>
 
-<%= form_with model: @user, url: users_information_path, method: :patch do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name, autofocus: true %>
-  <%= f.submit "変更を保存する" %>
-<% end %>
+  <%= form_with model: @user, url: users_information_path, method: :patch do |f| %>
+    <%= f.label :name %>
+    <%= f.text_field :name, autofocus: true %><br>
+    <%= f.submit "変更を保存する" %>
+  <% end %>
 
-<%= link_to "退会する", users_out_check_path %>
+  <%= link_to "退会する", users_out_check_path %>
+</div>

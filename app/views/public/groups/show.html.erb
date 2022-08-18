@@ -1,18 +1,21 @@
-<h1><%= @group.name %></h1>
+<div id="container" class="container">
 
-<% if @group.owner_id == current_user %>
-  <%= link_to "チャットへ", group_chat_path(@group.id) %>
+  <h4 class="text-center"><%= @group.name %></h4>
 
-  <% if @other_users.present? %>
-    <%= form_with model: @user, url: invitation_group_path(@group), method: :post, local: true do |f| %>
-      <%= f.collection_select :user_id, @other_users, :id, :name %>
-      <%= f.submit "招待する" %>
-    <% end %>
-  <% end %>
-<% end %>
+  <div class="row my-2 mx-0">
+    <%= link_to "チャットへ", group_chat_path(@group.id), class: "col-2 offset-1 btn btn-outline-secondary px-0" %>
 
+    <%# if @group.owner_id == current_user %>
+      <% if @other_users.present? %>
+        <%= form_with model: @user, url: invitation_group_path(@group), method: :post, local: true do |f| %>
+          <%= f.collection_select :user_id, @other_users, :id, :name, class: "col" %>
+          <%= f.submit "招待する" %>
+        <% end %>
+      <% end %>
 
-<div id="container" class="container mb-5">
+    <%# end %>
+  </div>
+
 
   <div class="button-container-calendar row day-box">
     <div class="col-1 p-0 allow-box">

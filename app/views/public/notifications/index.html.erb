@@ -1,6 +1,8 @@
-<h1>通知</h1>
-<% if @notifications.exists? %>
-  <%= render @notifications %>
-<% else %>
-  <p>通知はありません</p>
-<% end %>
+<div class="container">
+  <h4>グループ招待通知</h4>
+  <% if @notifications.exists? %>
+    <%= render @notifications %>
+  <% else %>
+    <p>通知はありません</p>
+  <% end %>
+</div>
