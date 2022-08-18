@@ -19,4 +19,7 @@ class Task < ApplicationRecord
   belongs_to :user
   belongs_to :group, optional: true
   belongs_to :tag
+  
+  validates :content, presence: true
+  validates :title, presence: true
 end

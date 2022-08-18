@@ -32,9 +32,4 @@ class Group < ApplicationRecord
     end
   end
 
-  def uniq_num(ary)
-    counts = Hash.new(0)                             # ハッシュを生成
-    ary.each { |v| counts[v] += 1 }                  # 重複している要素を検索
-    i = counts.select { |v, count| count == 1 }.keys
-  end
 end

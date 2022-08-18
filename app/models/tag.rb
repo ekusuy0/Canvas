@@ -14,4 +14,6 @@ class Tag < ApplicationRecord
   has_many :tasks, dependent: :destroy
   belongs_to :user
   belongs_to :group, optional: true
+  
+  validates :name, presence: true
 end
