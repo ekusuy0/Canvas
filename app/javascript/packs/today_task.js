@@ -19,7 +19,7 @@ function next() {
   }
 
   todate = (todate == endDate) ? 1 : todate + 1;
-  endDate = new Date(currentYear, currentMonth + 1, 0).getDate();
+  // endDate = new Date(currentYear, currentMonth + 1, 0).getDate();
   showTodayTask(todate, currentMonth, currentYear);
 
 }
@@ -43,7 +43,7 @@ previouson.onclick = previous;
 
 document.addEventListener("click", function(e) {
   if(e.target.classList.contains("date-picker")) {
-    todate = e.target.dataset.date;
+    todate = parseFloat(e.target.dataset.date, 10);
     currentMonth = parseInt(e.target.dataset.month, 10) - 1;
     currentYear = parseInt(e.target.dataset.year, 10);
     showTodayTask(todate, currentMonth, currentYear);
