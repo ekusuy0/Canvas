@@ -73,7 +73,7 @@ function showTodayTask(todate, month, year) {
     if (year == task[0] && month == (task[1] - 1) && todate == task[2]) {
       today_content += "<div class='container'>"
       today_content += "<div class='row mx-auto'>"
-      today_content += "<div class='col-2'><p class='round text-center " + task[10] + "'>" + task[11] + "</p></div>";
+      today_content += "<div class='col-2'><p class='round text-center' style='background: linear-gradient(to right, " + task[10] + ", #ffffff, " + task[10] + ");'>" + task[11] + "</p></div>";
       today_content += "<p class='col-2 text-center'>" + task[9] + "</p>"
       today_content += "<p class='col-7'>" + task[12] + "</p>"
       today_content += "<p class='col-1 p-0'><a href='/group_tasks/" + task[13] + "/edit' class='btn btn-outline-secondary btn-sm'>編集</a></p>"
