@@ -57,7 +57,10 @@ function showTodayTask(todate, month, year) {
   var taskHash = JSON.parse(tasks.getAttribute('data-task-status'));
 
   var now_day = today.getDate();
-  if (now_day == todate) {
+  var now_month = today.getMonth();
+  var now_year = today.getFullYear();
+
+  if (now_day == todate && now_month == month && now_year == year) {
     var today_content = "<div class='text-center py-4'><h4>今日のグループの予定です</h4></div>";
   } else {
     var today_content = "<div class='text-center py-4'><h4>" + (month + 1) + "月 " + todate + "日のグループの予定です" + "</h4></div>";
