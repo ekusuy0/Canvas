@@ -57,7 +57,6 @@ function jump() {
   // parseIntは、文字列を整数に変換する。
   currentYear = parseInt(selectYear.value);
   currentMonth = parseInt(selectMonth.value);
-  console.log(currentMonth);
   showCalendar(currentMonth, currentYear);
 }
 let jumpmonth = document.getElementById('month');

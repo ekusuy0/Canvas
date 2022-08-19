@@ -2,7 +2,7 @@
   <div class="row">
     <div class="mx-auto">
       <% @tags.each do |tag| %>
-        <div class="<%= tag.color %> tag">
+        <div style="background-color:<%= tag.color %>;" class="tag px-5">
           <%= tag.name %>
           <%= link_to "削除", tag_path(tag.id), method: :delete, data: {confirm: "タグを削除するとタグが付いているタスクも削除されます。それでも削除しますか？"} %>
         </div>
@@ -15,7 +15,22 @@
       <%= form_with model: @tag, url: tags_path, method: :post do |f| %>
         <%= f.label :name %>
         <%= f.text_field :name %>
-        <%= f.select :color, [["赤色", "red"], ["青色", "blue"], ["黄色", "yellow"]] %>
+        <%= f.hidden_field :color, id: "color-name" %>
+        <div id="select-color" class="color-box">
+          <div id="selected-color" class="s-color"></div>
+          <span><input id="#B2DB11" type="button" class="tag-color" style="background-color: #B2DB11;"></input></span>
+          <span><input id="#1B9850" type="button" class="tag-color" style="background-color: #1B9850;"></input></span>
+          <span><input id="#017E74" type="button" class="tag-color" style="background-color: #017E74;"></input></span>
+          <span><input id="#006881" type="button" class="tag-color" style="background-color: #006881;"></input></span>
+          <span><input id="#0C419A" type="button" class="tag-color" style="background-color: #0C419A;"></input></span>
+          <span><input id="#3D258E" type="button" class="tag-color" style="background-color: #3D258E;"></input></span>
+          <span><input id="#6B1687" type="button" class="tag-color" style="background-color: #6B1687;"></input></span>
+          <span><input id="#AE0158" type="button" class="tag-color" style="background-color: #AE0158;"></input></span>
+          <span><input id="#F80040" type="button" class="tag-color" style="background-color: #F80040;"></input></span>
+          <span><input id="#FF4000" type="button" class="tag-color" style="background-color: #FF4000;"></input></span>
+          <span><input id="#FF8C00" type="button" class="tag-color" style="background-color: #FF8C00;"></input></span>
+          <span><input id="#FFE500" type="button" class="tag-color" style="background-color: #FFE500;"></input></span>
+        </div>
         <%= f.submit '追加' %>
       <% end %>
     </div>
@@ -42,3 +57,5 @@
     </div>
   </div>
 </div>
+
+<%= javascript_pack_tag 'task_create' %>
