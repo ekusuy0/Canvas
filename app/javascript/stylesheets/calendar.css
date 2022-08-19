@@ -3,9 +3,9 @@
   margin: 0;
   padding: 0;
 }
-.tag {
-  color: #fff;
-}
+/*.tag {*/
+/*  color: #fff;*/
+/*}*/
 
 .red {
   background-color: #ff0000;
@@ -127,8 +127,8 @@ table {
 
 .color-box {
   position:relative;
-  width: 240px; /* 直径 */
-  height: 240px; /* 直径 */
+  width: 320px; /* 直径 */
+  height: 320px; /* 直径 */
   text-align: center;
   margin: 0;
 }
@@ -136,16 +136,16 @@ table {
 .color-box span {
   position: absolute;
   top: 0;
-  left: calc(50% - 20px); /* 中心点、、円のサイズ分ずらす */
+  left: calc(50% - 30px); /* 中心点、、円のサイズ分ずらす */
   display: inline-block;
-  width: 40px;
-  height: 120px; /* 半径 */
+  width: 60px;
+  height: 160px; /* 半径 */
   transform-origin: center bottom;
 }
 
 .tag-color {
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   margin: 5px;
   border: none;
@@ -153,8 +153,8 @@ table {
 
 .s-color {
   position: absolute;
-  top: 70px;
-  left: 70px;
+  top: 110px;
+  left: 110px;
   width: 100px;
   height: 100px;
   border-radius: 50%;

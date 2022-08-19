@@ -1,50 +1,60 @@
 <div class="container">
-  <div class="row">
-    <div class="mx-auto">
-      <% @tags.each do |tag| %>
-        <div style="background-color:<%= tag.color %>;" class="tag px-5">
-          <%= tag.name %>
-          <%= link_to "削除", tag_path(tag.id), method: :delete, data: {confirm: "タグを削除するとタグが付いているタスクも削除されます。それでも削除しますか？"} %>
+  <h4 class="text-center">タグ作成</h4>
+  <div class="row mb-5">
+    <div class="col-md-4 offset-md-1">
+      <div class="mx-auto text-center">
+        <h4>タグ一覧</h4>
+        <% @tags.each do |tag| %>
+          <div style="background: linear-gradient(to right, <%= tag.color %>, #ffffff, <%= tag.color %>);" class="tag px-5 mb-1 round">
+            <%= tag.name %>
+            <%= link_to "削除", tag_path(tag.id), method: :delete, data: {confirm: "タグを削除するとタグが付いているタスクも削除されます。それでも削除しますか？"} %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="col-md-5 offset-md-1">
+      <div class="mx-auto row text-center">
+        <div class="mx-auto">
+          <%= form_with model: @tag, url: tags_path, method: :post do |f| %>
+            <div class="col-10 mx-auto">
+              <%= f.label :name, "タグネーム" %>
+              <%= f.text_field :name, class: "form-control" %>
+            </div>
+            <%= f.label :color, "タグカラー選択", class: "mt-3" %>
+            <%= f.hidden_field :color, id: "color-name" %>
+            <div id="select-color" class="color-box mx-auto">
+              <div id="selected-color" class="s-color"></div>
+              <span><input id="#B2DB11" type="button" class="tag-color" style="background-color: #B2DB11;"></input></span>
+              <span><input id="#1B9850" type="button" class="tag-color" style="background-color: #1B9850;"></input></span>
+              <span><input id="#017E74" type="button" class="tag-color" style="background-color: #017E74;"></input></span>
+              <span><input id="#006881" type="button" class="tag-color" style="background-color: #006881;"></input></span>
+              <span><input id="#0C419A" type="button" class="tag-color" style="background-color: #0C419A;"></input></span>
+              <span><input id="#3D258E" type="button" class="tag-color" style="background-color: #3D258E;"></input></span>
+              <span><input id="#6B1687" type="button" class="tag-color" style="background-color: #6B1687;"></input></span>
+              <span><input id="#AE0158" type="button" class="tag-color" style="background-color: #AE0158;"></input></span>
+              <span><input id="#F80040" type="button" class="tag-color" style="background-color: #F80040;"></input></span>
+              <span><input id="#FF4000" type="button" class="tag-color" style="background-color: #FF4000;"></input></span>
+              <span><input id="#FF8C00" type="button" class="tag-color" style="background-color: #FF8C00;"></input></span>
+              <span><input id="#FFE500" type="button" class="tag-color" style="background-color: #FFE500;"></input></span>
+            </div>
+            <div class="col-10 mx-auto">
+              <%= f.submit 'タグ作成', class: "btn btn-outline-secondary mt-3 col-12" %>
+            </div>
+          <% end %>
         </div>
-      <% end %>
+      </div>
     </div>
   </div>
 
-  <div class="row">
-    <div class="mx-auto">
-      <%= form_with model: @tag, url: tags_path, method: :post do |f| %>
-        <%= f.label :name %>
-        <%= f.text_field :name %>
-        <%= f.hidden_field :color, id: "color-name" %>
-        <div id="select-color" class="color-box">
-          <div id="selected-color" class="s-color"></div>
-          <span><input id="#B2DB11" type="button" class="tag-color" style="background-color: #B2DB11;"></input></span>
-          <span><input id="#1B9850" type="button" class="tag-color" style="background-color: #1B9850;"></input></span>
-          <span><input id="#017E74" type="button" class="tag-color" style="background-color: #017E74;"></input></span>
-          <span><input id="#006881" type="button" class="tag-color" style="background-color: #006881;"></input></span>
-          <span><input id="#0C419A" type="button" class="tag-color" style="background-color: #0C419A;"></input></span>
-          <span><input id="#3D258E" type="button" class="tag-color" style="background-color: #3D258E;"></input></span>
-          <span><input id="#6B1687" type="button" class="tag-color" style="background-color: #6B1687;"></input></span>
-          <span><input id="#AE0158" type="button" class="tag-color" style="background-color: #AE0158;"></input></span>
-          <span><input id="#F80040" type="button" class="tag-color" style="background-color: #F80040;"></input></span>
-          <span><input id="#FF4000" type="button" class="tag-color" style="background-color: #FF4000;"></input></span>
-          <span><input id="#FF8C00" type="button" class="tag-color" style="background-color: #FF8C00;"></input></span>
-          <span><input id="#FFE500" type="button" class="tag-color" style="background-color: #FFE500;"></input></span>
-        </div>
-        <%= f.submit '追加' %>
-      <% end %>
-    </div>
-  </div>
 
+  <h4 class="text-center">タスクの作成</h4>
   <div class="row">
     <div class="mx-auto">
-      <h4>タスクの作成</h4>
       <%= form_with model: @task, url: tasks_path, method: :post do |f| %>
-        <div class="form-group">
-          <%= f.label :title, "TITLE" %>
-          <%= f.text_field :title %>
-        </div>
-        <%= f.label :content %>
+        <%= f.label :title, "タスクネーム" %><br>
+        <%= f.text_field :title %><br>
+        <%= f.label :content %><br>
         <%= f.text_area :content %><br>
         <%= f.hidden_field :assigned_person, :value => current_user.id %>
         <%= f.label :start_time %>

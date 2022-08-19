@@ -70,6 +70,7 @@ function showCalendar(month, year) {
   var firstDay = (new Date(year, month)).getDay();
   var endDate = new Date(year, month + 1, 0).getDate();
   var lastMonthEndDate = new Date(year, month, 0).getDate();
+  console.log(firstDay);
 
   monthAndYear.innerHTML = "<h4>" + year + " / " + (month + 1) + "</h4>";
   selectYear.value = year;
@@ -154,6 +155,7 @@ function showCalendar(month, year) {
 
       for(var l = 0; l < taskHash.length; l++) {
         var task = taskHash[l];
+
 
         if((task_date - firstDay) == task[2] && year == task[0] && month == (task[1] - 1)) {
           var createTr = document.createElement("tr");
