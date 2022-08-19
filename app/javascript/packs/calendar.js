@@ -151,13 +151,14 @@ function showCalendar(month, year) {
     var tasks = document.getElementById('tasks');
     var taskHash = JSON.parse(tasks.getAttribute('data-task-status'));
 
-    for(var m = 0; m < 6; m++) {
+    for(var m = 0; m < 7; m++) {
 
       for(var l = 0; l < taskHash.length; l++) {
         var task = taskHash[l];
 
 
         if((task_date - firstDay) == task[2] && year == task[0] && month == (task[1] - 1)) {
+
           var createTr = document.createElement("tr");
           createTr.className = "taskTr";
 
@@ -167,7 +168,7 @@ function showCalendar(month, year) {
 
             if (count == task[3]) {
               if (task[8] == 0) {
-
+                console.log(task[3]);
                 task_cell.className = 'text-center p-0 round';
                 task_cell.setAttribute("style", "background: linear-gradient(to right," + task[10] + ", #ffffff," + task[10] + ");")
                 task_cell.innerHTML = task[9];
