@@ -168,18 +168,21 @@ function showCalendar(month, year) {
             if (count == task[3]) {
               if (task[8] == 0) {
 
-                task_cell.className = task[10] + ' text-center p-0 round';
+                task_cell.className = 'text-center p-0 round';
+                task_cell.setAttribute("style", "background: linear-gradient(to right," + task[10] + ", #ffffff," + task[10] + ");")
                 task_cell.innerHTML = task[9];
               } else {
                 if (task[3] + task[8] <= 7) {
-                  task_cell.className = task[10] + " text-center p-0 round";
+                  task_cell.className = "text-center p-0 round";
                   task_cell.setAttribute("colspan", task[8] + 1);
+                  task_cell.setAttribute("style", "background: linear-gradient(to right," + task[10] + ", #ffffff," + task[10] + ");")
                   task_cell.innerHTML = task[9];
                   createTr.appendChild(task_cell);
                 } else {
                   task_cell.setAttribute("colspan", 7 - task[3]);
                   task_cell.innerHTML = task[9];
-                  task_cell.className = task[10] + ' text-center p-0 left-round t';
+                  task_cell.className = 'text-center p-0 left-round t';
+                  task_cell.setAttribute("style", "background: linear-gradient(to right," + task[10] + ", #ffffff," + task[10] + ");")
                   createTr.appendChild(task_cell);
                 }
                 var last_td = (7 - task[3] - task[8] - 1);
@@ -210,7 +213,8 @@ function showCalendar(month, year) {
             for (var datecount = 0; datecount < 7; datecount++) {
               if (datecount == 1) {
                 var end_cell = document.createElement("td");
-                end_cell.className = task[10] + " text-center p-0 right-round";
+                end_cell.className = "text-center p-0 right-round";
+                end_cell.className.setAttribute("style", "background: linear-gradient(to right," + task[10] + ", #ffffff," + task[10] + ");")
                 end_cell.innerHTML = task[9];
                 end_cell.setAttribute("colspan", task[7] + 1);
                 let taskCellText = document.createTextNode("");
