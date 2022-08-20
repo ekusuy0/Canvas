@@ -77,7 +77,7 @@ function showTodayTask(todate, month, year) {
       today_content += "<div class='col-2'><p class='round text-center' style='background: linear-gradient(to right, " + task[10] + ", #ffffff, " + task[10] + ");'>" + task[11] + "</p></div>";
       today_content += "<p class='col-2 text-center'>" + task[9] + "</p>"
       today_content += "<p class='col-7'>" + task[12] + "</p>"
-      today_content += "<p class='col-1 p-0'><a href='/group_tasks/" + task[13] + "/edit' class='btn btn-outline-secondary btn-sm'>編集</a></p>"
+      today_content += "<p class='col-1 p-0 text-center'><a href='/group_tasks/" + task[13] + "/edit' class='btn btn-outline-secondary btn-sm'>編集</a></p>"
       today_content += "</div></div>"
     }
    }

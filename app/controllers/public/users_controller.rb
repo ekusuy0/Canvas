@@ -2,6 +2,7 @@ class Public::UsersController < ApplicationController
 
   def show
     @tasks = Task.where(assigned_person: current_user.id)
+    
   end
 
   def edit
@@ -33,6 +34,6 @@ class Public::UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:name, :status, :email, )
+    params.require(:user).permit(:name, :status, :email, :color)
   end
 end

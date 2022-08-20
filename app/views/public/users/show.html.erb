@@ -10,7 +10,7 @@
     </div>
   </div>
 
-  <%= link_to "新規作成", new_task_path %>
+  <%= link_to "タスクの新規作成", new_task_path, class: "btn btn-outline-secondary my-3 col-10 offset-1" %>
   <div class="button-container-calendar row mb-3 day-box">
     <div class="col-1 p-0">
       <input type="button" value="<" id="previous" class="text-center btn btn-outline-dark allow">
@@ -72,9 +72,7 @@
   <% task = [] %>
 <% end %>
 
-<%# tasks.each do |f| %>
-  <%#= f[0] %>
-<%# end %>
+
 
 <div id="tasks" data-task-status="<%= tasks.to_json %>"></div>
 
