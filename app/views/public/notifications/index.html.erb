@@ -1,8 +1,18 @@
 <div class="container">
-  <h4>グループ招待通知</h4>
-  <% if @notifications.exists? %>
-    <%= render @notifications %>
-  <% else %>
-    <p>通知はありません</p>
-  <% end %>
+  <div class="row">
+    <div class="col">
+      <h4 class="text-center">グループ招待通知</h4>
+    </div>
+  </div>
+  <div class="row">
+    <% if @notifications.exists? %>
+      <div class="col text-center mt-5">
+        <%= render @notifications %>
+      </div>
+    <% else %>
+      <div class="col text-center mt-5">
+        <p>通知はありません</p>
+      </div>
+    <% end %>
+  </div>
 </div>

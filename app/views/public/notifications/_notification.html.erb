@@ -1,5 +1,9 @@
 <% if notification.action == "invitation" %>
-  <%= notification.visitor.name %>さんからチームへの招待が届きました。<br>
-  パスワード：<%= notification.group.password %><br>
-  <%= link_to "参加する", group_confirm_path(notification.group_id) %>
+  <div class="row">
+    <div class="col-md-4 mx-auto mb-3 card">
+      <p class="my-3"><%= notification.visitor.name %>さんからグループへの招待が届きました。</p>
+      <p class="my-3">パスワード：<%= notification.group.password %></p>
+      <%= link_to "参加する", group_confirm_path(notification.group_id), class: "btn btn-outline-secondary mb-3" %><br>
+    </div>
+  </div>
 <% end %>
