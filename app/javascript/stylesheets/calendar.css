@@ -202,9 +202,9 @@ table {
   transform: rotate(330deg);
 }
 
-.tag-btn {
-  border: none;
-}
+/*.tag-btn {*/
+/*  border: none;*/
+/*}*/
 
 .chat-box {
   width: 100%;
