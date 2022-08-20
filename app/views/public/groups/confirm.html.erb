@@ -1,10 +1,15 @@
-<div class="container">
-  <h4>チーム参加確認画面</h4>
-  <p id="confirm" class="font-weight-bold"><%= flash[:confirm] %></p>
-  
-  <%= form_with url: join_group_path(@group.id), method: :get do |f| %>
-    <%= f.label :password, "パスワード" %>
-    <%= f.text_field :password %>
-    <%= f.submit 'チームに参加する' %>
-  <% end %>
+<div class="container text-center">
+  <h4 class="text-center">グループ参加確認画面</h4>
+  <div class="row">
+    <div class="col-4 mx-auto">
+      <p id="confirm" class="font-weight-bold"><%= flash[:confirm] %></p>
+
+      <p>グループ<br><%= @group.name %></p>
+      <%= form_with url: join_group_path(@group.id), method: :get do |f| %>
+        <%= f.label :password, "パスワード" %><br>
+        <%= f.text_field :password, class:"form-control" %><br>
+        <%= f.submit 'グループに参加する', class: "btn btn-outline-secondary mt-3" %>
+      <% end %>
+    </div>
+  </div>
 </div>
