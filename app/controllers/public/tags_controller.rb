@@ -7,9 +7,16 @@ class Public::TagsController < ApplicationController
   end
 
   def edit
+    @tag = Tag.find(params[:id])
   end
 
   def update
+    @tag = Tag.find(params[:id])
+    if @tag.update(tag_params)
+      redirect_to new_task_path
+    else
+      redirect_to request.referer
+    end
   end
 
   def destroy
