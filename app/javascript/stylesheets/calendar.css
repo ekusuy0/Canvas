@@ -202,3 +202,7 @@ table {
   transform: rotate(330deg);
 }
 
+.tag-btn {
+  border: none;
+}
+
