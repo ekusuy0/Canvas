@@ -206,3 +206,10 @@ table {
   border: none;
 }
 
+.chat-box {
+  width: 100%;
+  height: 500px;
+  border: 1px solid #000000;
+  overflow-y: scroll;
+}
+

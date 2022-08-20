@@ -58,6 +58,8 @@ function showTodayTask(todate, month, year) {
   var tasks = document.getElementById('tasks');
   var taskHash = JSON.parse(tasks.getAttribute('data-task-status'));
 
+
+
   var now_day = today.getDate();
   var now_month = today.getMonth();
   var now_year = today.getFullYear();
