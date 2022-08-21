@@ -1,4 +1,5 @@
 class Public::TasksController < ApplicationController
+  before_action :authenticate_user!
 
   def day_index
   end

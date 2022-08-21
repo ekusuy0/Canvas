@@ -1,4 +1,5 @@
 class Public::GroupTagsController < ApplicationController
+  before_action :authenticate_user!
 
   def create
     tag = current_user.tags.new(tag_params)

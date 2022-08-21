@@ -1,8 +1,13 @@
 class Public::GroupTasksController < ApplicationController
+  before_action :authenticate_user!
+  
   def create
     task = current_user.tasks.new(task_params)
-    task.save
-    redirect_to group_path(task.group_id)
+    if task.save
+      redirect_to group_path(task.group_id)
+    else
+      redirect_to request.referer
+    end
   end
 
   def update

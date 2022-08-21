@@ -1,4 +1,6 @@
 class Public::GroupsController < ApplicationController
+  before_action :authenticate_user!
+
   def new
     @group = Group.new
   end
@@ -12,8 +14,11 @@ class Public::GroupsController < ApplicationController
     @group.owner_id = current_user.id
     # グループに紐づいたuserにcurrent_userを入れ込んでいる
     @group.users << current_user
-    @group.save
-    redirect_to groups_path
+    if @group.save
+      redirect_to groups_path
+    else
+    　redirect_to request.referer
+    end
   end
 
   def chat

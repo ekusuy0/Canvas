@@ -1,9 +1,11 @@
 class Public::TagsController < ApplicationController
+  before_action :authenticate_user!
 
   def create
     tag = current_user.tags.new(tag_params)
-    tag.save
-    redirect_to request.referer
+    if tag.save
+      redirect_to request.referer
+    end
   end
 
   def edit

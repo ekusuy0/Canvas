@@ -1,8 +1,8 @@
 class Public::UsersController < ApplicationController
+  before_action :authenticate_user!
 
   def show
     @tasks = Task.where(assigned_person: current_user.id)
-    
   end
 
   def edit

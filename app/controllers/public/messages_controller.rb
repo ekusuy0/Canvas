@@ -1,8 +1,11 @@
 class Public::MessagesController < ApplicationController
+  before_action :authenticate_user!
+
   def create
     message = Message.new(message_params)
-    message.save
-    redirect_to request.referer
+    if message.save
+      redirect_to request.referer
+    end
   end
 
   private
