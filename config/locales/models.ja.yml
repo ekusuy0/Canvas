@@ -1,0 +1,28 @@
+ja:
+  activerecord:
+    attributes:
+      user:
+        name: 名前
+        email: メールアドレス
+      task:
+        title: タスク名
+        content: 内容
+        assigned_person: アサイン
+        start_time: 開始日
+        end_time: 終了日
+        state: ステータス
+      tag:
+        name: タグ名
+        color: タグカラー
+      message:
+        message: メッセージ
+      group:
+        name: グループ名
+        password: パスワード
+
+    models:
+      user: ユーザー
+      task: タスク
+      tag: タグ
+      message: メッセージ
+      group: グループ
