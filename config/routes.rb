@@ -29,17 +29,9 @@ Rails.application.routes.draw do
     resources :group_tags, only: [:create, :edit, :update, :destroy]
     resources :notifications, only: :index
 
-    resources :group_tasks, except: [:show, :index] do
-      collection do
-        get '/day_index' => 'group_tasks#day_index'
-      end
-    end
+    resources :group_tasks, except: [:show, :index]
 
-    resources :tasks, except: [:index, :show] do
-      collection do
-        get '/day_index' => 'tasks#day_index'
-      end
-    end
+    resources :tasks, except: [:index, :show]
 
     resources :groups, only: [:new, :create, :index, :show] do
       get '/confirm' => 'groups#confirm'
@@ -51,6 +43,9 @@ Rails.application.routes.draw do
     end
 
     resources :messages, only: [:create]
+
+    get 'tags' => redirect("/tasks/new")
+    get 'tasks' => redirect("/tasks/new")
   end
 
 

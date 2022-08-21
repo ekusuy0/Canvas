@@ -3,9 +3,13 @@ class Public::TagsController < ApplicationController
   before_action :tag_check, only: [:edit]
 
   def create
-    tag = current_user.tags.new(tag_params)
-    if tag.save
+    @tag = current_user.tags.new(tag_params)
+    if @tag.save
       redirect_to request.referer
+    else
+      @task = Task.new
+      @tags = current_user.tags.all
+      render template: 'public/tasks/new'
     end
   end
 

@@ -3,9 +3,15 @@ class Public::GroupTagsController < ApplicationController
   before_action :group_tag_check, only: [:edit]
 
   def create
-    tag = current_user.tags.new(tag_params)
-    tag.save
-    redirect_to request.referer
+    @tag = current_user.tags.new(tag_params)
+    if @tag.save
+      redirect_to request.referer
+    else
+      @task = Task.new
+      @task.group_id = @tag.group_id
+      @tags = Tag.where(group_id: @tag.group_id)
+      render template: 'public/group_tasks/new'
+    end
   end
 
   def edit

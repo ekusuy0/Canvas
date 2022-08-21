@@ -2,9 +2,6 @@ class Public::TasksController < ApplicationController
   before_action :authenticate_user!
   before_action :check_task, only: [:edit]
 
-  def day_index
-  end
-
   def new
     @tag = Tag.new
     @tags = current_user.tags.all
@@ -35,7 +32,7 @@ class Public::TasksController < ApplicationController
     else
       @tag = Tag.new
       @tags = current_user.tags.all
-      render :new
+      render template: 'public/tasks/new'
     end
   end
 

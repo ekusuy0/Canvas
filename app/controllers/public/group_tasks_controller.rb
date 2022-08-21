@@ -3,11 +3,14 @@ class Public::GroupTasksController < ApplicationController
   before_action :group_task_check, only: [:edit]
 
   def create
-    task = current_user.tasks.new(task_params)
-    if task.save
+    @task = current_user.tasks.new(task_params)
+    if @task.save
       redirect_to group_path(task.group_id)
     else
-      redirect_to request.referer
+      @tag = Tag.new
+      @tag.group_id = @task.group_id
+      @tags = Tag.where(group_id: @task.group_id)
+      render template: 'public/group_tasks/new'
     end
   end
 
@@ -34,9 +37,6 @@ class Public::GroupTasksController < ApplicationController
 
   def edit
     @group_task = Task.find(params[:id])
-  end
-
-  def day_index
   end
 
   private

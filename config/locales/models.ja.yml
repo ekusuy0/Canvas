@@ -11,6 +11,7 @@ ja:
         start_time: 開始日
         end_time: 終了日
         state: ステータス
+        tag_id: タグ
       tag:
         name: タグ名
         color: タグカラー
