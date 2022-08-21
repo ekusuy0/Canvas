@@ -19,7 +19,14 @@ class Task < ApplicationRecord
   belongs_to :user
   belongs_to :group, optional: true
   belongs_to :tag
-  
+
   validates :content, presence: true
   validates :title, presence: true
+  validates :start_time, presence: true
+  validates :end_time, presence: true
+  validate :start_end_check
+
+  def start_end_check
+    errors.add(:end_time, "は、開始日と同じ日か遅い日付を選択してください") if self.start_time >= self.end_time
+  end
 end

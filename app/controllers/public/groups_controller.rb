@@ -1,5 +1,8 @@
 class Public::GroupsController < ApplicationController
   before_action :authenticate_user!
+  before_action :check_group, only: [:show, :joni, :invitation]
+  before_action :check_group_chat, only: [:chat]
+
 
   def new
     @group = Group.new
@@ -80,5 +83,25 @@ class Public::GroupsController < ApplicationController
   private
   def group_params
     params.require(:group).permit(:name, :password);
+  end
+
+  def check_group
+    @group = Group.find(params[:id])
+    @group.users.each do |user|
+      unless user.id == current_user.id
+        flash[:danger] = "このグループに招待されていないので入れません"
+        redirect_to root_path
+      end
+    end
+  end
+
+  def check_group_chat
+    @group = Group.find(params[:group_id])
+    @group.users.each do |user|
+      unless user.id == current_user.id
+        flash[:danger] = "このグループに招待されていないので入れません"
+        redirect_to root_path
+      end
+    end
   end
 end

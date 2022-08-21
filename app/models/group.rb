@@ -9,6 +9,10 @@
 #  updated_at :datetime         not null
 #  owner_id   :integer          not null
 #
+# Indexes
+#
+#  index_groups_on_name  (name) UNIQUE
+#
 class Group < ApplicationRecord
   has_many :messages, dependent: :destroy
   has_many :group_users, dependent: :destroy
@@ -16,6 +20,9 @@ class Group < ApplicationRecord
   has_many :tasks, dependent: :destroy
   has_many :tags, dependent: :destroy
   has_many :notifications, dependent: :destroy
+
+  validates :name, presence: true, uniqueness: true
+  validates :password, presence: true, length: { minimum: 6 }
 
   def group_invitation_notification(current_user, visited_id, group_id)
     # すでに招待用の通知が送られているか検索

@@ -1,5 +1,6 @@
 class Public::GroupTagsController < ApplicationController
   before_action :authenticate_user!
+  before_action :group_tag_check, only: [:edit]
 
   def create
     tag = current_user.tags.new(tag_params)
@@ -29,5 +30,21 @@ class Public::GroupTagsController < ApplicationController
   private
   def tag_params
     params.require(:tag).permit(:name, :color, :group_id)
+  end
+
+  def group_tag_check
+    @group_tag = Tag.find(params[:id])
+    @group = @group_tag.group
+    if @group.present?
+    @group.users.each do |user|
+      unless user.id == current_user.id
+        flash[:danger] = "予期せ眼エラーが発生しました"
+        redirect_to root_path
+      end
+    end
+    else
+      flash[:danger] = "予期せ眼エラーが発生しました"
+      redirect_to root_path
+    end
   end
 end

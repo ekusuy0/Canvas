@@ -52,7 +52,18 @@
       </div>
     </div>
   </div>
-
+  <div class="row" id="<%= @task.id %>-task-new">
+    <div class="col-6 mx-auto text-center">
+      <% if @task.errors.any? %>
+        <%= @task.errors.count %>件のエラーが発生しました
+        <ul>
+          <% @task.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      <% end %>
+    </div>
+  </div>
 
   <h4 class="text-center">タスクの作成</h4>
     <%= form_with model: @task, url: tasks_path, method: :post do |f| %>

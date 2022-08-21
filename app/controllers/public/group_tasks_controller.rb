@@ -1,6 +1,7 @@
 class Public::GroupTasksController < ApplicationController
   before_action :authenticate_user!
-  
+  before_action :group_task_check, only: [:edit]
+
   def create
     task = current_user.tasks.new(task_params)
     if task.save
@@ -43,4 +44,18 @@ class Public::GroupTasksController < ApplicationController
     params.require(:task).permit(:title, :content, :assigned_person, :start_time, :end_time, :tag_id, :group_id)
   end
 
+  def group_task_check
+    @group_task = Task.find(params[:id])
+    @group = @group_task.group
+    if @group.present?
+      @group.users.each do |user|
+        unless user.id == current_user.id
+          flash[:danger] = "予期せ眼エラーが発生しました"
+          redirect_to root_path
+        end
+      end
+    else
+      redirect_to root_path
+    end
+  end
 end

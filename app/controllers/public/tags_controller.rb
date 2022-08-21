@@ -1,5 +1,6 @@
 class Public::TagsController < ApplicationController
   before_action :authenticate_user!
+  before_action :tag_check, only: [:edit]
 
   def create
     tag = current_user.tags.new(tag_params)
@@ -30,5 +31,13 @@ class Public::TagsController < ApplicationController
   private
   def tag_params
     params.require(:tag).permit(:name, :color)
+  end
+
+  def tag_check
+    @tag = Tag.find(params[:id])
+    unless @tag.user.id == current_user.id
+      flash[:danger] = "予期せ眼エラーが発生しました"
+      redirect_to root_path
+    end
   end
 end
