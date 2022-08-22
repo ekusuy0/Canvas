@@ -3,7 +3,6 @@ function TagColor() {
   color_name.setAttribute("value", this.id);
   var selected_color = document.getElementById("selected-color");
   selected_color.setAttribute("style", "background-color:" + this.id + ";");
-  console.log(this.id)
 }
 
 let red = document.getElementById("#FF4000");

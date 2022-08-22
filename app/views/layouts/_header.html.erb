@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-sm" style="background-color: <% if user_signed_in? %><%= current_user.color %><% end %>;">
+<nav class="navbar navbar-expand-sm" <% if user_signed_in? %><%= current_user.color %><% end %>>
   <div class="container">
     <%= link_to root_path, class: "navbar-brand p-3 text-dark" do %><h1>Canvas</h1><% end %>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expended="false" aria-label="Toggle navigation">

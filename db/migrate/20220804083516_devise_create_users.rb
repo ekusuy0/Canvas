@@ -33,7 +33,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
       # t.datetime :locked_at
       t.string :name, null: false
       t.boolean :status, null: false, default: false
-      t.string :color, null: false, default: "#ffffff"
+      t.string :color, null: false, default: "style=background-color:#ffffff;"
 
 
       t.timestamps null: false

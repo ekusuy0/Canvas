@@ -3,9 +3,8 @@ class Public::MessagesController < ApplicationController
 
   def create
     message = Message.new(message_params)
-    if message.save
-      redirect_to request.referer
-    end
+    message.save
+    redirect_to request.referer
   end
 
   private

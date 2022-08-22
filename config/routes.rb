@@ -44,8 +44,8 @@ Rails.application.routes.draw do
 
     resources :messages, only: [:create]
 
-    get 'tags' => redirect("/tasks/new")
-    get 'tasks' => redirect("/tasks/new")
+    get 'tags' => redirect("tasks#new")
+    get 'tasks' => redirect("tasks#new")
   end
 
 
