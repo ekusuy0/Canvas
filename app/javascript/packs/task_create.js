@@ -5,39 +5,39 @@ function TagColor() {
   selected_color.setAttribute("style", "background-color:" + this.id + ";");
 }
 
-let red = document.getElementById("#FF4000");
+
+let red = document.getElementById("#F28C8E");
 red.onclick = TagColor;
 
-let orange = document.getElementById("#FF8C00");
+let orange = document.getElementById("#FF9E7D");
 orange.onclick = TagColor;
 
-let yellow = document.getElementById("#FFE500");
+let yellow = document.getElementById("#FCB869");
 yellow.onclick = TagColor;
 
-let yellow_green = document.getElementById("#B2DB11");
+let yellow_green = document.getElementById("#EDD267");
 yellow_green.onclick = TagColor;
 
-let green = document.getElementById("#1B9850");
+let green = document.getElementById("#CACA61");
 green.onclick = TagColor;
 
-let dark_green = document.getElementById("#017E74");
+let dark_green = document.getElementById("#73C89C");
 dark_green.onclick = TagColor;
 
-let dark_blue = document.getElementById("#006881");
+let dark_blue = document.getElementById("#3FABA4");
 dark_blue.onclick = TagColor;
 
-let blue = document.getElementById("#0C419A");
+let blue = document.getElementById("#52A6BF");
 blue.onclick = TagColor;
 
-let deep_blue = document.getElementById("#3D258E");
+let deep_blue = document.getElementById("#6591C0");
 deep_blue.onclick = TagColor;
 
-let purple = document.getElementById("#6B1687");
+let purple = document.getElementById("#8E87BE");
 purple.onclick = TagColor;
 
-let red_purple = document.getElementById("#AE0158");
+let red_purple = document.getElementById("#AC7EAE");
 red_purple.onclick = TagColor;
 
-let wine_red = document.getElementById("#F80040");
+let wine_red = document.getElementById("#D98295");
 wine_red.onclick = TagColor;
-
