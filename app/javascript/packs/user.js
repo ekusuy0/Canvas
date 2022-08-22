@@ -2,42 +2,45 @@ function UserColor() {
   var color_name = document.getElementById("color-name");
   color_name.setAttribute("value", this.id);
   var selected_color = document.getElementById("selected-color");
-  selected_color.setAttribute("value", this.id);
+  selected_color.setAttribute("style", "background-color:" + this.id + ";");
 }
 
-let red = document.getElementById("style=background-color:#FF4000;");
+let red = document.getElementById("#F28C8E");
 red.onclick = UserColor;
 
-let orange = document.getElementById("style=background-color:#FF8C00;");
+let orange = document.getElementById("#FF9E7D");
 orange.onclick = UserColor;
 
-let yellow = document.getElementById("style=background-color:#FFE500;");
+let yellow = document.getElementById("#FCB869");
 yellow.onclick = UserColor;
 
-let yellow_green = document.getElementById("style=background-color:#B2DB11;");
+let yellow_green = document.getElementById("#EDD267");
 yellow_green.onclick = UserColor;
 
-let green = document.getElementById("style=background-color:#1B9850;");
+let green = document.getElementById("#CACA61");
 green.onclick = UserColor;
 
-let dark_green = document.getElementById("style=background-color:#017E74;");
+let dark_green = document.getElementById("#73C89C");
 dark_green.onclick = UserColor;
 
-let dark_blue = document.getElementById("style=background-color:#006881;");
+let dark_blue = document.getElementById("#3FABA4");
 dark_blue.onclick = UserColor;
 
-let blue = document.getElementById("style=background-color:#0C419A;");
+let blue = document.getElementById("#52A6BF");
 blue.onclick = UserColor;
 
-let deep_blue = document.getElementById("style=background-color:#3D258E;");
+let deep_blue = document.getElementById("#6591C0");
 deep_blue.onclick = UserColor;
 
-let purple = document.getElementById("style=background-color:#6B1687;");
+let purple = document.getElementById("#8E87BE");
 purple.onclick = UserColor;
 
-let red_purple = document.getElementById("style=background-color:#AE0158;");
+let red_purple = document.getElementById("#AC7EAE");
 red_purple.onclick = UserColor;
 
-let wine_red = document.getElementById("style=background-color:#F80040;");
+let wine_red = document.getElementById("#D98295");
 wine_red.onclick = UserColor;
+
+let white = document.getElementById("#ffffff");
+white.onclick = UserColor;
 

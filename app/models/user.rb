@@ -3,7 +3,7 @@
 # Table name: users
 #
 #  id                     :integer          not null, primary key
-#  color                  :string           default("style=background-color:#ffffff;"), not null
+#  color                  :string           default("#ffffff;"), not null
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
 #  name                   :string           not null

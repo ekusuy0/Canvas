@@ -1,34 +1,42 @@
-<div class="container">
-  <h4 class="text-center">ユーザー編集</h4>
+<div class="container text-center">
+  <h4 class="text-center mb-3">ユーザー編集</h4>
 
   <%= form_with model: @user, url: users_information_path, method: :patch do |f| %>
     <div class="row">
-      <div class="col-5 text-center">
+      <div class="col-5 text-center mx-auto">
         <%= f.label :name, "ユーザー名" %><br>
         <%= f.text_field :name, autofocus: true, class: "form-control" %>
       </div>
     </div>
-    <%= f.label :color, "タグカラー選択", class: "mt-3" %>
-    <%= f.hidden_field :color, id: "color-name" %>
-    <div id="select-color" class="color-box mx-auto">
-      <div id="selected-color" class="s-color"></div>
-      <span><input id="style=background-color:#B2DB11;" type="button" class="tag-color" style="background-color: #B2DB11;"></input></span>
-      <span><input id="style=background-color:#1B9850;" type="button" class="tag-color" style="background-color: #1B9850;"></input></span>
-      <span><input id="style=background-color:#017E74;" type="button" class="tag-color" style="background-color: #017E74;"></input></span>
-      <span><input id="style=background-color:#006881;" type="button" class="tag-color" style="background-color: #006881;"></input></span>
-      <span><input id="style=background-color:#0C419A;" type="button" class="tag-color" style="background-color: #0C419A;"></input></span>
-      <span><input id="style=background-color:#3D258E;" type="button" class="tag-color" style="background-color: #3D258E;"></input></span>
-      <span><input id="style=background-color:#6B1687;" type="button" class="tag-color" style="background-color: #6B1687;"></input></span>
-      <span><input id="style=background-color:#AE0158;" type="button" class="tag-color" style="background-color: #AE0158;"></input></span>
-      <span><input id="style=background-color:#F80040;" type="button" class="tag-color" style="background-color: #F80040;"></input></span>
-      <span><input id="style=background-color:#FF4000;" type="button" class="tag-color" style="background-color: #FF4000;"></input></span>
-      <span><input id="style=background-color:#FF8C00;" type="button" class="tag-color" style="background-color: #FF8C00;"></input></span>
-      <span><input id="style=background-color:#FFE500;" type="button" class="tag-color" style="background-color: #FFE500;"></input></span>
+
+    <div class="col-5 text-center mx-auto">
+      <%= f.label :color, "イメージカラー選択", class: "mt-3" %>
     </div>
-    <%= f.submit "変更を保存する", class: "btn btn-outline-secondary mt-3" %>
+
+    <span><input id="#ffffff" type="button" class="default-color mb-3" style="background-color:#ffffff; border: 1px solid black;" value="デフォルトカラー(白)"></input></span>
+
+    <div class="row">
+      <%= f.hidden_field :color, id: "color-name" %>
+      <div id="select-color" class="color-box mb-3 mx-auto">
+        <div id="selected-color" class="s-color" style="background-color: <%= current_user.color %>;" ></div>
+        <span><input id="#EDD267" type="button" class="tag-color" style="background-color: #EDD267;"></input></span>
+        <span><input id="#CACA61" type="button" class="tag-color" style="background-color: #CACA61;"></input></span>
+        <span><input id="#73C89C" type="button" class="tag-color" style="background-color: #73C89C;"></input></span>
+        <span><input id="#3FABA4" type="button" class="tag-color" style="background-color: #3FABA4;"></input></span>
+        <span><input id="#52A6BF" type="button" class="tag-color" style="background-color: #52A6BF;"></input></span>
+        <span><input id="#6591C0" type="button" class="tag-color" style="background-color: #6591C0;"></input></span>
+        <span><input id="#8E87BE" type="button" class="tag-color" style="background-color: #8E87BE;"></input></span>
+        <span><input id="#AC7EAE" type="button" class="tag-color" style="background-color: #AC7EAE;"></input></span>
+        <span><input id="#D98295" type="button" class="tag-color" style="background-color: #D98295;"></input></span>
+        <span><input id="#F28C8E" type="button" class="tag-color" style="background-color: #F28C8E;"></input></span>
+        <span><input id="#FF9E7D" type="button" class="tag-color" style="background-color: #FF9E7D;"></input></span>
+        <span><input id="#FCB869" type="button" class="tag-color" style="background-color: #FCB869;"></input></span>
+      </div>
+    </div>
+    <%= f.submit "変更を保存する", class: "btn btn-outline-secondary my-3" %>
   <% end %>
 
-  <%= link_to "退会する", users_out_check_path, class: "btn btn-outline-secondary mt-3" %>
+  <%= link_to "退会する", users_out_check_path, class: "btn btn-outline-secondary my-3" %>
 
 </div>
 
