@@ -21,8 +21,11 @@ var days = ["日", "月", "火", "水", "木", "金", "土"];
 var months = ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"];
 var dayNames = "<tbody>" + "<tr>";
 
+var user_color = document.getElementById('user_color');
+var color = JSON.parse(user_color.getAttribute('data-user-status'));
+
 for (let day in days) {
-  dayNames += "<th class='text-center' title='" + days[day] + "'>" + days[day] + "</th>";
+  dayNames += "<th class='text-center' title='" + days[day] + "' style='background-color:" + color + ";'>" + days[day] + "</th>";
 }
 dayNames += "</tr>" + "</tbody>";
 

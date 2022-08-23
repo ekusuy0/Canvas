@@ -21,8 +21,11 @@ var days = ["月", "火", "水", "木", "金", "土", "日"];
 var months = ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"];
 var dayNames = "<tbody>" + "<tr>";
 
+var user_color = document.getElementById('user_color');
+var color = JSON.parse(user_color.getAttribute('data-user-status'));
+
 for (let day in days) {
-  dayNames += "<th class='text-center' title='" + days[day] + "'>" + days[day] + "</th>";
+  dayNames += "<th class='text-center' title='" + days[day] + "' style='background-color:" + color + ";'>" + days[day] + "</th>";
 }
 dayNames += "</tr>" + "</tbody>";
 
@@ -67,10 +70,10 @@ jumpyear.onchange = jump;
 
 
 function showCalendar(month, year) {
-  var firstDay = (new Date(year, month)).getDay();
+  var firstDay = (new Date(year, month)).getDay() - 1;
   var endDate = new Date(year, month + 1, 0).getDate();
   var lastMonthEndDate = new Date(year, month, 0).getDate();
-  console.log(firstDay);
+
 
   monthAndYear.innerHTML = "<h4>" + year + " / " + (month + 1) + "</h4>";
   selectYear.value = year;
@@ -166,39 +169,50 @@ function showCalendar(month, year) {
             var task_cell = document.createElement("td");
             task_cell.className = count;
 
-            if (count == task[3]) {
+            if (count == task[3] - 1) {
               if (task[8] == 0) {
-                console.log(task[3]);
                 task_cell.className = 'text-center p-0 round';
                 task_cell.setAttribute("style", "background-color: " + task[10] + ";")
                 task_cell.innerHTML = task[9];
               } else {
-                if (task[3] + task[8] < 7) {
-                  task_cell.className = "text-center p-0 round";
-                  task_cell.setAttribute("colspan", task[8] + 1);
-                  task_cell.setAttribute("style", "background-color: " + task[10] + ";")
-                  task_cell.innerHTML = task[9];
-                  createTr.appendChild(task_cell);
-                } else {
-                  task_cell.setAttribute("colspan", 7 - task[3]);
-                  task_cell.innerHTML = task[9];
-                  task_cell.className = 'text-center p-0 left-round t';
-                  task_cell.setAttribute("style", "background-color: " + task[10] + ";")
-                  createTr.appendChild(task_cell);
-                }
-                var last_td = (7 - task[3] - task[8] - 1);
+                  if (task[3] - 1 + task[8] < 7) {
+                    task_cell.className = "text-center p-0 round";
+                    task_cell.setAttribute("colspan", task[8] + 1);
+                    task_cell.setAttribute("style", "background-color: " + task[10] + ";")
+                    task_cell.innerHTML = task[9];
+                    createTr.appendChild(task_cell);
+                  } else {
+                    task_cell.setAttribute("colspan", 7 - task[3] + 1);
+                    task_cell.innerHTML = task[9];
+                    task_cell.className = 'text-center p-0 left-round t';
+                    task_cell.setAttribute("style", "background-color: " + task[10] + ";")
+                    createTr.appendChild(task_cell);
+                  }
+                  var last_td = (7 - task[3] - task[8] - 2);
 
-                for (let n = 0; n < last_td; n++) {
-                  var task_null_cell = document.createElement("td");
-                  let taskCellText = document.createTextNode("");
-                  task_null_cell.appendChild(taskCellText);
-                  createTr.appendChild(task_null_cell);
+                  for (let n = 0; n < last_td; n++) {
+                    var task_null_cell = document.createElement("td");
+                    let taskCellText = document.createTextNode("");
+                    task_null_cell.appendChild(taskCellText);
+                    createTr.appendChild(task_null_cell);
+                  }
+                  break;
                 }
-                break;
-              }
             } else {
               taskCellText = document.createTextNode("");
               task_cell.appendChild(taskCellText);
+            }
+
+            if (task[3] == 0 && count == 6) {
+              if (task[8] == 0) {
+                task_cell.className = 'text-center p-0 round';
+                task_cell.setAttribute("style", "background-color: " + task[10] + ";")
+                task_cell.innerHTML = task[9];
+              } else {
+                  task_cell.className = 'text-center p-0 left-round';
+                  task_cell.setAttribute("style", "background-color: " + task[10] + ";")
+                  task_cell.innerHTML = task[9];
+                }
             }
 
             createTr.appendChild(task_cell);
@@ -209,7 +223,7 @@ function showCalendar(month, year) {
         }
 
         if ((task_date - firstDay) == task[6] && year == task[4] && month == (task[5] - 1)) {
-          if (task[8] >= (task[7] + 1)) {
+          if (task[8] >= (task[7])) {
             var createTr = document.createElement("tr");
             for (var datecount = 0; datecount < 7; datecount++) {
               if (datecount == 1) {
@@ -217,15 +231,23 @@ function showCalendar(month, year) {
                 end_cell.className = "text-center p-0 right-round";
                 end_cell.setAttribute("style", "background-color: " + task[10] + ";")
                 end_cell.innerHTML = task[9];
-                end_cell.setAttribute("colspan", task[7] + 1);
+                if (task[7] == 0) {
+                  end_cell.setAttribute("colspan", 7);
+                } else {
+                  end_cell.setAttribute("colspan", task[7]);
+                }
                 let taskCellText = document.createTextNode("");
                 end_cell.appendChild(taskCellText);
                 createTr.appendChild(end_cell);
 
-                var last_end_td = (7 - task[7] - 1);
+                if (task[7] == 0) {
+                  var last_end_td = 0;
+                } else {
+                  var last_end_td = (7 - task[7] - 1);
+                }
                 for (let p = 0; p < last_end_td; p++) {
                   var task_null_end_cell = document.createElement("td");
-                  task_null_end_cell.className = task[7] + 2 + p;
+                  task_null_end_cell.className = task[7] + 1 + p;
                   let taskEndCellText = document.createTextNode("");
                   task_null_end_cell.appendChild(taskEndCellText);
                   createTr.appendChild(task_null_end_cell);

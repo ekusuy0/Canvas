@@ -3,6 +3,7 @@
 # Table name: users
 #
 #  id                     :integer          not null, primary key
+#  calendar_status        :boolean          default(TRUE), not null
 #  color                  :string           default("#ffffff;"), not null
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null

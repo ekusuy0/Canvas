@@ -12,7 +12,7 @@ class Public::UsersController < ApplicationController
   def update
     @user = User.find(current_user.id)
     if @user.update(user_params)
-      redirect_to request.referer
+      redirect_to users_my_page_path
     else
       render :edit
     end
@@ -34,6 +34,6 @@ class Public::UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:name, :status, :email, :color)
+    params.require(:user).permit(:name, :status, :email, :color, :calendar_status)
   end
 end
