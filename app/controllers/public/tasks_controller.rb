@@ -36,7 +36,13 @@ class Public::TasksController < ApplicationController
       redirect_to users_my_page_path, notice: "タスクを保存しました"
     else
       @tag = Tag.new
-      @tags = current_user.tags.all
+      @user_tags = current_user.tags.all
+      @tags = []
+      @user_tags.each do |tag|
+        unless tag.group_id.present?
+          @tags << tag
+        end
+      end
       render template: 'public/tasks/new'
     end
   end

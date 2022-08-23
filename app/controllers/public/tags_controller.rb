@@ -8,7 +8,13 @@ class Public::TagsController < ApplicationController
       redirect_to request.referer, notice: "タグを保存しました"
     else
       @task = Task.new
-      @tags = current_user.tags.all
+      @user_tags = current_user.tags.all
+      @tags = []
+      @user_tags.each do |tag|
+        unless tag.group_id.present?
+          @tags << tag
+        end
+      end
       render template: 'public/tasks/new'
     end
   end
