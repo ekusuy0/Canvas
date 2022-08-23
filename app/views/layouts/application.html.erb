@@ -14,6 +14,9 @@
     <header class="shadow mb-5" <% if user_signed_in? %>style="background-color: <%= current_user.color %>;"<% end %>>
       <%= render "layouts/header" %>
     </header>
+    <div class="flash-message text-center" id="flash">
+      <%= notice %>
+    </div>
     <%= yield %>
   </body>
 </html>

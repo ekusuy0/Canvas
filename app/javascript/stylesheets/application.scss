@@ -1,1 +1,13 @@
 @import '~bootstrap/scss/bootstrap';
+
+body {
+  position: relative;
+}
+
+.flash-message {
+  position: absolute;
+  width: 100%;
+  top: 115px;
+  left: 0;
+  background-color: #a6ce39;
+}
