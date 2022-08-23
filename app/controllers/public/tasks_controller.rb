@@ -4,9 +4,14 @@ class Public::TasksController < ApplicationController
 
   def new
     @tag = Tag.new
-    @tags = current_user.tags.all
+    @user_tags = current_user.tags.all
+    @tags = []
+    @user_tags.each do |tag|
+      unless tag.group_id.present?
+        @tags << tag
+      end
+    end
     @task = Task.new
-    # @tasks = current_user.tasks.all
   end
 
   def edit
