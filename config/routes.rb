@@ -43,9 +43,6 @@ Rails.application.routes.draw do
     end
 
     resources :messages, only: [:create]
-
-    get 'tags' => redirect("tasks#new")
-    get 'tasks' => redirect("tasks#new")
   end
 
 

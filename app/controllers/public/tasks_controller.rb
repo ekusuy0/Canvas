@@ -16,7 +16,7 @@ class Public::TasksController < ApplicationController
   def update
     @task = Task.find(params[:id])
     if @task.update(task_params)
-      redirect_to users_my_page_path
+      redirect_to users_my_page_path, notice: "タスクの変更を保存しました"
     else
       redirect_to request.referer
     end
@@ -28,7 +28,7 @@ class Public::TasksController < ApplicationController
   def create
     @task = current_user.tasks.new(task_params)
     if @task.save
-      redirect_to users_my_page_path
+      redirect_to users_my_page_path, notice: "タスクを保存しました"
     else
       @tag = Tag.new
       @tags = current_user.tags.all

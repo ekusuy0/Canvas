@@ -5,7 +5,7 @@ class Public::TagsController < ApplicationController
   def create
     @tag = current_user.tags.new(tag_params)
     if @tag.save
-      redirect_to request.referer
+      redirect_to request.referer, notice: "タグを保存しました"
     else
       @task = Task.new
       @tags = current_user.tags.all
@@ -20,7 +20,7 @@ class Public::TagsController < ApplicationController
   def update
     @tag = Tag.find(params[:id])
     if @tag.update(tag_params)
-      redirect_to new_task_path
+      redirect_to new_task_path, notice: "タグの変更を保存しました"
     else
       redirect_to request.referer
     end
@@ -29,7 +29,7 @@ class Public::TagsController < ApplicationController
   def destroy
     tag = Tag.find(params[:id])
     tag.destroy
-    redirect_to request.referer
+    redirect_to request.referer, notice: "タグの削除をしました"
   end
 
   private

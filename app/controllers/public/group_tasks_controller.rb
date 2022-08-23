@@ -5,7 +5,7 @@ class Public::GroupTasksController < ApplicationController
   def create
     @task = current_user.tasks.new(task_params)
     if @task.save
-      redirect_to group_path(task.group_id)
+      redirect_to group_path(task.group_id), notice: "タスクを保存しました"
     else
       @tag = Tag.new
       @tag.group_id = @task.group_id
@@ -17,7 +17,7 @@ class Public::GroupTasksController < ApplicationController
   def update
     @group_task = Task.find(params[:id])
     if @group_task.update(task_params)
-      redirect_to group_path(@group_task.group_id)
+      redirect_to group_path(@group_task.group_id), "タスクの変更を保存しました"
     else
       redirect_to request.referer
     end
