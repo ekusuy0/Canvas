@@ -171,7 +171,6 @@ function showCalendar(month, year) {
 
             if (count == task[3]) {
               if (task[8] == 0) {
-                console.log(task[3]);
                 task_cell.className = 'text-center p-0 round';
                 task_cell.setAttribute("style", "background-color: " + task[10] + ";")
                 task_cell.innerHTML = task[9];

@@ -2,7 +2,8 @@ class Public::UsersController < ApplicationController
   before_action :authenticate_user!
 
   def show
-    @tasks = Task.where(assigned_person: current_user.id)
+    # 予定を開始日が古い順に取り出す
+    @tasks = Task.where(assigned_person: current_user.id).order(start_time: "ASC")
   end
 
   def edit
