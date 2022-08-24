@@ -27,7 +27,7 @@ class Public::GroupsController < ApplicationController
   def chat
     @message = Message.new
     @group = Group.find(params[:group_id])
-    @messages = @group.messages.all
+    @messages = @group.messages.all.order(id: "DESC")
   end
 
   def index

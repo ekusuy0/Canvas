@@ -15,7 +15,6 @@ Rails.application.routes.draw do
   }
 
   root to: 'public/homes#top'
-  get 'about' => 'public/homes#about'
 
   get 'users/my_page' => 'public/users#show'
   get 'users/information/edit' => 'public/users#edit'
