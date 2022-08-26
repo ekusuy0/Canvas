@@ -32,6 +32,28 @@ class Public::TasksController < ApplicationController
 
   def create
     @task = current_user.tasks.new(task_params)
+    tasks = current_user.tasks.all
+    tasks.each do |task|
+      # if task.start_time == @task.start_time
+      #   @task.task_day_count = @task.task_day_count + 1
+      # end
+      for span in 0..(task.end_time.yday - task.start_time.yday) do
+        for taskspan in 0..(@task.end_time.yday - @task.start_time.yday) do
+          if (@task.start_time + taskspan) == (task.start_time + span)
+            @task.task_day_count = task.task_day_count + 1
+          end
+        end
+      end
+    end
+
+    @task.week_count = @task.week_of_month(@task.start_time)
+
+    if current_user.calendar_status
+      if @task.start_time.wday == 0
+        @task.week_count = @task.week_count + 1
+      end
+    end
+
     if @task.save
       redirect_to users_my_page_path, notice: "タスクを保存しました"
     else

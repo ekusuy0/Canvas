@@ -7,9 +7,11 @@ class CreateTasks < ActiveRecord::Migration[6.1]
       t.string :title, null: false
       t.text :content, null: false
       t.integer :assigned_person, null: false
-      t.datetime :start_time, null: false
-      t.datetime :end_time, null: false
+      t.date :start_time, null: false
+      t.date :end_time, null: false
       t.boolean :status, null: false, default: false
+      t.integer :task_day_count, null: false, default: 1
+      t.integer :week_count, null: false
 
       t.timestamps
     end

@@ -74,9 +74,11 @@ ActiveRecord::Schema.define(version: 2022_08_11_100225) do
     t.string "title", null: false
     t.text "content", null: false
     t.integer "assigned_person", null: false
-    t.datetime "start_time", null: false
-    t.datetime "end_time", null: false
+    t.date "start_time", null: false
+    t.date "end_time", null: false
     t.boolean "status", default: false, null: false
+    t.integer "task_day_count", default: 1, null: false
+    t.integer "week_count", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "group_id"
