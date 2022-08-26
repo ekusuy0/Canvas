@@ -94,7 +94,7 @@ function showCalendar(month, year) {
     week_row += "<tbody>" + "<tr>";
 
     var date_row = "<table cellpadding='0' cellspacing='0' class='st-grid table table-borderless row-10 mb-0'>";
-    date_row += "<tbody class='date-number'>";
+    date_row += "<thead class='date-number'>";
 
     var row = document.createElement("tr");
 
@@ -149,6 +149,7 @@ function showCalendar(month, year) {
 
     week_row += "</tr>" + "</tbody>" + "</table>";
     date_row += row.outerHTML;
+    date_row += "</thead>" + "<tbody>";
 
     var tasks = document.getElementById('tasks');
     var taskHash = JSON.parse(tasks.getAttribute('data-task-status'));
@@ -173,29 +174,33 @@ function showCalendar(month, year) {
 
 
         for (var week = 0; week < 7; week++) {
-
+          var task_cell = document.createElement("td");
+          task_cell.className
 
           for (var task_count = 0; task_count < taskHash.length; task_count++) {
             var task = taskHash[task_count];
 
             if (week == task[3] && (n + 1) == task[14] && (i + 1) == task[15]) {
               if (task[8] == 0) {
-                var task_cell = document.createElement("td");
                 task_cell.className = 'text-center p-0 round';
                 task_cell.setAttribute("style", "background-color: " + task[10] + ";");
                 task_cell.innerHTML = task[9];
                 createTr.appendChild(task_cell);
+
               } else {
-                var task_cell = document.createElement("td");
                 task_cell.className = 'text-center p-0 round';
                 task_cell.setAttribute("style", "background-color: " + task[10] + ";");
                 task_cell.setAttribute("colspan", task[8] + 1);
                 task_cell.innerHTML = task[9];
                 createTr.appendChild(task_cell);
+
+                week = week + task[8];
               }
             }
-            createTr.appendChild(task_cell);
+
           }
+          createTr.appendChild(task_cell);
+
         }
 
         date_row += createTr.outerHTML;
