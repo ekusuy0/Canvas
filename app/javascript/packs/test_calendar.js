@@ -82,6 +82,7 @@ function showCalendar(month, year) {
   mv_event.innerHTML = "";
   var date = 1;
   var task_date = 1;
+  var box_count = 0;
 
   for(let i = 0; i < 6; i++) {
 
@@ -117,6 +118,7 @@ function showCalendar(month, year) {
         cellText = document.createTextNode(lastMonthDate);
         cell.appendChild(cellText);
         row.appendChild(cell);
+        box_count++;
       } else if (date > daysInMonth(month, year)) {
         if (i == 5 && j == 0 && date > endDate) {
           break;
@@ -179,15 +181,17 @@ function showCalendar(month, year) {
 
           for (var task_count = 0; task_count < taskHash.length; task_count++) {
             var task = taskHash[task_count];
+            if (task[0] == year && (task[1] - 1) == month || task[4] && (task[5] - 1) == month) {
 
-            if (week == task[3] && (n + 1) == task[14] && (i + 1) == task[15]) {
-              if (task[8] == 0) {
-                task_cell.className = 'text-center p-0 round';
-                task_cell.setAttribute("style", "background-color: " + task[10] + ";");
-                task_cell.innerHTML = task[9];
-                createTr.appendChild(task_cell);
 
-              } else if (task[3] + task[8] < 7) {
+              if (week == task[3] && (n + 1) == task[14] && (i + 1) == task[15]) {
+                if (task[8] == 0) {
+                  task_cell.className = 'text-center p-0 round';
+                  task_cell.setAttribute("style", "background-color: " + task[10] + ";");
+                  task_cell.innerHTML = task[9];
+                  createTr.appendChild(task_cell);
+
+                } else if (task[3] + task[8] < 7) {
                   task_cell.className = 'text-center p-0 round';
                   task_cell.setAttribute("style", "background-color: " + task[10] + ";");
                   task_cell.setAttribute("colspan", task[8] + 1);
@@ -195,22 +199,38 @@ function showCalendar(month, year) {
                   createTr.appendChild(task_cell);
                   week = week + task[8];
 
-              } else {
+                } else {
                   task_cell.setAttribute("colspan", 7 - task[3]);
                   task_cell.innerHTML = task[9];
                   task_cell.className = 'text-center p-0 left-round t';
                   task_cell.setAttribute("style", "background-color: " + task[10] + ";")
                   createTr.appendChild(task_cell);
                   week = week + 6 -task[3];
-              }
-            } else if (week == 0 && (n + 1) == task[14] && (i + 1) == task[16]) {
-              if ((task[16] - task[15]) != 0) {
-                task_cell.className = "text-center p-0 right-round";
-                task_cell.setAttribute("style", "background-color: " + task[10] + ";");
-                task_cell.innerHTML = task[9];
-                task_cell.setAttribute("colspan", task[7] + 1);
-                createTr.appendChild(task_cell);
-                week = week + task[7];
+                }
+              } else if (week == 0 && (n + 1) == task[14] && (i + 1) == task[16]) {
+                if ((task[16] - task[15]) != 0 && (task[5] - 1) == month) {
+                  if ((task[15] - task[16]) >= 4) {
+                    for (var u = 0; u < task[3]; u++) {
+                      var task_null_cell = document.createElement("td");
+                      task_null_cell.className
+                      task_null_cell.innerHTML = "";
+                      createTr.appendChild(task_null_cell);
+                    }
+                    task_cell.className = "text-center p-0 round";
+                    task_cell.setAttribute("style", "background-color: " + task[10] + ";");
+                    task_cell.innerHTML = task[9];
+                    task_cell.setAttribute("colspan", task[8] + 1);
+                    createTr.appendChild(task_cell);
+                    week = week + task[7];
+                  } else {
+                    task_cell.className = "text-center p-0 right-round";
+                    task_cell.setAttribute("style", "background-color: " + task[10] + ";");
+                    task_cell.innerHTML = task[9];
+                    task_cell.setAttribute("colspan", task[7] + 1);
+                    createTr.appendChild(task_cell);
+                    week = week + task[7];
+                  }
+                }
               }
             }
           }
