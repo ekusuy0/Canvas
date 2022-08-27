@@ -162,8 +162,25 @@ function showCalendar(month, year) {
       var task = taskHash[task_count];
 
 
-      if((i + 1) == task[15] || (i + 1) == task[16] && year == task[0] && month == (task[1] - 1)) {
+      if((i + 1) == task[15] && year == task[0] && month == (task[1] - 1)) {
         count.push(task[14]);
+      }
+
+      if ((i + 1) == task[16] && year == task[0] && month == (task[1] - 1)) {
+        count.push(task[14]);
+      }
+
+      if (task[16] > task[15]　&& (task[16] - task[15]) > 1) {
+        for(var s = 1; s <= (task[16] - task[15]); s++) {
+          if ((i + 1) == (task[15] + s) && year == task[0] && month == (task[1] - 1)) {
+            count.push(task[14]);
+          }
+        }
+      }
+
+      if (i == 0 && task[6] < task[8] + 1 && year == task[4] && month == (task[5] - 1)) {
+        count.push(task[14]);
+        console.log(task[6]);
       }
     }
     if (count.length) {
@@ -181,17 +198,17 @@ function showCalendar(month, year) {
 
           for (var task_count = 0; task_count < taskHash.length; task_count++) {
             var task = taskHash[task_count];
-            if (task[0] == year && (task[1] - 1) == month || task[4] && (task[5] - 1) == month) {
+            if (task[0] == year && (task[1] - 1) == month) {
 
 
               if (week == task[3] && (n + 1) == task[14] && (i + 1) == task[15]) {
-                if (task[8] == 0) {
+                if (task[8] == 0) { // タスクの長さが一日の時
                   task_cell.className = 'text-center p-0 round';
                   task_cell.setAttribute("style", "background-color: " + task[10] + ";");
                   task_cell.innerHTML = task[9];
                   createTr.appendChild(task_cell);
 
-                } else if (task[3] + task[8] < 7) {
+                } else if (task[3] + task[8] < 7) { // タスクがその週の間に日をまたぐとき
                   task_cell.className = 'text-center p-0 round';
                   task_cell.setAttribute("style", "background-color: " + task[10] + ";");
                   task_cell.setAttribute("colspan", task[8] + 1);
@@ -199,7 +216,7 @@ function showCalendar(month, year) {
                   createTr.appendChild(task_cell);
                   week = week + task[8];
 
-                } else {
+                } else { // タスクが週をまたぐとき
                   task_cell.setAttribute("colspan", 7 - task[3]);
                   task_cell.innerHTML = task[9];
                   task_cell.className = 'text-center p-0 left-round t';
@@ -208,39 +225,70 @@ function showCalendar(month, year) {
                   week = week + 6 -task[3];
                 }
               } else if (week == 0 && (n + 1) == task[14] && (i + 1) == task[16]) {
-                if ((task[16] - task[15]) != 0 && (task[5] - 1) == month) {
-                  if ((task[15] - task[16]) >= 4) {
-                    for (var u = 0; u < task[3]; u++) {
-                      var task_null_cell = document.createElement("td");
-                      task_null_cell.className
-                      task_null_cell.innerHTML = "";
-                      createTr.appendChild(task_null_cell);
+                if ((task[16] - task[15]) != 0 && (task[5] - 1) == month) { // 週をまたいだ終わりのところ
+
+                  task_cell.className = "text-center p-0 right-round";
+                  task_cell.setAttribute("style", "background-color: " + task[10] + ";");
+                  task_cell.innerHTML = task[9];
+                  task_cell.setAttribute("colspan", task[7] + 1);
+                  createTr.appendChild(task_cell);
+                  week = week + task[7];
+
+                }
+              }
+
+              if (task[16] > task[15] && (task[16] - task[15]) > 1) {
+                for(var s = 1; s < (task[16] - task[15]); s++) {
+                  if ((i + 1) == (task[15] + s) && year == task[0] && month == (task[1] - 1) && (n + 1) == task[14]) {
+                    if (week == 0) {
+                      task_cell.className = "text-center p-0";
+                      task_cell.setAttribute("style", "background-color: " + task[10] + ";");
+                      task_cell.innerHTML = task[9];
+                      task_cell.setAttribute("colspan", 7);
+                      createTr.appendChild(task_cell);
+                      week = week + 7;
                     }
-                    task_cell.className = "text-center p-0 round";
-                    task_cell.setAttribute("style", "background-color: " + task[10] + ";");
-                    task_cell.innerHTML = task[9];
-                    task_cell.setAttribute("colspan", task[8] + 1);
-                    createTr.appendChild(task_cell);
-                    week = week + task[7];
-                  } else {
-                    task_cell.className = "text-center p-0 right-round";
-                    task_cell.setAttribute("style", "background-color: " + task[10] + ";");
-                    task_cell.innerHTML = task[9];
-                    task_cell.setAttribute("colspan", task[7] + 1);
-                    createTr.appendChild(task_cell);
-                    week = week + task[7];
                   }
                 }
               }
+
+
+            } else if (task[4] == year && (task[5] - 1) == month) {
+                if (i == 0 && week == (task[7] - task[8]) && (n + 1) == task[14] && task[16] == 1) {
+                  task_cell.className = "text-center p-0 round";
+                  task_cell.setAttribute("style", "background-color: " + task[10] + ";");
+                  task_cell.innerHTML = task[9];
+                  task_cell.setAttribute("colspan", task[8] + 1);
+                  createTr.appendChild(task_cell);
+                  week = week + task[8];
+                }
             }
           }
           createTr.appendChild(task_cell);
 
         }
 
+
         date_row += createTr.outerHTML;
+
+
       }
     }
+
+    // if ((task[15] - task[16]) >= 4) {
+    //     for (var u = 0; u < task[3]; u++) {
+    //       var task_null_cell = document.createElement("td");
+    //       task_null_cell.className
+    //       task_null_cell.innerHTML = "";
+    //       createTr.appendChild(task_null_cell);
+    //     }
+    //     task_cell.className = "text-center p-0 round";
+    //     task_cell.setAttribute("style", "background-color: " + task[10] + ";");
+    //     task_cell.innerHTML = task[9];
+    //     task_cell.setAttribute("colspan", task[8] + 1);
+    //     createTr.appendChild(task_cell);
+    //     week = week + task[7];
+    //   } else {
 
     // var createTr = document.createElement("tr");
     // createTr.className = "taskTr";
