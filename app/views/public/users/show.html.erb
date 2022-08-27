@@ -93,6 +93,11 @@
   <% task << t.id %>                <!--13-->
   <% task << t.task_day_count %>    <!--14-->
   <% task << t.week_count %>        <!--15-->
+  <% if t.end_time.wday == 0 %>
+    <% task << t.week_of_month(t.end_time) + 1%> <!--16-->
+  <% else %>
+    <% task << t.week_of_month(t.end_time) %>
+  <% end %>
   <% tasks << task %>
   <% task = [] %>
 <% end %>
@@ -110,10 +115,12 @@
 
 
 <% @tasks.each do |task| %>
-  <%= task.week_count %>
-  <%= task.task_day_count %>
-  <%= task.start_time %>
-  <%= task.end_time.yday - task.start_time.yday %>
+  <%= task.week_count %>週目
+  <%= task.task_day_count %>予定の数
+  <%= task.start_time %>予定開始日
+  <%= task.end_time %>予定の終了日
+  <%= task.end_time.yday - task.start_time.yday %>タスクのスパン
+  <%= task.week_of_month(task.end_time) %>予定の終了日が何週目か
   <%= task.title %><br>
 <% end %>
 <% user_color = current_user.color %>

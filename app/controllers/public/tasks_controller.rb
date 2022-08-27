@@ -33,10 +33,10 @@ class Public::TasksController < ApplicationController
   def create
     @task = current_user.tasks.new(task_params)
     tasks = current_user.tasks.all
+
+
+
     tasks.each do |task|
-      # if task.start_time == @task.start_time
-      #   @task.task_day_count = @task.task_day_count + 1
-      # end
       for span in 0..(task.end_time.yday - task.start_time.yday) do
         for taskspan in 0..(@task.end_time.yday - @task.start_time.yday) do
           if (@task.start_time + taskspan) == (task.start_time + span)

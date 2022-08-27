@@ -36,7 +36,7 @@ class Public::GroupsController < ApplicationController
 
   def show
     @group = Group.find(params[:id])
-    @tasks = Task.where(group_id: @group.id)
+    @tasks = Task.where(group_id: @group.id).order(start_time: "ASC")
     @user = User.new
     @users = User.all
     @other_users = []
