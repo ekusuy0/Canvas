@@ -48,12 +48,6 @@ class Public::TasksController < ApplicationController
 
     @task.week_count = @task.week_of_month(@task.start_time)
 
-    if current_user.calendar_status
-      if @task.start_time.wday == 0
-        @task.week_count = @task.week_count + 1
-      end
-    end
-
     if @task.save
       redirect_to users_my_page_path, notice: "タスクを保存しました"
     else

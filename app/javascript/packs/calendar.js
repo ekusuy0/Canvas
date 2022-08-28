@@ -14,23 +14,47 @@ var selectMonth = document.getElementById("month");
 var selsecDay = document.getElementById("date");
 
 
+
+
 var createYear = generate_year_range(1900, 2200);
 document.getElementById("year").innerHTML = createYear;
 
-var days = ["日", "月", "火", "水", "木", "金", "土"];
-var months = ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"];
-var dayNames = "<tbody>" + "<tr>";
+var user_calendar_status = document.getElementById('user_calendar_status');
+var check = JSON.parse(user_calendar_status.getAttribute('data-calendar-status'));
 
-var user_color = document.getElementById('user_color');
-var color = JSON.parse(user_color.getAttribute('data-user-status'));
+if (check) {
 
-for (let day in days) {
-  dayNames += "<th class='text-center' title='" + days[day] + "' style='background-color:" + color + ";'>" + days[day] + "</th>";
+  var days = ["日", "月", "火", "水", "木", "金", "土"];
+  var months = ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"];
+  var dayNames = "<tbody>" + "<tr>";
+
+  var user_color = document.getElementById('user_color');
+  var color = JSON.parse(user_color.getAttribute('data-user-status'));
+
+  for (let day in days) {
+    dayNames += "<th class='text-center' title='" + days[day] + "' style='background-color:" + color + ";'>" + days[day] + "</th>";
+  }
+  dayNames += "</tr>" + "</tbody>";
+
+  document.getElementById('myDaynamesTable').innerHTML = dayNames;
+
+} else {
+
+  var days = ["月", "火", "水", "木", "金", "土", "日"];
+  var months = ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"];
+  var dayNames = "<tbody>" + "<tr>";
+
+  var user_color = document.getElementById('user_color');
+  var color = JSON.parse(user_color.getAttribute('data-user-status'));
+
+  for (let day in days) {
+    dayNames += "<th class='text-center' title='" + days[day] + "' style='background-color:" + color + ";'>" + days[day] + "</th>";
+  }
+  dayNames += "</tr>" + "</tbody>";
+
+  document.getElementById('myDaynamesTable').innerHTML = dayNames;
+
 }
-dayNames += "</tr>" + "</tbody>";
-
-document.getElementById('myDaynamesTable').innerHTML = dayNames;
-
 
 monthAndYear = document.getElementById("monthAndYear");
 
@@ -70,10 +94,13 @@ jumpyear.onchange = jump;
 
 
 function showCalendar(month, year) {
-  var firstDay = (new Date(year, month)).getDay();
+  if (check) {
+    var firstDay = (new Date(year, month)).getDay(); // 月の最初の曜日
+  } else {
+    var firstDay = (new Date(year, month)).getDay() - 1; // 月曜日始まりだから-１している
+  }
   var endDate = new Date(year, month + 1, 0).getDate();
   var lastMonthEndDate = new Date(year, month, 0).getDate();
-
 
   monthAndYear.innerHTML = "<h4>" + year + " / " + (month + 1) + "</h4>";
   selectYear.value = year;
@@ -83,7 +110,6 @@ function showCalendar(month, year) {
   mv_event.innerHTML = "";
   var date = 1;
   var task_date = 1;
-  var box_count = 0;
 
   for(let i = 0; i < 6; i++) {
 
@@ -119,7 +145,6 @@ function showCalendar(month, year) {
         cellText = document.createTextNode(lastMonthDate);
         cell.appendChild(cellText);
         row.appendChild(cell);
-        box_count++;
       } else if (date > daysInMonth(month, year)) {
         if (i == 5 && j == 0 && date > endDate) {
           break;
@@ -386,4 +411,3 @@ function showCalendar(month, year) {
 function daysInMonth(iMonth, iYear) {
   return 32 - new Date(iYear, iMonth, 32).getDate();
 }
-
