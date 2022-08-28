@@ -103,7 +103,7 @@ class Public::GroupsController < ApplicationController
     @group = Group.find(params[:group_id])
     check = false
     @group.users.each do |user|
-      unless user.id == current_user.id
+      if user.id == current_user.id
         check = true
       end
     end
