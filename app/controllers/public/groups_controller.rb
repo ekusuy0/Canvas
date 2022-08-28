@@ -1,6 +1,6 @@
 class Public::GroupsController < ApplicationController
   before_action :authenticate_user!
-  before_action :check_group, only: [:show, :joni, :invitation]
+  before_action :check_group, only: [:show, :invitation]
   before_action :check_group_chat, only: [:chat]
 
 
@@ -38,9 +38,9 @@ class Public::GroupsController < ApplicationController
     @group = Group.find(params[:id])
     @tasks = Task.where(group_id: @group.id).order(start_time: "ASC")
     @user = User.new
-    @users = User.all
+    users = User.all
     @other_users = []
-    @users.each do |user|
+    users.each do |user|
       @group.users.each do |group_user|
         if user.id != group_user.id
           @other_users << user
@@ -87,21 +87,29 @@ class Public::GroupsController < ApplicationController
 
   def check_group
     @group = Group.find(params[:id])
+    check = false
     @group.users.each do |user|
-      unless user.id == current_user.id
-        flash[:danger] = "このグループに招待されていないので入れません"
-        redirect_to root_path
+      if user.id == current_user.id
+        check = true
       end
+    end
+    unless check
+      flash[:danger] = "このグループに招待されていないので入れません"
+      redirect_to root_path
     end
   end
 
   def check_group_chat
     @group = Group.find(params[:group_id])
+    check = false
     @group.users.each do |user|
       unless user.id == current_user.id
-        flash[:danger] = "このグループに招待されていないので入れません"
-        redirect_to root_path
+        check = true
       end
+    end
+    unless check
+      flash[:danger] = "このグループに招待されていないので入れません"
+      redirect_to root_path
     end
   end
 end

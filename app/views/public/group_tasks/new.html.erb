@@ -22,7 +22,7 @@
         <h4>タグ一覧</h4>
         <% @tags.each do |tag| %>
           <div class="row">
-            <div style="background: linear-gradient(to right, <%= tag.color %>, #ffffff, <%= tag.color %>);" class="tag px-5 mb-1 round col-7 m-auto">
+            <div style="background-color: <%= tag.color %> ;" class="tag px-5 mb-1 round col-7 m-auto">
               <%= tag.name %>
             </div>
             <%= link_to "編集", edit_group_tag_path(tag.id), class: "btn btn-outline-secondary btn-sm col-2 mx-auto" %>

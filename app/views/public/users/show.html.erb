@@ -50,28 +50,6 @@
 </div>
 
 
-<%# task = [] %>
-<%# tasks = [] %>
-<%# @tasks.each do |t| %>
-  <%# task << t.start_time.year %>   <!--0-->
-  <%# task << t.start_time.month %>  <!--1-->
-  <%# task << t.start_time.day %>    <!--2-->
-  <%# task << t.start_time.wday %>   <!--3-->
-  <%# task << t.end_time.year %>     <!--4-->
-  <%# task << t.end_time.month %>    <!--5-->
-  <%# task << t.end_time.day %>      <!--6-->
-  <%# task << t.end_time.wday %>     <!--7-->
-  <%# task_span = t.end_time.day - t.start_time.day %>
-  <%# task << task_span %>           <!--8-->
-  <%# task << t.title %>             <!--9-->
-  <%# task << t.tag.color %>         <!--10-->
-  <%# task << t.tag.name %>          <!--11-->
-  <%# task << t.content %>           <!---12-->
-  <%# task << t.id %>                <!---13-->
-  <%# tasks << task %>
-  <%# task = [] %>
-<%# end %>
-
 <% if current_user.calendar_status %>
 
   <% task = [] %>
@@ -143,7 +121,6 @@
   <% end %>
 
 <% end %>
-
 
 
 <% user_color = current_user.color %>

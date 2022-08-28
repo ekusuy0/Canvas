@@ -4,7 +4,7 @@ class Public::GroupTasksController < ApplicationController
 
   def create
     @task = current_user.tasks.new(task_params)
-    tasks = Task.where(group_id: @group.id)
+    tasks = Task.where(group_id: @task.group.id)
 
     tasks.each do |task|
       for span in 0..(task.end_time.yday - task.start_time.yday) do
@@ -19,7 +19,7 @@ class Public::GroupTasksController < ApplicationController
     @task.week_count = @task.week_of_month(@task.start_time)
 
     if @task.save
-      redirect_to group_path(task.group_id), notice: "タスクを保存しました"
+      redirect_to group_path(@task.group_id), notice: "タスクを保存しました"
     else
       @tag = Tag.new
       @tag.group_id = @task.group_id
