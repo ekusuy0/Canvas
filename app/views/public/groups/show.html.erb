@@ -67,36 +67,84 @@
 </div>
 
 
-<% task = [] %>
-<% tasks = [] %>
-<% @tasks.each do |t| %>
-  <% task << t.start_time.year %>   <!--0-->
-  <% task << t.start_time.month %>  <!--1-->
-  <% task << t.start_time.day %>    <!--2-->
-  <% task << t.start_time.wday %>   <!--3-->
-  <% task << t.end_time.year %>     <!--4-->
-  <% task << t.end_time.month %>    <!--5-->
-  <% task << t.end_time.day %>      <!--6-->
-  <% task << t.end_time.wday %>     <!--7-->
-  <% task_span = t.end_time.day - t.start_time.day %>
-  <% task << task_span %>           <!--8-->
-  <% task << t.title %>             <!--9-->
-  <% task << t.tag.color %>         <!--10-->
-  <% task << t.tag.name %>          <!--11-->
-  <% task << t.content %>           <!--12-->
-  <% task << t.id %>                <!--13-->
-  <% tasks << task %>
+<% if current_user.calendar_status %>
+
   <% task = [] %>
+  <% tasks = [] %>
+  <% @tasks.each do |t| %>
+    <% task << t.start_time.year %>   <!--0-->
+    <% task << t.start_time.month %>  <!--1-->
+    <% task << t.start_time.day %>    <!--2-->
+    <% task << t.start_time.wday %>   <!--3-->
+    <% task << t.end_time.year %>     <!--4-->
+    <% task << t.end_time.month %>    <!--5-->
+    <% task << t.end_time.day %>      <!--6-->
+    <% task << t.end_time.wday %>     <!--7-->
+    <% task_span = t.end_time.yday - t.start_time.yday %>
+    <% task << task_span %>           <!--8-->
+    <% task << t.title %>             <!--9-->
+    <% task << t.tag.color %>         <!--10-->
+    <% task << t.tag.name %>          <!--11-->
+    <% task << t.content %>           <!--12-->
+    <% task << t.id %>                <!--13-->
+    <% task << t.task_day_count %>    <!--14-->
+    <% if t.start_time.wday == 0 %>   <!--15-->
+      <% task << t.week_count + 1 %>
+    <% else %>
+      <% task << t.week_count %>
+    <% end %>
+    <% if t.end_time.wday == 0 %>
+      <% task << t.week_of_month(t.end_time) + 1%> <!--16-->
+    <% else %>
+      <% task << t.week_of_month(t.end_time) %>
+    <% end %>
+    <% tasks << task %>
+    <% task = [] %>
+  <% end %>
+
+<% else %>
+
+  <% task = [] %>
+  <% tasks = [] %>
+  <% @tasks.each do |t| %>
+    <% task << t.start_time.year %>   <!--0-->
+    <% task << t.start_time.month %>  <!--1-->
+    <% task << t.start_time.day %>    <!--2-->
+    <% if t.start_time.wday == 0 %>   <!--3-->
+      <% task << 6 %>
+    <% else %>
+      <% task << t.start_time.wday - 1 %>
+    <% end %>
+    <% task << t.end_time.year %>     <!--4-->
+    <% task << t.end_time.month %>    <!--5-->
+    <% task << t.end_time.day %>      <!--6-->
+    <% if t.end_time.wday == 0 %>     <!--7-->
+      <% task << 6 %>
+    <% else %>
+      <% task << t.end_time.wday - 1 %>
+    <% end %>
+    <% task_span = t.end_time.yday - t.start_time.yday %>
+    <% task << task_span %>           <!--8-->
+    <% task << t.title %>             <!--9-->
+    <% task << t.tag.color %>         <!--10-->
+    <% task << t.tag.name %>          <!--11-->
+    <% task << t.content %>           <!--12-->
+    <% task << t.id %>                <!--13-->
+    <% task << t.task_day_count %>    <!--14-->
+    <% task << t.week_count %>        <!--15-->
+    <% task << t.week_of_month(t.end_time) %><!--16-->
+    <% tasks << task %>
+    <% task = [] %>
+  <% end %>
+
 <% end %>
 
 <% user_color = current_user.color %>
+<% user_calendar_status = current_user.calendar_status %>
 
 <div id="tasks" data-task-status="<%= tasks.to_json %>"></div>
 <div id="user_color" data-user-status="<%= user_color.to_json %>"></div>
+<div id="user_calendar_status" data-calendar-status="<%= user_calendar_status.to_json %>"></div>
 
 <%= javascript_pack_tag 'today_group_task' %>
-<% if current_user.calendar_status %>
-  <%= javascript_pack_tag 'first_sun_calendar' %>
-<% else %>
-  <%= javascript_pack_tag 'first_mon_calendar' %>
-<% end %>
+<%= javascript_pack_tag 'calendar' %>
