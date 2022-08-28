@@ -190,13 +190,11 @@ function showCalendar(month, year) {
       // 予定開始日が入る週とiが一致するとき
       if((i + 1) == task[15] && year == task[0] && month == (task[1] - 1)) {
         count.push(task[14]);
-        console.log("ええええ");
       }
 
       // 予定終了日が入る週とiが一致するとき
       if ((i + 1) == task[16] && year == task[0] && month == (task[1] - 1)) {
         count.push(task[14]);
-        console.log("ううううう");
       }
 
       // 今月の中で予定が週をまたぐとき
@@ -204,7 +202,6 @@ function showCalendar(month, year) {
         for(var s = 1; s <= (task[16] - task[15]); s++) {
           if ((i + 1) == (task[15] + s) && year == task[0] && month == (task[1] - 1)) {
             count.push(task[14]);
-            console.log("いいい");
           }
         }
       }
@@ -213,7 +210,6 @@ function showCalendar(month, year) {
       if (task[0] == task[4] && task[1] < task[5] && (task[1] - 1) == month) {
         for (var s = 1; s <= (firstDay + endDate) / 6 - task[15]; s++) {
           if ((i + 1) == (task[15] + s)) {
-            console.log("ああああああああ");
             count.push(task[14]);
           }
         }
@@ -223,7 +219,6 @@ function showCalendar(month, year) {
       if (task[0] == task[4] && task[1] < task[5] && (task[5] - 1) == month) {
         for (var s = 1; s <= task[16]; s++) {
           if ((i + 1) == s) {
-            console.log("おおおお");
             count.push(task[14]);
           }
         }
@@ -240,7 +235,6 @@ function showCalendar(month, year) {
         for (var s = 1; s <= (task[5] - task[1] - 1); s++) {
           if ((task[1] + s - 1) == month) {
             count.push(task[14]);
-            console.log("きききききききっききいい");
           }
         }
       }
@@ -317,7 +311,6 @@ function showCalendar(month, year) {
               if (task[0] == task[4] && task[1] < task[5]) { // 予定が次の月にまたいでいるときの予定開始日から月の終わりまで
                 for(var s = 1; s <= (firstDay + endDate) / 6 - task[15]; s++) {
                   if ((i + 1) == (task[15] + s) && year == task[0] && month == (task[1] - 1) && (n + 1) == task[14]) {
-                    console.log("ああ");
                     if (week == 0) {
                       task_cell.className = "text-center p-0";
                       task_cell.setAttribute("style", "background-color: " + task[10] + ";");
@@ -341,7 +334,6 @@ function showCalendar(month, year) {
                   week = week + task[8];
                 } else if (i != 0 && (i + 1) == task[16] && (task[1] - 1) < month && (n + 1) == task[14]){ // 長い予定の予定終了週のとき
                   if (week == 0) {
-                    console.log("かかかっかか");
                     task_cell.className = "text-center p-0 right-round";
                     task_cell.setAttribute("style", "background-color: " + task[10] + ";");
                     task_cell.innerHTML = task[9];
