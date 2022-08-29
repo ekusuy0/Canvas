@@ -30,6 +30,12 @@ class Public::SessionsController < Devise::SessionsController
     users_my_page_path
   end
 
+  def guest_sign_in
+    user = User.guest
+    sign_in user
+    redirect_to users_my_page_path, notice: 'guestuserでログインしました。'
+  end
+
   protected
   def user_state
     # 入力されたnameからアカウントを1権取得

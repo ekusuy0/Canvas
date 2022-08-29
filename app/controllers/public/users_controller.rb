@@ -1,5 +1,6 @@
 class Public::UsersController < ApplicationController
   before_action :authenticate_user!
+  before_action :ensure_guest_user, only: [:out_check]
 
   def show
     # 予定を開始日が古い順に取り出す
@@ -30,6 +31,12 @@ class Public::UsersController < ApplicationController
       redirect_to destroy_user_session_path
     else
       redirect_to request.referer
+    end
+  end
+
+  def ensure_guest_user
+    if current_user.name == "guestuser"
+      redirect_to users_my_page_path, alert: "予期せぬエラーが発生しました"
     end
   end
 
