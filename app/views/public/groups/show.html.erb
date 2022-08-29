@@ -97,6 +97,7 @@
     <% else %>
       <% task << t.week_of_month(t.end_time) %>
     <% end %>
+    <% task << t.group_id %>          <!--17-->
     <% tasks << task %>
     <% task = [] %>
   <% end %>
@@ -132,6 +133,7 @@
     <% task << t.task_day_count %>    <!--14-->
     <% task << t.week_count %>        <!--15-->
     <% task << t.week_of_month(t.end_time) %><!--16-->
+    <% task << t.group_id %>          <!--17-->
     <% tasks << task %>
     <% task = [] %>
   <% end %>
@@ -140,10 +142,13 @@
 
 <% user_color = current_user.color %>
 <% user_calendar_status = current_user.calendar_status %>
+<% calendar_user = "group" %>
 
 <div id="tasks" data-task-status="<%= tasks.to_json %>"></div>
 <div id="user_color" data-user-status="<%= user_color.to_json %>"></div>
 <div id="user_calendar_status" data-calendar-status="<%= user_calendar_status.to_json %>"></div>
+<div id="calendar_user" data-calendar="<%= calendar_user.to_json %>"></div>
 
-<%= javascript_pack_tag 'today_group_task' %>
+
+<%= javascript_pack_tag 'today_task' %>
 <%= javascript_pack_tag 'calendar' %>

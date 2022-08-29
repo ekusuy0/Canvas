@@ -47,10 +47,12 @@ class Public::GroupTasksController < ApplicationController
     @tags = Tag.where(group_id: @group_id)
     @task = Task.new
     @task.group_id = @group_id
+    @group = Group.find(params[:group_id])
   end
 
   def edit
     @group_task = Task.find(params[:id])
+    @group = @group_task.group
   end
 
   private

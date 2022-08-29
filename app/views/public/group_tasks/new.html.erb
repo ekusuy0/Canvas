@@ -99,7 +99,7 @@
           <%= f.label :assigned_person, "アサイン" %><br>
           <%= f.select :assigned_person, options_from_collection_for_select(@task.group.users.all, :id, :name)%><br>
           <%= f.label :tag_id, "タグ選択", class: "mt-3" %><br>
-          <%= f.select :tag_id, options_from_collection_for_select(current_user.tags.all, :id, :name) %><br>
+          <%= f.select :tag_id, options_from_collection_for_select(@group.tags.all, :id, :name) %><br>
           <%= f.hidden_field :group_id, :value => @task.group_id %>
         </div>
       </div>
