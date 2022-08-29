@@ -117,12 +117,15 @@ function showTodayTask(todate, month, year) {
     var task = taskHash[i];
 
 
-
     if(task[8] == 0) {
       if (year == task[0] && month == (task[1] - 1) && todate == task[2]) {
         today_content += "<div class='row m-0'>"
-        if (task[17]) {
-          today_content += "<div class='col-2'><p class='round text-center' style='background-color: " + task[10] + ";'>★" + task[11] + "</p></div>";
+        if (calendar == "user") {
+          if (task[17]) {
+            today_content += "<div class='col-2'><p class='round text-center' style='background-color: " + task[10] + ";'>★" + task[11] + "</p></div>";
+          } else {
+            today_content += "<div class='col-2'><p class='round text-center' style='background-color: " + task[10] + ";'>" + task[11] + "</p></div>";
+          }
         } else {
           today_content += "<div class='col-2'><p class='round text-center' style='background-color: " + task[10] + ";'>" + task[11] + "</p></div>";
         }
@@ -141,10 +144,14 @@ function showTodayTask(todate, month, year) {
           if (task[2] + j <= endDate) {
             if (todate == task[2] + j) {
               today_content += "<div class='row m-0'>"
-              if (task[17]) {
-                today_content += "<div class='col-2'><p class='round text-center' style='background-color: " + task[10] + ";'>★" + task[11] + "</p></div>";
+              if (calendar == "user") {
+                if (task[17]) {
+                  today_content += "<div class='col-2'><p class='round text-center' style='background-color: " + task[10] + ";'>★" + task[11] + "</p></div>";
+                } else {
+                  today_content += "<div class='col-2'><p class='round text-center mmm' style='background-color: " + task[10] + ";'>" + task[11] + "</p></div>";
+                }
               } else {
-                today_content += "<div class='col-2'><p class='round text-center' style='background-color: " + task[10] + ";'>" + task[11] + "</p></div>";
+                today_content += "<div class='col-2'><p class='round text-center tt' style='background-color: " + task[10] + ";'>" + task[11] + "</p></div>";
               }
               today_content += "<p class='col-2 text-center'>" + task[9] + "</p>"
               today_content += "<p class='col-7'>" + task[12] + "</p>"
@@ -162,8 +169,12 @@ function showTodayTask(todate, month, year) {
         for (var h = 1; h <= task[6]; h++) {
           if (todate == h) {
             today_content += "<div class='row m-0'>"
-            if (task[17]) {
-              today_content += "<div class='col-2'><p class='round text-center' style='background-color: " + task[10] + ";'>★" + task[11] + "</p></div>";
+            if (calendar == "user") {
+              if (task[17]) {
+                today_content += "<div class='col-2'><p class='round text-center' style='background-color: " + task[10] + ";'>★" + task[11] + "</p></div>";
+              } else {
+                today_content += "<div class='col-2'><p class='round text-center' style='background-color: " + task[10] + ";'>" + task[11] + "</p></div>";
+              }
             } else {
               today_content += "<div class='col-2'><p class='round text-center' style='background-color: " + task[10] + ";'>" + task[11] + "</p></div>";
             }

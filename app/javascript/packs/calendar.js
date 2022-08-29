@@ -19,8 +19,12 @@ var selsecDay = document.getElementById("date");
 var createYear = generate_year_range(1900, 2200);
 document.getElementById("year").innerHTML = createYear;
 
+
 var user_calendar_status = document.getElementById('user_calendar_status');
 var check = JSON.parse(user_calendar_status.getAttribute('data-calendar-status'));
+
+var calendar_user = document.getElementById('calendar_user');
+var calendar = JSON.parse(calendar_user.getAttribute('data-calendar'));
 
 if (check) {
 
@@ -261,8 +265,12 @@ function showCalendar(month, year) {
                 if (task[8] == 0) { // 予定の長さが一日の時
                   task_cell.className = 'text-center p-0 round';
                   task_cell.setAttribute("style", "background-color: " + task[10] + ";");
-                  if (task[17]) {
-                    task_cell.innerHTML = "★" + task[9];
+                  if (calendar == "user") {
+                    if (task[17]) {
+                      task_cell.innerHTML = "★" + task[9];
+                    } else {
+                      task_cell.innerHTML = task[9];
+                    }
                   } else {
                     task_cell.innerHTML = task[9];
                   }
@@ -272,8 +280,12 @@ function showCalendar(month, year) {
                   task_cell.className = 'text-center p-0 round';
                   task_cell.setAttribute("style", "background-color: " + task[10] + ";");
                   task_cell.setAttribute("colspan", task[8] + 1);
-                  if (task[17]) {
-                    task_cell.innerHTML = "★" + task[9];
+                  if (calendar == "user") {
+                    if (task[17]) {
+                      task_cell.innerHTML = "★" + task[9];
+                    } else {
+                      task_cell.innerHTML = task[9];
+                    }
                   } else {
                     task_cell.innerHTML = task[9];
                   }
@@ -282,8 +294,12 @@ function showCalendar(month, year) {
 
                 } else { // タスクが週をまたぐとき
                   task_cell.setAttribute("colspan", 7 - task[3]);
-                  if (task[17]) {
-                    task_cell.innerHTML = "★" + task[9];
+                  if (calendar == "user") {
+                    if (task[17]) {
+                      task_cell.innerHTML = "★" + task[9];
+                    } else {
+                      task_cell.innerHTML = task[9];
+                    }
                   } else {
                     task_cell.innerHTML = task[9];
                   }
@@ -297,8 +313,12 @@ function showCalendar(month, year) {
 
                   task_cell.className = "text-center p-0 right-round";
                   task_cell.setAttribute("style", "background-color: " + task[10] + ";");
-                  if (task[17]) {
-                    task_cell.innerHTML = "★" + task[9];
+                  if (calendar == "user") {
+                    if (task[17]) {
+                      task_cell.innerHTML = "★" + task[9];
+                    } else {
+                      task_cell.innerHTML = task[9];
+                    }
                   } else {
                     task_cell.innerHTML = task[9];
                   }
@@ -315,8 +335,12 @@ function showCalendar(month, year) {
                     if (week == 0) {
                       task_cell.className = "text-center p-0";
                       task_cell.setAttribute("style", "background-color: " + task[10] + ";");
-                      if (task[17]) {
-                        task_cell.innerHTML = "★" + task[9];
+                      if (calendar == "user") {
+                        if (task[17]) {
+                          task_cell.innerHTML = "★" + task[9];
+                        } else {
+                          task_cell.innerHTML = task[9];
+                        }
                       } else {
                         task_cell.innerHTML = task[9];
                       }
@@ -334,8 +358,12 @@ function showCalendar(month, year) {
                     if (week == 0) {
                       task_cell.className = "text-center p-0";
                       task_cell.setAttribute("style", "background-color: " + task[10] + ";");
-                      if (task[17]) {
-                        task_cell.innerHTML = "★" + task[9];
+                      if (calendar == "user") {
+                        if (task[17]) {
+                          task_cell.innerHTML = "★" + task[9];
+                        } else {
+                          task_cell.innerHTML = task[9];
+                        }
                       } else {
                         task_cell.innerHTML = task[9];
                       }
@@ -352,8 +380,12 @@ function showCalendar(month, year) {
                 if (i == 0 && week == (task[7] - task[8]) && (n + 1) == task[14] && task[16] == 1) { // 予定が前の月の最後の週から今月の最初の週までのとき
                   task_cell.className = "text-center p-0 round";
                   task_cell.setAttribute("style", "background-color: " + task[10] + ";");
-                  if (task[17]) {
-                    task_cell.innerHTML = "★" + task[9];
+                  if (calendar == "user") {
+                    if (task[17]) {
+                      task_cell.innerHTML = "★" + task[9];
+                    } else {
+                      task_cell.innerHTML = task[9];
+                    }
                   } else {
                     task_cell.innerHTML = task[9];
                   }
@@ -364,8 +396,12 @@ function showCalendar(month, year) {
                   if (week == 0) {
                     task_cell.className = "text-center p-0 right-round";
                     task_cell.setAttribute("style", "background-color: " + task[10] + ";");
-                    if (task[17]) {
-                      task_cell.innerHTML = "★" + task[9];
+                    if (calendar == "user") {
+                      if (task[17]) {
+                        task_cell.innerHTML = "★" + task[9];
+                      } else {
+                        task_cell.innerHTML = task[9];
+                      }
                     } else {
                       task_cell.innerHTML = task[9];
                     }
@@ -379,8 +415,12 @@ function showCalendar(month, year) {
                       if (week == 0 && week == task[3]) {
                         task_cell.className = "text-center p-0";
                         task_cell.setAttribute("style", "background-color: " + task[10] + ";");
-                        if (task[17]) {
-                          task_cell.innerHTML = "★" + task[9];
+                        if (calendar == "user") {
+                          if (task[17]) {
+                            task_cell.innerHTML = "★" + task[9];
+                          } else {
+                            task_cell.innerHTML = task[9];
+                          }
                         } else {
                           task_cell.innerHTML = task[9];
                         }
@@ -390,8 +430,12 @@ function showCalendar(month, year) {
                       } else if (week == task[3]) { // 前の月からの予定が今月の第一週目にふくまれるとき
                         task_cell.className = "text-center p-0 left-round";
                         task_cell.setAttribute("style", "background-color: " + task[10] + ";");
-                        if (task[17]) {
-                          task_cell.innerHTML = "★" + task[9];
+                        if (calendar == "user") {
+                          if (task[17]) {
+                            task_cell.innerHTML = "★" + task[9];
+                          } else {
+                            task_cell.innerHTML = task[9];
+                          }
                         } else {
                           task_cell.innerHTML = task[9];
                         }
@@ -408,8 +452,12 @@ function showCalendar(month, year) {
                     if(week == 0) {
                       task_cell.className = "text-center p-0";
                       task_cell.setAttribute("style", "background-color: " + task[10] + ";");
-                      if (task[17]) {
-                        task_cell.innerHTML = "★" + task[9];
+                      if (calendar == "user") {
+                        if (task[17]) {
+                          task_cell.innerHTML = "★" + task[9];
+                        } else {
+                          task_cell.innerHTML = task[9];
+                        }
                       } else {
                         task_cell.innerHTML = task[9];
                       }
