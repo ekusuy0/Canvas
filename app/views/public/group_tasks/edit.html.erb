@@ -26,6 +26,11 @@
         <%= f.submit '編集を保存する', class: "btn btn-outline-secondary mt-3 col-12" %>
       </div>
     </div>
+    <div class="row mb-3">
+      <div class="col-4 mx-auto">
+        <%= link_to 'タスクを削除する', group_task_path(@group_task), method: :delete, class: "btn btn-outline-secondary mt-3 col-12" %>
+      </div>
+    </div>
     <div class="row">
       <div class="col-2 mx-auto">
         <%= link_to '戻る', group_path(@group_task.group_id), class: "btn btn-outline-secondary mt-3 col-12" %>

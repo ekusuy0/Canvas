@@ -28,6 +28,12 @@ class Public::TasksController < ApplicationController
   end
 
   def destroy
+    task = Task.find(params[:id])
+    if task.destroy
+      redirect_to users_my_page_path, notice: "タスクを削除しました"
+    else
+      redirect_to request.referer, alert: "タスクの保存に失敗しました"
+    end
   end
 
   def create

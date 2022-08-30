@@ -31,13 +31,20 @@ class Public::GroupTasksController < ApplicationController
   def update
     @group_task = Task.find(params[:id])
     if @group_task.update(task_params)
-      redirect_to group_path(@group_task.group_id), "タスクの変更を保存しました"
+      redirect_to group_path(@group_task.group_id), notice: "タスクの変更を保存しました"
     else
-      redirect_to request.referer
+      redirect_to request.referer, alert: "タスクの変更に失敗しました"
     end
   end
 
   def destroy
+    group_task = Task.find(params[:id])
+    group = group_task.group_id
+    if group_task.destroy
+      redirect_to group_path(group), notice: "タスクを削除しました"
+    else
+      redirect_to request.referer, alert: "タスクの削除に失敗しました"
+    end
   end
 
   def new
