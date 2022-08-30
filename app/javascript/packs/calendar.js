@@ -100,11 +100,25 @@ jumpyear.onchange = jump;
 function showCalendar(month, year) {
   if (check) {
     var firstDay = (new Date(year, month)).getDay(); // 月の最初の曜日
+    var lastFirstDay = (new Date(year, month - 1)).getDay();
   } else {
-    var firstDay = (new Date(year, month)).getDay() - 1; // 月曜日始まりだから-１している
+    var firstDay = (new Date(year, month)).getDay(); // 月曜日始まりだから-１している
+    if (firstDay == 0) {
+      firstDay = 6;
+    } else {
+      firstDay = firstDay - 1;
+    }
+    var lastFirstDay = (new Date(year, month - 1)).getDay();
+    if (lastFirstDay == 0) {
+      lastFirstDay = 6;
+    } else {
+      lastFirstDay = lastFirstDay - 1;
+    }
   }
   var endDate = new Date(year, month + 1, 0).getDate();
+  var lastMonthEndDay = new Date(year, month, 0).getDate();
   var lastMonthEndDate = new Date(year, month, 0).getDate();
+
 
   monthAndYear.innerHTML = "<h4>" + year + " / " + (month + 1) + "</h4>";
   selectYear.value = year;
@@ -231,7 +245,6 @@ function showCalendar(month, year) {
       // 前の月からの予定がその月の一週目で終わるとき
       if (i == 0 && task[6] < task[8] + 1 && year == task[4] && month == (task[5] - 1) && task[16] == 1) {
         count.push(task[14]);
-        console.log(task[6]);
       }
 
 
@@ -412,7 +425,9 @@ function showCalendar(month, year) {
                 } else { // 前の月から予定が続いてるときの月初めから予定終了の週までうめるとき
                     for(var s = 1; s <= task[16] - 1; s++) {
                     if ((i + 1) == s && year == task[4] && month == (task[5] - 1) && (n + 1) == task[14]) {
-                      if (week == 0 && week == task[3]) {
+                      console.log(task[15]);
+                      console.log(Math.floor((lastFirstDay + lastMonthEndDay) / 6));
+                      if (week == 0 && (i + 1) != task[16] && task[15] != Math.floor((lastFirstDay + lastMonthEndDay) / 6)) {
                         task_cell.className = "text-center p-0";
                         task_cell.setAttribute("style", "background-color: " + task[10] + ";");
                         if (calendar == "user") {

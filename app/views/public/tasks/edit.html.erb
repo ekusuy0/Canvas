@@ -14,7 +14,8 @@
         <%= f.date_field :start_time, :value => Time.now.strftime("%Y-%m-%d"), class: "form-control" %><br>
         <%= f.label :end_time, "タスク終了日" %><br>
         <%= f.date_field :end_time, :value => Time.now.strftime("%Y-%m-%d"), class: "form-control" %><br>
-        <%= f.select :tag_id, options_from_collection_for_select(current_user.tags.all, :id, :name) %><br>
+        <%= f.label :tag_id, "タグ選択" %>
+        <%= f.select :tag_id, options_from_collection_for_select(current_user.tags.all, :id, :name), {include_blank: "選択"}, { class: "col-12 text-center"} %><br>
       </div>
     </div>
     <div class="row mb-3">
