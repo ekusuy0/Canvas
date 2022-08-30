@@ -16,6 +16,13 @@ class Public::TasksController < ApplicationController
 
   def edit
     @task = Task.find(params[:id])
+    @user_tags = current_user.tags.all
+    @tags = []
+    @user_tags.each do |tag|
+      unless tag.group_id.present?
+        @tags << tag
+      end
+    end
   end
 
   def update
