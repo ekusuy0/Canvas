@@ -72,7 +72,7 @@ class Public::TasksController < ApplicationController
           @tags << tag
         end
       end
-      render template: 'public/tasks/new'
+      render :new
     end
   end
 

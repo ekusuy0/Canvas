@@ -15,7 +15,7 @@ class Public::TagsController < ApplicationController
           @tags << tag
         end
       end
-      render template: 'public/tasks/new'
+      render 'public/tasks/new'
     end
   end
 

@@ -5,7 +5,7 @@
       <%= form_with model: @group do |f| %>
         <%= f.label :name, "グループ名" %><br>
         <%= f.text_field :name, class: "form-control" %><br>
-        <%= f.label :password, "パスワード" %><br>
+        <%= f.label :password, "パスワード(数字6文字以上)" %><br>
         <%= f.text_field :password, class: "form-control" %><br>
         <%= f.submit '作成', class: "btn btn-outline-secondary" %>
       <% end %>
