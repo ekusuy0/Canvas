@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 2022_08_11_100225) do
   create_table "tasks", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "tag_id", null: false
+    t.integer "group_id"
     t.string "title", null: false
     t.text "content", null: false
     t.integer "assigned_person", null: false
@@ -79,9 +80,9 @@ ActiveRecord::Schema.define(version: 2022_08_11_100225) do
     t.boolean "status", default: false, null: false
     t.integer "task_day_count", default: 1, null: false
     t.integer "week_count", null: false
+    t.integer "group_task_day_count", default: 1, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "group_id"
   end
 
   create_table "users", force: :cascade do |t|

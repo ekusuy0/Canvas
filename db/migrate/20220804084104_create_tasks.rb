@@ -3,7 +3,7 @@ class CreateTasks < ActiveRecord::Migration[6.1]
     create_table :tasks do |t|
       t.integer :user_id, null: false
       t.integer :tag_id, null: false
-      t.integer :group_id, null: false
+      t.integer :group_id
       t.string :title, null: false
       t.text :content, null: false
       t.integer :assigned_person, null: false
@@ -12,6 +12,7 @@ class CreateTasks < ActiveRecord::Migration[6.1]
       t.boolean :status, null: false, default: false
       t.integer :task_day_count, null: false, default: 1
       t.integer :week_count, null: false
+      t.integer :group_task_day_count, null: false, default: 1
 
       t.timestamps
     end

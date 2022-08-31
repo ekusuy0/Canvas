@@ -4,13 +4,24 @@ class Public::GroupTasksController < ApplicationController
 
   def create
     @task = current_user.tasks.new(task_params)
-    tasks = Task.where(group_id: @task.group.id)
+    tasks = Task.where(assigned_person: @task.assigned_person)
+    group_tasks = Task.where(group_id: @task.group_id)
 
     tasks.each do |task|
       for span in 0..(task.end_time.yday - task.start_time.yday) do
         for taskspan in 0..(@task.end_time.yday - @task.start_time.yday) do
           if (@task.start_time + taskspan) == (task.start_time + span)
             @task.task_day_count = task.task_day_count + 1
+          end
+        end
+      end
+    end
+
+    group_tasks.each do |task|
+      for span in 0..(task.end_time.yday - task.start_time.yday) do
+        for taskspan in 0..(@task.end_time.yday - @task.start_time.yday) do
+          if (@task.start_time + taskspan) == (task.start_time + span)
+            @task.group_task_day_count = task.group_task_day_count + 1
           end
         end
       end

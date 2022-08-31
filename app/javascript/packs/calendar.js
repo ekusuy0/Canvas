@@ -199,6 +199,7 @@ function showCalendar(month, year) {
 
     var tasks = document.getElementById('tasks');
     var taskHash = JSON.parse(tasks.getAttribute('data-task-status'));
+    
 
     const count = [];
 

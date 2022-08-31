@@ -86,7 +86,7 @@
     <% task << t.tag.name %>          <!--11-->
     <% task << t.content %>           <!--12-->
     <% task << t.id %>                <!--13-->
-    <% task << t.task_day_count %>    <!--14-->
+    <% task << t.group_task_day_count %>    <!--14-->
     <% if t.start_time.wday == 0 %>   <!--15-->
       <% task << t.week_count + 1 %>
     <% else %>
@@ -130,7 +130,7 @@
     <% task << t.tag.name %>          <!--11-->
     <% task << t.content %>           <!--12-->
     <% task << t.id %>                <!--13-->
-    <% task << t.task_day_count %>    <!--14-->
+    <% task << t.group_task_day_count %>    <!--14-->
     <% task << t.week_count %>        <!--15-->
     <% task << t.week_of_month(t.end_time) %><!--16-->
     <% task << t.group_id %>          <!--17-->
