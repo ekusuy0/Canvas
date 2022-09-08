@@ -27,8 +27,8 @@ class Public::UsersController < ApplicationController
   def out
     @user = User.find(current_user.id)
     if @user.update(user_params)
-      session[:current_user] = nil
-      redirect_to destroy_user_session_path
+      sign_out current_user
+      redirect_to root_path
     else
       redirect_to request.referer
     end
