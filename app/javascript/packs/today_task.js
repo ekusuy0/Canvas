@@ -60,17 +60,17 @@ function showTodayTask(todate, month, year) {
   var id_count = 0
   for (var i = 0; i < taskHash.length; i++) {
     var task = taskHash[i];
-    if (year == task[0] && month == (task[1] - 1) && todate == task[2]) {
-      if (task[17]) {
+    if (year == task['start_time_year'] && month == (task['start_time_month'] - 1) && todate == task['start_time_day']) {
+      if (task['group_id']) {
         id_count++;
       }
     }
 
-    if (year == task[0] && month == (task[1] - 1) || month == (task[5] - 1)) {
-      for (var j = 0; j <= task[8]; j++) {
-        if (task[2] + j <= endDate) {
-          if (todate == task[2] + j) {
-            if (task[17]) {
+    if (year == task['start_time_year'] && month == (task['start_time_month'] - 1) || month == (task['end_time_month'] - 1)) {
+      for (var j = 0; j <= task['task_span']; j++) {
+        if (task['start_time_day'] + j <= endDate) {
+          if (todate == task['start_time_day'] + j) {
+            if (task['group_id']) {
               id_count++;
             }
           }
@@ -78,10 +78,10 @@ function showTodayTask(todate, month, year) {
       }
     }
 
-    if (year == task[0] && month == (task[5] - 1) && (task[1] - 1) < month) {
-      for (var h = 1; h <= task[6]; h++) {
+    if (year == task['start_time_year'] && month == (task['end_time_month'] - 1) && (task['start_time_month'] - 1) < month) {
+      for (var h = 1; h <= task['end_time_day']; h++) {
         if (todate == h) {
-          if (task[17]) {
+          if (task['group_id']) {
             id_count++;
           }
         }
@@ -117,73 +117,73 @@ function showTodayTask(todate, month, year) {
     var task = taskHash[i];
 
 
-    if(task[8] == 0) {
-      if (year == task[0] && month == (task[1] - 1) && todate == task[2]) {
+    if(task['task_span'] == 0) {
+      if (year == task['start_time_year'] && month == (task['start_time_month'] - 1) && todate == task['start_time_day']) {
         today_content += "<div class='row m-0'>"
         if (calendar == "user") {
-          if (task[17]) {
-            today_content += "<div class='col-2'><p class='round text-center' style='background-color: " + task[10] + ";'>★" + task[11] + "</p></div>";
+          if (task['group_id']) {
+            today_content += "<div class='col-2'><p class='round text-center' style='background-color: " + task['tag_color'] + ";'>★" + task['tag_name'] + "</p></div>";
           } else {
-            today_content += "<div class='col-2'><p class='round text-center' style='background-color: " + task[10] + ";'>" + task[11] + "</p></div>";
+            today_content += "<div class='col-2'><p class='round text-center' style='background-color: " + task['tag_color'] + ";'>" + task['tag_name'] + "</p></div>";
           }
         } else {
-          today_content += "<div class='col-2'><p class='round text-center' style='background-color: " + task[10] + ";'>" + task[11] + "</p></div>";
+          today_content += "<div class='col-2'><p class='round text-center' style='background-color: " + task['tag_color'] + ";'>" + task['tag_name'] + "</p></div>";
         }
-        today_content += "<p class='col-2 text-center'>" + task[9] + "</p>"
-        today_content += "<p class='col-7'>" + task[12] + "</p>"
-        if (task[17]) {
-          today_content += "<p class='col-1 p-0 text-center tttt'><a href='/group_tasks/" + task[13] + "/edit' class='btn btn-outline-secondary btn-sm'>編集</a></p>"
+        today_content += "<p class='col-2 text-center'>" + task['title'] + "</p>"
+        today_content += "<p class='col-7'>" + task['content'] + "</p>"
+        if (task['group_id']) {
+          today_content += "<p class='col-1 p-0 text-center tttt'><a href='/group_tasks/" + task['task_id'] + "/edit' class='btn btn-outline-secondary btn-sm'>編集</a></p>"
         } else {
-          today_content += "<p class='col-1 p-0 text-center'><a href='/tasks/" + task[13] + "/edit' class='btn btn-outline-secondary btn-sm'>編集</a></p>"
+          today_content += "<p class='col-1 p-0 text-center'><a href='/tasks/" + task['task_id'] + "/edit' class='btn btn-outline-secondary btn-sm'>編集</a></p>"
         }
         today_content += "</div>"
       }
     } else {
-      if (year == task[0] && month == (task[1] - 1) || month == (task[5] - 1)) {
-        for (var j = 0; j <= task[8]; j++) {
-          if (task[2] + j <= endDate) {
-            if (todate == task[2] + j) {
+      if (year == task['start_time_year'] && month == (task['start_time_month'] - 1) || month == (task['end_time_month'] - 1)) {
+        for (var j = 0; j <= task['task_span']; j++) {
+          if (task['start_time_day'] + j <= endDate) {
+            if (todate == task['start_time_day'] + j) {
               today_content += "<div class='row m-0'>"
               if (calendar == "user") {
-                if (task[17]) {
-                  today_content += "<div class='col-2'><p class='round text-center' style='background-color: " + task[10] + ";'>★" + task[11] + "</p></div>";
+                if (task['group_id']) {
+                  today_content += "<div class='col-2'><p class='round text-center' style='background-color: " + task['tag_color'] + ";'>★" + task['tag_name'] + "</p></div>";
                 } else {
-                  today_content += "<div class='col-2'><p class='round text-center mmm' style='background-color: " + task[10] + ";'>" + task[11] + "</p></div>";
+                  today_content += "<div class='col-2'><p class='round text-center mmm' style='background-color: " + task['tag_color'] + ";'>" + task['tag_name'] + "</p></div>";
                 }
               } else {
-                today_content += "<div class='col-2'><p class='round text-center tt' style='background-color: " + task[10] + ";'>" + task[11] + "</p></div>";
+                today_content += "<div class='col-2'><p class='round text-center tt' style='background-color: " + task['tag_color'] + ";'>" + task['tag_name'] + "</p></div>";
               }
-              today_content += "<p class='col-2 text-center'>" + task[9] + "</p>"
-              today_content += "<p class='col-7'>" + task[12] + "</p>"
-              if (task[17]) {
-                today_content += "<p class='col-1 p-0 text-center tttt'><a href='/group_tasks/" + task[13] + "/edit' class='btn btn-outline-secondary btn-sm'>編集</a></p>"
+              today_content += "<p class='col-2 text-center'>" + task['title'] + "</p>"
+              today_content += "<p class='col-7'>" + task['content'] + "</p>"
+              if (task['group_id']) {
+                today_content += "<p class='col-1 p-0 text-center tttt'><a href='/group_tasks/" + task['task_id'] + "/edit' class='btn btn-outline-secondary btn-sm'>編集</a></p>"
               } else {
-                today_content += "<p class='col-1 p-0 text-center'><a href='/tasks/" + task[13] + "/edit' class='btn btn-outline-secondary btn-sm'>編集</a></p>"
+                today_content += "<p class='col-1 p-0 text-center'><a href='/tasks/" + task['task_id'] + "/edit' class='btn btn-outline-secondary btn-sm'>編集</a></p>"
               }
               today_content += "</div>"
             }
           }
         }
       }
-      if (year == task[0] && month == (task[5] - 1) && (task[1] - 1) < month) {
-        for (var h = 1; h <= task[6]; h++) {
+      if (year == task['start_time_year'] && month == (task['end_time_month'] - 1) && (task['start_time_month'] - 1) < month) {
+        for (var h = 1; h <= task['end_time_day']; h++) {
           if (todate == h) {
             today_content += "<div class='row m-0'>"
             if (calendar == "user") {
-              if (task[17]) {
-                today_content += "<div class='col-2'><p class='round text-center' style='background-color: " + task[10] + ";'>★" + task[11] + "</p></div>";
+              if (task['group_id']) {
+                today_content += "<div class='col-2'><p class='round text-center' style='background-color: " + task['tag_color'] + ";'>★" + task['tag_name'] + "</p></div>";
               } else {
-                today_content += "<div class='col-2'><p class='round text-center' style='background-color: " + task[10] + ";'>" + task[11] + "</p></div>";
+                today_content += "<div class='col-2'><p class='round text-center' style='background-color: " + task['tag_color'] + ";'>" + task['tag_name'] + "</p></div>";
               }
             } else {
-              today_content += "<div class='col-2'><p class='round text-center' style='background-color: " + task[10] + ";'>" + task[11] + "</p></div>";
+              today_content += "<div class='col-2'><p class='round text-center' style='background-color: " + task['tag_color'] + ";'>" + task['tag_name'] + "</p></div>";
             }
-            today_content += "<p class='col-2 text-center'>" + task[9] + "</p>"
-            today_content += "<p class='col-7'>" + task[12] + "</p>"
-            if (task[17]) {
-              today_content += "<p class='col-1 p-0 text-center tttt'><a href='/group_tasks/" + task[13] + "/edit' class='btn btn-outline-secondary btn-sm'>編集</a></p>"
+            today_content += "<p class='col-2 text-center'>" + task['title'] + "</p>"
+            today_content += "<p class='col-7'>" + task['content'] + "</p>"
+            if (task['group_id']) {
+              today_content += "<p class='col-1 p-0 text-center tttt'><a href='/group_tasks/" + task['task_id'] + "/edit' class='btn btn-outline-secondary btn-sm'>編集</a></p>"
             } else {
-              today_content += "<p class='col-1 p-0 text-center'><a href='/tasks/" + task[13] + "/edit' class='btn btn-outline-secondary btn-sm'>編集</a></p>"
+              today_content += "<p class='col-1 p-0 text-center'><a href='/tasks/" + task['task_id'] + "/edit' class='btn btn-outline-secondary btn-sm'>編集</a></p>"
             }
             today_content += "</div>"
           }

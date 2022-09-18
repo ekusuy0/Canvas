@@ -51,76 +51,74 @@
 
 
 <% if current_user.calendar_status %>
-
-  <% task = [] %>
-  <% tasks = [] %>
-  <% @tasks.each do |t| %>
-    <% task << t.start_time.year %>   <!--0-->
-    <% task << t.start_time.month %>  <!--1-->
-    <% task << t.start_time.day %>    <!--2-->
-    <% task << t.start_time.wday %>   <!--3-->
-    <% task << t.end_time.year %>     <!--4-->
-    <% task << t.end_time.month %>    <!--5-->
-    <% task << t.end_time.day %>      <!--6-->
-    <% task << t.end_time.wday %>     <!--7-->
-    <% task_span = t.end_time.yday - t.start_time.yday %>
-    <% task << task_span %>           <!--8-->
-    <% task << t.title %>             <!--9-->
-    <% task << t.tag.color %>         <!--10-->
-    <% task << t.tag.name %>          <!--11-->
-    <% task << t.content %>           <!--12-->
-    <% task << t.id %>                <!--13-->
-    <% task << t.task_day_count %>    <!--14-->
-    <% if t.start_time.wday == 0 %>   <!--15-->
-      <% task << t.week_count + 1 %>
-    <% else %>
-      <% task << t.week_count %>
-    <% end %>
-    <% if t.end_time.wday == 0 %>
-      <% task << t.week_of_month(t.end_time) + 1%> <!--16-->
-    <% else %>
-      <% task << t.week_of_month(t.end_time) %>
-    <% end %>
-    <% task << t.group_id %>          <!--17-->
-    <% tasks << task %>
-    <% task = [] %>
-  <% end %>
+  <%
+  tasks = []
+  @tasks.each do |t|
+    task = Hash.new()
+    task['start_time_year'] = t.start_time.year
+    task['start_time_month'] = t.start_time.month
+    task['start_time_day'] = t.start_time.day
+    task['start_time_wday'] = t.start_time.wday
+    task['end_time_year'] = t.end_time.year
+    task['end_time_month'] = t.end_time.month
+    task['end_time_day'] = t.end_time.day
+    task['end_time_wday'] = t.end_time.wday
+    task['task_span'] = t.end_time.yday - t.start_time.yday
+    task['title'] = t.title
+    task['tag_color'] = t.tag.color
+    task['tag_name'] = t.tag.name
+    task['content'] = t.content
+    task['task_id'] = t.id
+    task['task_day_count'] = t.task_day_count
+    if t.start_time.wday == 0
+      task['week_count'] = t.week_count + 1
+    else
+      task['week_count'] = t.week_count
+    end
+    if t.end_time.wday == 0
+      task['week_of_month'] = t.week_of_month(t.end_time) + 1
+    else
+      task['week_of_month'] = t.week_of_month(t.end_time)
+    end
+    task['group_id'] = t.group_id
+    tasks << task
+  end
+  %>
 
 <% else %>
-
-  <% task = [] %>
-  <% tasks = [] %>
-  <% @tasks.each do |t| %>
-    <% task << t.start_time.year %>   <!--0-->
-    <% task << t.start_time.month %>  <!--1-->
-    <% task << t.start_time.day %>    <!--2-->
-    <% if t.start_time.wday == 0 %>   <!--3-->
-      <% task << 6 %>
-    <% else %>
-      <% task << t.start_time.wday - 1 %>
-    <% end %>
-    <% task << t.end_time.year %>     <!--4-->
-    <% task << t.end_time.month %>    <!--5-->
-    <% task << t.end_time.day %>      <!--6-->
-    <% if t.end_time.wday == 0 %>     <!--7-->
-      <% task << 6 %>
-    <% else %>
-      <% task << t.end_time.wday - 1 %>
-    <% end %>
-    <% task_span = t.end_time.yday - t.start_time.yday %>
-    <% task << task_span %>           <!--8-->
-    <% task << t.title %>             <!--9-->
-    <% task << t.tag.color %>         <!--10-->
-    <% task << t.tag.name %>          <!--11-->
-    <% task << t.content %>           <!--12-->
-    <% task << t.id %>                <!--13-->
-    <% task << t.task_day_count %>    <!--14-->
-    <% task << t.week_count %>        <!--15-->
-    <% task << t.week_of_month(t.end_time) %><!--16-->
-    <% task << t.group_id %>          <!--17-->
-    <% tasks << task %>
-    <% task = [] %>
-  <% end %>
+  <%
+  tasks = []
+  @tasks.each do |t|
+    task = Hash.new()
+    task['start_time_year'] = t.start_time.year
+    task['start_time_month'] = t.start_time.month
+    task['start_time_day'] = t.start_time.day
+    if t.start_time.wday == 0
+      task['start_time_wday'] = 6
+    else
+      task['start_time_wday'] = t.start_time.wday - 1
+    end
+    task['end_time_year'] = t.end_time.year
+    task['end_time_month'] = t.end_time.month
+    task['end_time_day'] = t.end_time.day
+    if t.end_time.wday == 0
+      task['end_time_wday'] = 6
+    else
+      task['end_time_wday'] = t.end_time.wday - 1
+    end
+    task['task_span'] = t.end_time.yday - t.start_time.yday
+    task['title'] = t.title
+    task['tag_color'] = t.tag_color
+    task['tag_name'] = t.tag.name
+    task['content'] = t.content
+    task['id'] = t.id
+    task['task_day_count'] = t.task_day_count
+    task['week_count'] = t.week_count
+    task['week_of_month'] = t.week_of_month(t.end_time)
+    task['group_id'] = t.group_id
+    tasks << task
+  end
+  %>
 
 <% end %>
 

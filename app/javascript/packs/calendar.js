@@ -199,7 +199,7 @@ function showCalendar(month, year) {
 
     var tasks = document.getElementById('tasks');
     var taskHash = JSON.parse(tasks.getAttribute('data-task-status'));
-    
+
 
     const count = [];
 
@@ -207,52 +207,52 @@ function showCalendar(month, year) {
       var task = taskHash[task_count];
 
       // 予定開始日が入る週とiが一致するとき
-      if((i + 1) == task[15] && year == task[0] && month == (task[1] - 1)) {
-        count.push(task[14]);
+      if((i + 1) == task['week_count'] && year == task['start_time_year'] && month == (task['start_time_month'] - 1)) {
+        count.push(task['task_day_count']);
       }
 
       // 予定終了日が入る週とiが一致するとき
-      if ((i + 1) == task[16] && year == task[0] && month == (task[1] - 1)) {
-        count.push(task[14]);
+      if ((i + 1) == task['week_of_month'] && year == task['start_time_year'] && month == (task['start_time_month'] - 1)) {
+        count.push(task['task_day_count']);
       }
 
       // 今月の中で予定が週をまたぐとき
-      if (task[16] > task[15]　&& (task[16] - task[15]) > 1) {
-        for(var s = 1; s <= (task[16] - task[15]); s++) {
-          if ((i + 1) == (task[15] + s) && year == task[0] && month == (task[1] - 1)) {
-            count.push(task[14]);
+      if (task['week_of_month'] > task['week_count']　&& (task['week_of_month'] - task['week_count']) > 1) {
+        for(var s = 1; s <= (task['week_of_month'] - task['week_count']); s++) {
+          if ((i + 1) == (task['week_count'] + s) && year == task['start_time_year'] && month == (task['start_time_month'] - 1)) {
+            count.push(task['task_day_count']);
           }
         }
       }
 
       // 他の月まで予定がまたぐときの予定開始日から月最終日まで
-      if (task[0] == task[4] && task[1] < task[5] && (task[1] - 1) == month) {
-        for (var s = 1; s <= (firstDay + endDate) / 6 - task[15]; s++) {
-          if ((i + 1) == (task[15] + s)) {
-            count.push(task[14]);
+      if (task['start_time_year'] == task['end_time_year'] && task['start_time_month'] < task['end_time_month'] && (task['start_time_month'] - 1) == month) {
+        for (var s = 1; s <= (firstDay + endDate) / 6 - task['week_count']; s++) {
+          if ((i + 1) == (task['week_count'] + s)) {
+            count.push(task['task_day_count']);
           }
         }
       }
 
       // 前の月から予定が続いて今月初めから予定終了日まで
-      if (task[0] == task[4] && task[1] < task[5] && (task[5] - 1) == month) {
-        for (var s = 1; s <= task[16]; s++) {
+      if (task['start_time_year'] == task['end_time_year'] && task['start_time_month'] < task['end_time_month'] && (task['end_time_month'] - 1) == month) {
+        for (var s = 1; s <= task['week_of_month']; s++) {
           if ((i + 1) == s) {
-            count.push(task[14]);
+            count.push(task['task_day_count']);
           }
         }
       }
 
       // 前の月からの予定がその月の一週目で終わるとき
-      if (i == 0 && task[6] < task[8] + 1 && year == task[4] && month == (task[5] - 1) && task[16] == 1) {
-        count.push(task[14]);
+      if (i == 0 && task['end_time_day'] < task['task_span'] + 1 && year == task['end_time_year'] && month == (task['end_time_month'] - 1) && task['week_of_month'] == 1) {
+        count.push(task['task_day_count']);
       }
 
 
-      if (task[0] == task[4] && (task[5] - task[1]) > 1) {
-        for (var s = 1; s <= (task[5] - task[1] - 1); s++) {
-          if ((task[1] + s - 1) == month) {
-            count.push(task[14]);
+      if (task['start_time_year'] == task['end_time_year'] && (task['end_time_month'] - task['start_time_month']) > 1) {
+        for (var s = 1; s <= (task['end_time_month'] - task['start_time_month'] - 1); s++) {
+          if ((task['start_time_month'] + s - 1) == month) {
+            count.push(task['task_day_count']);
           }
         }
       }
@@ -272,91 +272,91 @@ function showCalendar(month, year) {
 
           for (var task_count = 0; task_count < taskHash.length; task_count++) {
             var task = taskHash[task_count];
-            if (task[0] == year && (task[1] - 1) == month) {
+            if (task['start_time_year'] == year && (task['start_time_month'] - 1) == month) {
 
 
-              if (week == task[3] && (n + 1) == task[14] && (i + 1) == task[15]) {
-                if (task[8] == 0) { // 予定の長さが一日の時
+              if (week == task['start_time_wday'] && (n + 1) == task['task_day_count'] && (i + 1) == task['week_count']) {
+                if (task['task_span'] == 0) { // 予定の長さが一日の時
                   task_cell.className = 'text-center p-0 round';
-                  task_cell.setAttribute("style", "background-color: " + task[10] + ";");
+                  task_cell.setAttribute("style", "background-color: " + task['tag_color'] + ";");
                   if (calendar == "user") {
-                    if (task[17]) {
-                      task_cell.innerHTML = "★" + task[9];
+                    if (task['group_id']) {
+                      task_cell.innerHTML = "★" + task['title'];
                     } else {
-                      task_cell.innerHTML = task[9];
+                      task_cell.innerHTML = task['title'];
                     }
                   } else {
-                    task_cell.innerHTML = task[9];
+                    task_cell.innerHTML = task['title'];
                   }
                   createTr.appendChild(task_cell);
 
-                } else if (task[3] + task[8] < 7) { // タスクがその週の間に日をまたぐとき
+                } else if (task['start_time_wday'] + task['task_span'] < 7) { // タスクがその週の間に日をまたぐとき
                   task_cell.className = 'text-center p-0 round';
-                  task_cell.setAttribute("style", "background-color: " + task[10] + ";");
-                  task_cell.setAttribute("colspan", task[8] + 1);
+                  task_cell.setAttribute("style", "background-color: " + task['tag_color'] + ";");
+                  task_cell.setAttribute("colspan", task['task_span'] + 1);
                   if (calendar == "user") {
-                    if (task[17]) {
-                      task_cell.innerHTML = "★" + task[9];
+                    if (task['group_id']) {
+                      task_cell.innerHTML = "★" + task['title'];
                     } else {
-                      task_cell.innerHTML = task[9];
+                      task_cell.innerHTML = task['title'];
                     }
                   } else {
-                    task_cell.innerHTML = task[9];
+                    task_cell.innerHTML = task['title'];
                   }
                   createTr.appendChild(task_cell);
-                  week = week + task[8];
+                  week = week + task['task_span'];
 
                 } else { // タスクが週をまたぐとき
-                  task_cell.setAttribute("colspan", 7 - task[3]);
+                  task_cell.setAttribute("colspan", 7 - task['start_time_wday']);
                   if (calendar == "user") {
-                    if (task[17]) {
-                      task_cell.innerHTML = "★" + task[9];
+                    if (task['group_id']) {
+                      task_cell.innerHTML = "★" + task['title'];
                     } else {
-                      task_cell.innerHTML = task[9];
+                      task_cell.innerHTML = task['title'];
                     }
                   } else {
-                    task_cell.innerHTML = task[9];
+                    task_cell.innerHTML = task['title'];
                   }
                   task_cell.className = 'text-center p-0 left-round t';
-                  task_cell.setAttribute("style", "background-color: " + task[10] + ";")
+                  task_cell.setAttribute("style", "background-color: " + task['tag_color'] + ";")
                   createTr.appendChild(task_cell);
-                  week = week + 6 - task[3];
+                  week = week + 6 - task['start_time_wday'];
                 }
-              } else if (week == 0 && (n + 1) == task[14] && (i + 1) == task[16]) {
-                if ((task[16] - task[15]) != 0 && (task[5] - 1) == month) { // 週をまたいだ終わりのところ
+              } else if (week == 0 && (n + 1) == task['task_day_count'] && (i + 1) == task['week_of_month']) {
+                if ((task['week_of_month'] - task['week_count']) != 0 && (task['end_time_month'] - 1) == month) { // 週をまたいだ終わりのところ
 
                   task_cell.className = "text-center p-0 right-round";
-                  task_cell.setAttribute("style", "background-color: " + task[10] + ";");
+                  task_cell.setAttribute("style", "background-color: " + task['tag_color'] + ";");
                   if (calendar == "user") {
-                    if (task[17]) {
-                      task_cell.innerHTML = "★" + task[9];
+                    if (task['group_id']) {
+                      task_cell.innerHTML = "★" + task['title'];
                     } else {
-                      task_cell.innerHTML = task[9];
+                      task_cell.innerHTML = task['title'];
                     }
                   } else {
-                    task_cell.innerHTML = task[9];
+                    task_cell.innerHTML = task['title'];
                   }
-                  task_cell.setAttribute("colspan", task[7] + 1);
+                  task_cell.setAttribute("colspan", task['end_time_wday'] + 1);
                   createTr.appendChild(task_cell);
-                  week = week + task[7];
+                  week = week + task['end_time_wday'];
 
                 }
               }
 
-              if (task[16] > task[15] && (task[16] - task[15]) > 1) { // 予定がその月の中で長い予定
-                for(var s = 1; s < (task[16] - task[15]); s++) {
-                  if ((i + 1) == (task[15] + s) && year == task[0] && month == (task[1] - 1) && (n + 1) == task[14]) {
+              if (task['week_of_month'] > task['week_count'] && (task['week_of_month'] - task['week_count']) > 1) { // 予定がその月の中で長い予定
+                for(var s = 1; s < (task['week_of_month'] - task['week_count']); s++) {
+                  if ((i + 1) == (task['week_count'] + s) && year == task['start_time_year'] && month == (task['start_time_month'] - 1) && (n + 1) == task['task_day_count']) {
                     if (week == 0) {
                       task_cell.className = "text-center p-0";
-                      task_cell.setAttribute("style", "background-color: " + task[10] + ";");
+                      task_cell.setAttribute("style", "background-color: " + task['tag_color'] + ";");
                       if (calendar == "user") {
-                        if (task[17]) {
-                          task_cell.innerHTML = "★" + task[9];
+                        if (task['group_id']) {
+                          task_cell.innerHTML = "★" + task['title'];
                         } else {
-                          task_cell.innerHTML = task[9];
+                          task_cell.innerHTML = task['title'];
                         }
                       } else {
-                        task_cell.innerHTML = task[9];
+                        task_cell.innerHTML = task['title'];
                       }
                       task_cell.setAttribute("colspan", 7);
                       createTr.appendChild(task_cell);
@@ -366,20 +366,20 @@ function showCalendar(month, year) {
                 }
               }
 
-              if (task[0] == task[4] && task[1] < task[5]) { // 予定が次の月にまたいでいるときの予定開始日から月の終わりまで
-                for(var s = 1; s <= (firstDay + endDate) / 6 - task[15]; s++) {
-                  if ((i + 1) == (task[15] + s) && year == task[0] && month == (task[1] - 1) && (n + 1) == task[14]) {
+              if (task['start_time_year'] == task['end_time_year'] && task['start_time_month'] < task['end_time_month']) { // 予定が次の月にまたいでいるときの予定開始日から月の終わりまで
+                for(var s = 1; s <= (firstDay + endDate) / 6 - task['week_count']; s++) {
+                  if ((i + 1) == (task['week_count'] + s) && year == task['start_time_year'] && month == (task['start_time_month'] - 1) && (n + 1) == task['task_day_count']) {
                     if (week == 0) {
                       task_cell.className = "text-center p-0";
-                      task_cell.setAttribute("style", "background-color: " + task[10] + ";");
+                      task_cell.setAttribute("style", "background-color: " + task['tag_color'] + ";");
                       if (calendar == "user") {
-                        if (task[17]) {
-                          task_cell.innerHTML = "★" + task[9];
+                        if (task['group_id']) {
+                          task_cell.innerHTML = "★" + task['title'];
                         } else {
-                          task_cell.innerHTML = task[9];
+                          task_cell.innerHTML = task['title'];
                         }
                       } else {
-                        task_cell.innerHTML = task[9];
+                        task_cell.innerHTML = task['title'];
                       }
                       task_cell.setAttribute("colspan", 7);
                       createTr.appendChild(task_cell);
@@ -390,83 +390,83 @@ function showCalendar(month, year) {
               }
 
 
-            } else if (task[4] == year && (task[5] - 1) == month) { // 予定が前の月から続いていているとき
-                if (i == 0 && week == (task[7] - task[8]) && (n + 1) == task[14] && task[16] == 1) { // 予定が前の月の最後の週から今月の最初の週までのとき
+            } else if (task['end_time_year'] == year && (task['end_time_month'] - 1) == month) { // 予定が前の月から続いていているとき
+                if (i == 0 && week == (task['end_time_wday'] - task['task_span']) && (n + 1) == task['task_day_count'] && task['week_of_month'] == 1) { // 予定が前の月の最後の週から今月の最初の週までのとき
                   task_cell.className = "text-center p-0 round";
-                  task_cell.setAttribute("style", "background-color: " + task[10] + ";");
+                  task_cell.setAttribute("style", "background-color: " + task['tag_color'] + ";");
                   if (calendar == "user") {
-                    if (task[17]) {
-                      task_cell.innerHTML = "★" + task[9];
+                    if (task['group_id']) {
+                      task_cell.innerHTML = "★" + task['title'];
                     } else {
-                      task_cell.innerHTML = task[9];
+                      task_cell.innerHTML = task['title'];
                     }
                   } else {
-                    task_cell.innerHTML = task[9];
+                    task_cell.innerHTML = task['title'];
                   }
-                  task_cell.setAttribute("colspan", task[8] + 1);
+                  task_cell.setAttribute("colspan", task['task_span'] + 1);
                   createTr.appendChild(task_cell);
-                  week = week + task[8];
-                } else if (i != 0 && (i + 1) == task[16] && (task[1] - 1) < month && (n + 1) == task[14]){ // 長い予定の予定終了週のとき
+                  week = week + task['task_span'];
+                } else if (i != 0 && (i + 1) == task['week_of_month'] && (task['start_time_month'] - 1) < month && (n + 1) == task['task_day_count']){ // 長い予定の予定終了週のとき
                   if (week == 0) {
                     task_cell.className = "text-center p-0 right-round";
-                    task_cell.setAttribute("style", "background-color: " + task[10] + ";");
+                    task_cell.setAttribute("style", "background-color: " + task['tag_color'] + ";");
                     if (calendar == "user") {
-                      if (task[17]) {
-                        task_cell.innerHTML = "★" + task[9];
+                      if (task['group_id']) {
+                        task_cell.innerHTML = "★" + task['title'];
                       } else {
-                        task_cell.innerHTML = task[9];
+                        task_cell.innerHTML = task['title'];
                       }
                     } else {
-                      task_cell.innerHTML = task[9];
+                      task_cell.innerHTML = task['title'];
                     }
-                    task_cell.setAttribute("colspan", task[7] + 1);
+                    task_cell.setAttribute("colspan", task['end_time_wday'] + 1);
                     createTr.appendChild(task_cell);
-                    week = week + task[7];
+                    week = week + task['end_time_wday'];
                   }
                 } else { // 前の月から予定が続いてるときの月初めから予定終了の週までうめるとき
-                    for(var s = 1; s <= task[16] - 1; s++) {
-                    if ((i + 1) == s && year == task[4] && month == (task[5] - 1) && (n + 1) == task[14]) {
-                      if (week == 0 && (i + 1) != task[16] && task[15] != Math.floor((lastFirstDay + lastMonthEndDay) / 6)) {
+                    for(var s = 1; s <= task['week_of_month'] - 1; s++) {
+                    if ((i + 1) == s && year == task['end_time_year'] && month == (task['end_time_month'] - 1) && (n + 1) == task['task_day_count']) {
+                      if (week == 0 && (i + 1) != task['week_of_month'] && task['week_count'] != Math.floor((lastFirstDay + lastMonthEndDay) / 6)) {
                         task_cell.className = "text-center p-0";
-                        task_cell.setAttribute("style", "background-color: " + task[10] + ";");
+                        task_cell.setAttribute("style", "background-color: " + task['tag_color'] + ";");
                         if (calendar == "user") {
-                          if (task[17]) {
-                            task_cell.innerHTML = "★" + task[9];
+                          if (task['group_id']) {
+                            task_cell.innerHTML = "★" + task['title'];
                           } else {
-                            task_cell.innerHTML = task[9];
+                            task_cell.innerHTML = task['title'];
                           }
                         } else {
-                          task_cell.innerHTML = task[9];
+                          task_cell.innerHTML = task['title'];
                         }
                         task_cell.setAttribute("colspan", 7);
                         createTr.appendChild(task_cell);
                         week = week + 7;
-                      } else if (week == task[3]) { // 前の月からの予定が今月の第一週目にふくまれるとき
+                      } else if (week == task['start_time_wday']) { // 前の月からの予定が今月の第一週目にふくまれるとき
                         task_cell.className = "text-center p-0 left-round";
-                        task_cell.setAttribute("style", "background-color: " + task[10] + ";");
+                        task_cell.setAttribute("style", "background-color: " + task['tag_color'] + ";");
                         if (calendar == "user") {
-                          if (task[17]) {
-                            task_cell.innerHTML = "★" + task[9];
+                          if (task['group_id']) {
+                            task_cell.innerHTML = "★" + task['title'];
                           } else {
-                            task_cell.innerHTML = task[9];
+                            task_cell.innerHTML = task['title'];
                           }
                         } else {
-                          task_cell.innerHTML = task[9];
+                          task_cell.innerHTML = task['title'];
                         }
-                        task_cell.setAttribute("colspan", 7 - task[3]);
+                        task_cell.setAttribute("colspan", 7 - task['start_time_wday']);
                         createTr.appendChild(task_cell);
-                        week = week + task[8];
-                      } else if (week == 0 && task[5] - task[1] > 1) {
+                        week = week + task['task_span'];
+                      } else if (week == 0 && task['end_time_month'] - task['start_time_month'] > 1) {
                         task_cell.className = "text-center p-0";
-                        task_cell.setAttribute("style", "background-color: " + task[10] + ";");
+                        task_cell.setAttribute("style", "background-color: " + task['tag_color'] + ";");
                         if (calendar == "user") {
-                          if (task[17]) {
-                            task_cell.innerHTML = "★" + task[9];
+                          if (task['group_id']) {
+                            task_cell.innerHTML = "★" + task['title'];
                           } else {
-                            task_cell.innerHTML = task[9];
+                            task_cell.innerHTML = task['title'];
                           }
                         } else {
-                          task_cell.innerHTML = task[9];
+                          task_cell.innerHTML = task['title'];
                         }
                         task_cell.setAttribute("colspan", 7);
                         createTr.appendChild(task_cell);
@@ -475,38 +475,38 @@ function showCalendar(month, year) {
                     }
                   }
                 }
-            } else if (task[0] == task[4] && (task[5] - task[1]) > 1) {
-                for (var s = 1; s <= (task[5] - task[1] - 1); s++) {
-                  if ((task[1] + s - 1) == month) {
-                    if((n + 1) == task[14] && task[15]) {
-                      if (i == 0 && task[15] == Math.floor((lastFirstDay + lastMonthEndDay) / 6)) {
-                        if (week == task[3]) {
+            } else if (task['start_time_year'] == task['end_time_year'] && (task['end_time_month'] - task['start_time_month']) > 1) {
+                for (var s = 1; s <= (task['end_time_month'] - task['start_time_month'] - 1); s++) {
+                  if ((task['start_time_month'] + s - 1) == month) {
+                    if((n + 1) == task['task_day_count'] && task['week_count']) {
+                      if (i == 0 && task['week_count'] == Math.floor((lastFirstDay + lastMonthEndDay) / 6)) {
+                        if (week == task['start_time_wday']) {
                           task_cell.className = "text-center p-0 left-round ekjij@";
-                          task_cell.setAttribute("style", "background-color: " + task[10] + ";");
+                          task_cell.setAttribute("style", "background-color: " + task['tag_color'] + ";");
                           if (calendar == "user") {
-                            if (task[17]) {
-                              task_cell.innerHTML = "★" + task[9];
+                            if (task['group_id']) {
+                              task_cell.innerHTML = "★" + task['title'];
                             } else {
-                              task_cell.innerHTML = task[9];
+                              task_cell.innerHTML = task['title'];
                             }
                           } else {
-                            task_cell.innerHTML = task[9];
+                            task_cell.innerHTML = task['title'];
                           }
-                          task_cell.setAttribute("colspan", 7 - task[3]);
+                          task_cell.setAttribute("colspan", 7 - task['start_time_wday']);
                           createTr.appendChild(task_cell);
-                          week = week + task[8];
+                          week = week + task['task_span'];
                         }
                       } else if (week == 0 ) {
                         task_cell.className = "text-center p-0 mmak";
-                        task_cell.setAttribute("style", "background-color: " + task[10] + ";");
+                        task_cell.setAttribute("style", "background-color: " + task['tag_color'] + ";");
                         if (calendar == "user") {
-                          if (task[17]) {
-                            task_cell.innerHTML = "★" + task[9];
+                          if (task['group_id']) {
+                            task_cell.innerHTML = "★" + task['title'];
                           } else {
-                            task_cell.innerHTML = task[9];
+                            task_cell.innerHTML = task['title'];
                           }
                         } else {
-                          task_cell.innerHTML = task[9];
+                          task_cell.innerHTML = task['title'];
                         }
                         task_cell.setAttribute("colspan", 7);
                         createTr.appendChild(task_cell);
