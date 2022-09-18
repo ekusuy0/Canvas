@@ -71,6 +71,7 @@ class Public::GroupTasksController < ApplicationController
   def edit
     @group_task = Task.find(params[:id])
     @group = @group_task.group
+    @user = User.find_by(id: @group_task.assigned_person)
   end
 
   private
