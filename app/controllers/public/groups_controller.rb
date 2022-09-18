@@ -69,14 +69,16 @@ class Public::GroupsController < ApplicationController
 
   def invitation
     @group = Group.find(params[:id])
-
-    @user = User.find_by(id: params[:user][:user_id])
-    notification = Notification.where(visited_id: @user.id, group_id: @group.id, action: "invitation")
-    unless notification.exists?
-      @group.group_invitation_notification(current_user, @user.id, @group.id)
-      redirect_to request.referer, notice: "招待を送りました"
+    if @user = User.find_by(id: params[:user][:user_id])
+      notification = Notification.where(visited_id: @user.id, group_id: @group.id, action: "invitation")
+      unless notification.exists?
+        @group.group_invitation_notification(current_user, @user.id, @group.id)
+        redirect_to request.referer, notice: "招待を送りました"
+      else
+        redirect_to request.referer, alert: "すでに招待しています"
+      end
     else
-      redirect_to request.referer, alert: "すでに招待しています"
+      redirect_to request.referer, alert: "招待するユーザーを選択してください"
     end
   end
 
