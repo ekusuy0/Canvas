@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   }
 
   namespace :admin do
-    get '/' => 'homes#top'
+    resources :users, only: [:index, :show, :update]
   end
 
   root to: 'public/homes#top'

@@ -1,0 +1,13 @@
+<h4>ユーザー一覧</h4>
+<% @users.each do |user| %>
+  <% unless user.name == "guestuser" %>
+    <%= user.id %>
+    <%= user.name %>
+    <% if user.status %>
+      退会
+    <% else %>
+      有効
+    <% end %>
+    <%= link_to "詳細", admin_user_path(user.id) %><br>
+  <% end %>
+<% end %>
