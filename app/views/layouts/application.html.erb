@@ -12,7 +12,11 @@
 
   <body>
     <header class="shadow mb-5" <% if user_signed_in? %>style="background-color: <%= current_user.color %>;"<% end %>>
-      <%= render "layouts/header" %>
+      <% if admin_signed_in? %>
+        <%= render "layouts/admin" %>
+      <% else %>
+        <%= render "layouts/header" %>
+      <% end %>
     </header>
     <div class="flash-message text-center">
       <p id="notice"><%= notice %></p>

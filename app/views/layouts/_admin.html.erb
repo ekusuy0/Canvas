@@ -1,0 +1,18 @@
+<nav class="navbar navbar-expand-sm">
+  <div class="container">
+    <%= link_to root_path, class: "navbar-brand p-3 text-dark" do %><h1>Canvas</h1><% end %>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expended="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav ml-auto">
+        <% if admin_signed_in? %>
+          <li class="nav-item ml-3">
+            <%= link_to "ログアウト", destroy_admin_session_path, class: 'nav-link text-dark' %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>
+

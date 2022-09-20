@@ -18,6 +18,10 @@ Rails.application.routes.draw do
     sessions: "admin/sessions"
   }
 
+  namespace :admin do
+    get '/' => 'homes#top'
+  end
+
   root to: 'public/homes#top'
 
   get 'users/my_page' => 'public/users#show'
