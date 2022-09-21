@@ -1,13 +1,32 @@
-<h4>ユーザー一覧</h4>
-<% @users.each do |user| %>
-  <% unless user.name == "guestuser" %>
-    <%= user.id %>
-    <%= user.name %>
-    <% if user.status %>
-      退会
-    <% else %>
-      有効
-    <% end %>
-    <%= link_to "詳細", admin_user_path(user.id) %><br>
-  <% end %>
-<% end %>
+<div class="container">
+  <h4>ユーザー一覧</h4>
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>ユーザーネーム</th>
+        <th>ユーザーステータス</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+        <% unless user.name == "guestuser" %>
+          <td><%= user.id %></td>
+          <td><%= user.name %></td>
+          <td>
+            <% if user.status %>
+              退会
+            <% else %>
+              有効
+            <% end %>
+          </td>
+          <td><%= link_to "詳細", admin_user_path(user.id) %></td>
+        <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

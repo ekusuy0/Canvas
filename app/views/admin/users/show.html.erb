@@ -1,10 +1,12 @@
-<h4>ユーザー詳細</h4>
-<%= form_with model: @user, url: admin_user_path(@user.id), method: :patch do |f| %>
-  ユーザーネーム：<%= @user.name %><br>
-  メールアドレス：<%= @user.email %></p>
-  <%= f.radio_button :status, false %>
-  <%= f.label :status, "有効", :value => false %>
-  <%= f.radio_button :status, true %>
-  <%= f.label :status, "退会", :value => true %><br>
-  <%= f.submit "変更を保存する" %>
-<% end %>
+<div class="container text-center">
+  <h4 class="mb-3">ユーザー詳細</h4>
+  <%= form_with model: @user, url: admin_user_path(@user.id), method: :patch do |f| %>
+    <p>ユーザーネーム：<%= @user.name %></p>
+    <p>メールアドレス：<%= @user.email %></p>
+    <%= f.radio_button :status, false %>
+    <%= f.label :status, "有効", :value => false %>
+    <%= f.radio_button :status, true %>
+    <%= f.label :status, "退会", :value => true %><br>
+    <%= f.submit "変更を保存する", class: "btn btn-outline-secondary" %>
+  <% end %>
+</div>
