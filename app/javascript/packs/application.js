@@ -14,6 +14,7 @@ import "bootstrap";
 import "../stylesheets/application";
 import "../stylesheets/calendar.css";
 import "flash.js"
+import '@fortawesome/fontawesome-free/js/all'
 
 Rails.start()
 Turbolinks.start()
