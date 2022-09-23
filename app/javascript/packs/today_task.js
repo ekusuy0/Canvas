@@ -49,6 +49,12 @@ document.addEventListener("click", function(e) {
   }
 })
 
+document.addEventListener("click", scroll_to_top);
+
+function scroll_to_top(){
+  window.scroll({top: 0, behavior: 'smooth'});
+};
+
 
 function showTodayTask(todate, month, year) {
   today_box = document.getElementById('today-box');

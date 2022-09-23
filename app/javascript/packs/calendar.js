@@ -180,7 +180,7 @@ function showCalendar(month, year) {
         cell.setAttribute("data-month", month + 1);
         cell.setAttribute("data-year", year);
         cell.setAttribute("data-month_name", months[month]);
-        cell.className = "date-picker text-center p-0 under_border";
+        cell.className = "date-picker text-center p-0 under_border day_picker";
         cell.innerHTML = "<span class='date-picker' data-date='" + date + "' data-month='" + month + "' data-year='" + year + "'>" + date + "</span>";
 
 
