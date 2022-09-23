@@ -1,9 +1,11 @@
-<div class="container">
+<div class="container text-center">
   <h4>ユーザー一覧</h4>
 
-  <%= form_with url: admin_users_search_path, method: :get do |f| %>
-    <%= f.text_field :word %>
-    <%= f.submit '検索' %>
+  <%= form_with url: admin_users_search_path, method: :get, class: "my-4" do |f| %>
+    <div class="form-group row">
+      <%= f.text_field :word, class: "form-control col-3 ml-auto mr-1" %>
+      <%= f.submit '検索', class: "btn btn-outline-secondary btn-sm mr-auto" %>
+    </div>
   <% end %>
 
   <table class="table table-bordered">
