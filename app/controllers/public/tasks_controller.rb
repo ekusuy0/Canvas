@@ -32,6 +32,7 @@ class Public::TasksController < ApplicationController
     else
       redirect_to request.referer
     end
+
   end
 
   def destroy

@@ -1,6 +1,6 @@
 <div class="container">
   <h4 class="text-center">タスクの編集</h4>
-  <%= form_with model: @task, url: task_path, method: :patch do |f| %>
+  <%= form_with model: @task, url: task_path(@task), method: :patch do |f| %>
     <div class="row">
       <div class="col-4 mx-auto text-center">
         <%= f.label :title, "タスクネーム" %><br>
@@ -15,7 +15,7 @@
         <%= f.label :end_time, "タスク終了日" %><br>
         <%= f.date_field :end_time, class: "form-control" %><br>
         <%= f.label :tag_id, "タグ選択" %>
-        <%= f.select :tag_id, options_from_collection_for_select(@tags, :id, :name), {include_blank: @task.tag.name}, { class: "col-12 text-center"} %><br>
+        <%= f.select :tag_id, options_from_collection_for_select(@tags, :id, :name), {:selected => @task.tag.id}, { class: "col-12 text-center"} %><br>
       </div>
     </div>
     <div class="row mb-3">
