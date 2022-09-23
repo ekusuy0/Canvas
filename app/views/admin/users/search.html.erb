@@ -1,0 +1,11 @@
+<div class="container text-center">
+  <h4><%= @word %>の検索結果</h4>
+  <% if @user.present? %>
+    <p>ユーザーID：<%= @user.id %></p>
+    <p>ユーザーネーム：<%= @user.name %></p>
+    <p>ユーザーステータス：<% if @user.status %>退会<% else %>有効<% end %></p>
+    <%= link_to '詳細へ', admin_user_path(@user.id) %>
+  <% else %>
+    <h4 class="mt-5">検索結果が見つかりませんでした</h4>
+  <% end %>
+</div>

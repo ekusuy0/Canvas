@@ -1,6 +1,11 @@
 <div class="container">
   <h4>ユーザー一覧</h4>
 
+  <%= form_with url: admin_users_search_path, method: :get do |f| %>
+    <%= f.text_field :word %>
+    <%= f.submit '検索' %>
+  <% end %>
+
   <table class="table table-bordered">
     <thead>
       <tr>

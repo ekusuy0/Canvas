@@ -14,6 +14,15 @@ class Admin::UsersController < ApplicationController
     redirect_to admin_users_path
   end
 
+  def search
+    @word = params[:word]
+    if @word != ""
+      @user = User.find_by(name: "#{@word}")
+    else
+      redirect_to admin_users_path, alert: "入力してください"
+    end
+  end
+
   private
 
   def user_params
