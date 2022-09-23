@@ -1,5 +1,17 @@
 <div class="container">
   <div class="row">
+    <% if @group.errors.any? %>
+      <div class="col-6 mx-auto my-3 px-0 border border-danger">
+        <h5 class="border-bottom border-danger py-2 text-center"><%= @group.errors.count %>件のエラーが発生しました</h5>
+        <ul class="px-5 mb-2">
+          <% @group.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  </div>
+  <div class="row">
     <div class="col-4 mx-auto text-center">
       <h4 class="mb-3">グループ作成画面</h4>
       <%= form_with model: @group do |f| %>

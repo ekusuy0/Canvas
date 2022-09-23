@@ -20,7 +20,7 @@ class Public::GroupsController < ApplicationController
     if @group.save
       redirect_to groups_path
     else
-      redirect_to request.referer
+      render 'public/groups/new'
     end
   end
 
