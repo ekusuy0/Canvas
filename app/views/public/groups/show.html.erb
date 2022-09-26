@@ -6,12 +6,10 @@
   </div>
 
 
-    <% if @other_users.present? %>
-      <%= form_with model: @user, url: invitation_group_path(@group), class: "row px-3", method: :post, local: true do |f| %>
-        <%= f.collection_select :user_id, @other_users, :id, :name, {include_blank: "選択"}, { class: "col-6 offset-1 text-center"} %>
-        <%= f.submit "招待する", class: "btn btn-outline-secondary btn-sm col-4" %>
-      <% end %>
-    <% end %>
+  <%= form_with url: invitation_group_path(@group), class: "row px-3", method: :post, local: true do |f| %>
+    <%= f.text_field :word, placeholder: "招待したいユーザー名", class: "col-6 ml-auto" %>
+    <%= f.submit "招待する", class: "btn btn-outline-secondary btn-sm col-4 mr-auto" %>
+  <% end %>
 
 
 

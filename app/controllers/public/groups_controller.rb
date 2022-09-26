@@ -38,16 +38,6 @@ class Public::GroupsController < ApplicationController
     @group = Group.find(params[:id])
     @tasks = Task.where(group_id: @group.id).order(start_time: "ASC")
     @user = User.new
-    users = User.all
-    @other_users = []
-    users.each do |user|
-      @group.users.each do |group_user|
-        if user.id != group_user.id
-          @other_users << user
-        end
-      end
-    end
-    @other_users.uniq!
   end
 
   def join
@@ -69,7 +59,7 @@ class Public::GroupsController < ApplicationController
 
   def invitation
     @group = Group.find(params[:id])
-    if @user = User.find_by(id: params[:user][:user_id])
+    if @user = User.find_by(name: "#{params[:word]}")
       notification = Notification.where(visited_id: @user.id, group_id: @group.id, action: "invitation")
       unless notification.exists?
         @group.group_invitation_notification(current_user, @user.id, @group.id)
@@ -78,13 +68,13 @@ class Public::GroupsController < ApplicationController
         redirect_to request.referer, alert: "すでに招待しています"
       end
     else
-      redirect_to request.referer, alert: "招待するユーザーを選択してください"
+      redirect_to request.referer, alert: "招待するユーザーが見つかりませんでした"
     end
   end
 
   private
   def group_params
-    params.require(:group).permit(:name, :password);
+    params.require(:group).permit(:name, :password)
   end
 
   def check_group
